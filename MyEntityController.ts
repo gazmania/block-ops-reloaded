@@ -7,6 +7,7 @@ import {
     Entity,
     World,
     PlayerEntity,
+    PlayerCameraMode,
   } from 'hytopia';
   
   import type {
@@ -24,6 +25,13 @@ interface WeaponConfig {
     reloadTime: number;
     spread: number;
     spreadRecoveryTime: number;
+    walkAnimation: string;
+    fireAnimation: string;
+    headDamage: number;
+    bodyDamage: number;
+    limbDamage: number;
+    killsRequired: number;
+    victory: boolean;
 }
 
   export default class MyEntityController extends BaseEntityController {
@@ -36,9 +44,6 @@ interface WeaponConfig {
     private _isReloading: boolean = false;
     private _currentSpread: number = 0;
     private _lastShotTime: number = 0;
-    private _recoilRecoveryTimeout: NodeJS.Timeout | null = null;
-    private _currentRecoilY: number = 0;
-    private _currentRecoilX: number = 0;
     
     private currentWeapon: string = 'pistol';
     private lastFireTime: number = 0;
@@ -48,13 +53,20 @@ interface WeaponConfig {
     private weaponConfigs: { [key: string]: WeaponConfig } = {
         pistol: {
             damage: 20,
-            fireRate: 250,
+            fireRate: 500,
             range: 50,
             maxAmmo: 20,
             modelUri: 'models/pistol.gltf',
             reloadTime: 2200, // 2.2 seconds
             spread: 0.06,
-            spreadRecoveryTime: 100 // 0.1 seconds
+            spreadRecoveryTime: 100, // 0.1 seconds
+            walkAnimation: 'walk', // Анимация ходьбы
+            fireAnimation: 'fire', // Анимация выстрела
+            headDamage: 10, // Урон по голове
+            bodyDamage: 5, // Урон по телу
+            limbDamage: 3, // Урон по конечностям
+            killsRequired: 1, // Количество убийств для смены на AK-47
+            victory: false, // Не приводит к победе
         },
         ak47: {
             damage: 15,
@@ -64,7 +76,14 @@ interface WeaponConfig {
             modelUri: 'models/ak47.gltf',
             reloadTime: 2500, // 2.5 seconds
             spread: 0.055,
-            spreadRecoveryTime: 300 // 0.3 seconds
+            spreadRecoveryTime: 300, // 0.3 seconds
+            walkAnimation: 'walk_ak', // Анимация ходьбы для AK-47
+            fireAnimation: 'fire_ak', // Анимация выстрела для AK-47
+            headDamage: 14, // Урон по голове
+            bodyDamage: 7, // Урон по телу
+            limbDamage: 3, // Урон по конечностям
+            killsRequired: 0, // AK-47 доступен сразу
+            victory: true, // Приводит к победе
         }
     };
 
@@ -80,6 +99,8 @@ interface WeaponConfig {
     private _lastWeaponBeforeDeath: string = 'pistol';
     private _playerNames: Map<number, string> = new Map();
 
+
+
     private getPlayerIdentifier(entity: PlayerEntity): string {
         // Priority: custom name -> default name -> ID
         const customName = this._playerNames.get(entity.id!);
@@ -88,18 +109,17 @@ interface WeaponConfig {
     }
 
     private broadcastKillFeed(world: World, killer: PlayerEntity, victim: PlayerEntity): void {
-        // Send message to all players through entityManager
         const killFeedData = {
             type: 'kill-feed',
             killer: this.getPlayerIdentifier(killer),
             victim: this.getPlayerIdentifier(victim)
         };
 
-        // Get all players in the world
+        // Получаем всех игроков в мире
         const allPlayerEntities = world.entityManager.getAllPlayerEntities();
         allPlayerEntities.forEach((playerEntity: PlayerEntity) => {
             if (playerEntity.player?.ui) {
-                playerEntity.player.ui.sendData(killFeedData);
+                playerEntity.player.ui.sendData(killFeedData); // Отправляем данные о убийстве
             }
         });
     }
@@ -109,26 +129,28 @@ interface WeaponConfig {
 
         console.log(`[${this.getPlayerIdentifier(entity)}] Updating weapon model. Current weapon: ${this.currentWeapon}`);
 
-        // Remove old weapon if exists
+        // Удалите старое оружие, если оно существует
         if (this._weaponEntity) {
             console.log(`[${this.getPlayerIdentifier(entity)}] Removing old weapon entity`);
             this._weaponEntity.despawn();
             this._weaponEntity = undefined;
         }
 
-        // Create new weapon entity
+        // Создайте новое оружие
         const weaponConfig = this.weaponConfigs[this.currentWeapon];
         this._weaponEntity = new Entity({
             name: `weapon_${this.currentWeapon}`,
             modelUri: weaponConfig.modelUri,
-            modelScale: 0.5,
+            modelScale: 1,
         });
 
-        // Spawn weapon and attach to player's right hand
+        console.log(`[${this.getPlayerIdentifier(entity)}] Creating new weapon entity with model URI: ${weaponConfig.modelUri}`);
+
+        // Спавн оружия и привязка к правой руке игрока
         this._weaponEntity.spawn(entity.world, { x: 0, y: 0, z: 0 });
         console.log(`[${this.getPlayerIdentifier(entity)}] Spawned new weapon entity: ${this.currentWeapon}`);
         
-        // Use the correct anchor point and adjust position/rotation for each weapon
+        // Используйте правильную точку привязки и настройте позицию/ориентацию для каждого оружия
         if (this.currentWeapon === 'pistol') {
             this._weaponEntity.setParent(entity, 'hand_right_anchor', 
                 { x: 0.08, y: 0.02, z: 0.15 },
@@ -136,8 +158,8 @@ interface WeaponConfig {
             );
         } else if (this.currentWeapon === 'ak47') {
             this._weaponEntity.setParent(entity, 'hand_right_anchor',
-                { x: 0.12, y: 0.02, z: 0.2 },
-                { x: -0.383, y: 0.0, z: 0.0, w: 0.924 }
+                { x: 0, y: 0, z: 0 },
+                { x: 0, y: 0, z: 0, w: 1 } // Убедитесь, что ориентация правильная
             );
         }
         console.log(`[${this.getPlayerIdentifier(entity)}] Weapon attached to player hand`);
@@ -190,11 +212,11 @@ interface WeaponConfig {
         const config = this.weaponConfigs[weapon];
         switch (hitLocation) {
             case 'head':
-                return weapon === 'pistol' ? 10.0 : 14.4;
+                return config.headDamage;
             case 'limbs':
-                return weapon === 'pistol' ? 3.0 : 3.6;
+                return config.limbDamage;
             default:
-                return weapon === 'pistol' ? 5.6 : 7.2;
+                return config.bodyDamage;
         }
     }
 
@@ -215,40 +237,55 @@ interface WeaponConfig {
 
     private die(entity: PlayerEntity, attackerEntity: PlayerEntity): void {
         console.log(`[${this.getPlayerIdentifier(entity)}] Died!`);
+
+        // Log the killer's name
+        if (attackerEntity) {
+            console.log(`${this.getPlayerIdentifier(attackerEntity)} killed ${this.getPlayerIdentifier(entity)}`);
+        }
         
-        // Save current weapon before death
+        // Сохраните текущее оружие перед смертью
         this._lastWeaponBeforeDeath = this.currentWeapon;
         
-        if (attackerEntity && attackerEntity.controller instanceof MyEntityController) {
-            const attackerController = attackerEntity.controller;
-            attackerController.kills++;
-            
-            // Отправляем информацию об убийстве всем игрокам
-            if (entity.world) {
-                this.broadcastKillFeed(entity.world, attackerEntity, entity);
-            }
-            
-            if (attackerController.kills === 1) {
-                attackerController.currentWeapon = 'ak47';
-                attackerController.currentAmmo = attackerController.weaponConfigs.ak47.maxAmmo;
-                console.log(`[${this.getPlayerIdentifier(attackerEntity)}] Upgraded to AK-47!`);
-                attackerController.updateWeaponModel(attackerEntity);
-                attackerController.updateUI(attackerEntity);
-            }
-        }
-
-        // Remove weapon when dead
-        if (this._weaponEntity) {
-            this._weaponEntity.despawn();
-            this._weaponEntity = undefined;
-        }
-
+        // Отправляем сообщение о смерти с отсчетом
         if (entity.player && entity.player.ui) {
-            // Отправляем сообщение о смерти с отсчетом
             entity.player.ui.sendData({
                 type: 'player-died',
                 respawnTime: 5
             });
+        }
+        
+        // Отправляем информацию об убийстве всем игрокам
+        if (entity.world) {
+            this.broadcastKillFeed(entity.world, attackerEntity, entity);
+        }
+        
+        // Удалите старое оружие, когда игрок мертв
+        if (this._weaponEntity) {
+            this._weaponEntity.despawn();
+            this._weaponEntity = undefined;
+        }
+        
+        // Проверка на смену оружия
+        if (attackerEntity && attackerEntity.controller instanceof MyEntityController) {
+            const attackerController = attackerEntity.controller;
+            attackerController.kills++;
+
+            // Смена оружия
+            if (attackerController.kills >= this.weaponConfigs[attackerController.currentWeapon].killsRequired) {
+                attackerController.switchWeapon('ak47', attackerEntity); // Смена на AK-47 для убийцы
+                console.log(`[${this.getPlayerIdentifier(attackerEntity)}] Upgraded to AK-47!`);
+            }
+
+            // Проверка на победу
+            if (this.weaponConfigs[attackerController.currentWeapon].victory) {
+                // Отправляем сообщение о победе
+                if (attackerEntity.player && attackerEntity.player.ui) {
+                    attackerEntity.player.ui.sendData({
+                        type: 'victory-screen',
+                        message: 'You Win!',
+                    });
+                }
+            }
         }
         
         let respawnTime = 5;
@@ -368,6 +405,13 @@ interface WeaponConfig {
         this._isReloading = true;
         console.log(`[${this.getPlayerIdentifier(entity)}] Started reloading ${this.currentWeapon}...`);
 
+        // Play reload animation based on weapon type
+        if (this.currentWeapon === 'ak47') {
+            entity.startModelOneshotAnimations(['recharge_ak']);
+        } else {
+            entity.startModelOneshotAnimations(['simple_interact']);
+        }
+
         let remainingTime = weaponConfig.reloadTime / 1000;
         const updateInterval = setInterval(() => {
             console.log(`[${this.getPlayerIdentifier(entity)}] Reloading... ${remainingTime.toFixed(1)}s`);
@@ -455,17 +499,18 @@ interface WeaponConfig {
           entity.startModelLoopedAnimations(runAnimations);
           this._stepAudio?.setPlaybackRate(0.81);
         } else {
-                const walkAnimations = ['walk_upper', 'walk_lower'];
-          entity.stopModelAnimations(Array.from(entity.modelLoopedAnimations).filter(v => !walkAnimations.includes(v)));
-          entity.startModelLoopedAnimations(walkAnimations);
+                // Choose walk animation based on current weapon
+                const walkAnimation = this.weaponConfigs[this.currentWeapon].walkAnimation;
+          entity.stopModelAnimations(Array.from(entity.modelLoopedAnimations).filter(v => !walkAnimation.includes(v)));
+          entity.startModelLoopedAnimations([walkAnimation]);
           this._stepAudio?.setPlaybackRate(0.55);
         }
         this._stepAudio?.play(entity.world, !this._stepAudio?.isPlaying);
       } else {
         this._stepAudio?.pause();
-            const idleAnimations = ['idle_upper', 'idle_lower'];
-        entity.stopModelAnimations(Array.from(entity.modelLoopedAnimations).filter(v => !idleAnimations.includes(v)));
-        entity.startModelLoopedAnimations(idleAnimations);
+            const idleAnimation = this.currentWeapon === 'ak47' ? 'idle_ak' : 'idle';
+        entity.stopModelAnimations(Array.from(entity.modelLoopedAnimations).filter(v => !idleAnimation.includes(v)));
+        entity.startModelLoopedAnimations([idleAnimation]);
       }
   
         // Calculate movement velocities
@@ -538,7 +583,6 @@ interface WeaponConfig {
         // Handle weapon firing
         const currentTime = Date.now();
         this.updateSpread(currentTime);
-        this.updateUI(entity);
 
         if (ml && !this._isDead && this.currentAmmo > 0 && !this._isReloading) {
             const weaponConfig = this.weaponConfigs[this.currentWeapon];
@@ -600,8 +644,9 @@ interface WeaponConfig {
                 this.currentAmmo--;
                 this.updateUI(entity);
 
-                // Play animation
-                entity.startModelOneshotAnimations([ 'simple_interact' ]);
+                // Play firing animation
+                const fireAnimation = this.weaponConfigs[this.currentWeapon].fireAnimation;
+                entity.startModelOneshotAnimations([fireAnimation]);
                 
                 // Update last fire times
                 this.lastFireTime = currentTime;
@@ -610,18 +655,11 @@ interface WeaponConfig {
         }
     }
 
-    public onPlayerData(entity: PlayerEntity, data: any): void {
-        if (data.type === 'set-name') {
-            this._playerNames.set(entity.id!, data.name);
-            console.log(`Player ${entity.id} set name to: ${data.name}`);
-            
-            // Обновляем UI после установки имени
-            if (entity.player?.ui) {
-                entity.player.ui.sendData({
-                    type: 'player-name',
-                    name: data.name
-                });
-            }
-        }
+
+    public switchWeapon(newWeapon: string, entity: PlayerEntity): void {
+        this.currentWeapon = newWeapon;
+        this.currentAmmo = this.weaponConfigs[newWeapon].maxAmmo; // Установите максимальное количество патронов для нового оружия
+        this.updateWeaponModel(entity); // Обновите модель оружия
+        this.updateUI(entity); // Обновите интерфейс пользователя
     }
   }

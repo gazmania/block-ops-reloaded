@@ -5,7 +5,7 @@
       "name": "hytopia-demo",
       "dependencies": {
         "@hytopia.com/assets": "^0.2.5",
-        "hytopia": "^0.1.93",
+        "hytopia": "^0.1.94",
       },
       "devDependencies": {
         "@types/bun": "latest",
@@ -26,7 +26,7 @@
 
     "bun-types": ["bun-types@1.2.0", "", { "dependencies": { "@types/node": "*", "@types/ws": "~8.5.10" } }, "sha512-KEaJxyZfbV/c4eyG0vyehDpYmBGreNiQbZIqvVHJwZ4BmeuWlNZ7EAzMN2Zcd7ailmS/tGVW0BgYbGf+lGEpWw=="],
 
-    "hytopia": ["hytopia@0.1.93", "", { "bin": { "hytopia": "bin/scripts.js" } }, "sha512-Fo8RPv5xTdrNt7hd5s5hXqqzHdkuo1sZHvneaFW231LzSp/bNYRls+C1JzIYIcWaQ7Umkh9OMZ/QZTUoug/JwQ=="],
+    "hytopia": ["hytopia@0.1.94", "", { "bin": { "hytopia": "bin/scripts.js" } }, "sha512-NhPMYofhlh1wYgq3TMoKA4mhwYD4SKqzolwJNg6aSd4REXDVr8CZ4uEj6fPQXvpvIUltql6MPRRJzwFaAd1txA=="],
 
     "typescript": ["typescript@5.7.3", "", { "bin": { "tsc": "bin/tsc", "tsserver": "bin/tsserver" } }, "sha512-84MVSjMEHP+FQRPy3pX9sTVV/INIex71s9TL2Gm5FG/WG1SqXeKyZ0k7/blY/4FdOzI12CBy1vGc4og/eus0fw=="],
 

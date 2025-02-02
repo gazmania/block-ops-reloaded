@@ -13,8 +13,8 @@ import mapData from './assets/maps/boilerplate.json';
 
 startServer(world => {
   // Включаем отладку физики, чтобы видеть коллайдеры
-  //world.simulation.enableDebugRaycasting(true);
- // world.simulation.enableDebugRendering(true);
+    //world.simulation.enableDebugRaycasting(true);
+    //world.simulation.enableDebugRendering(true);
 
   // Загружаем базовую карту
   world.loadMap(mapData);
@@ -37,17 +37,17 @@ startServer(world => {
     modelScale: 0.5,
     rigidBodyOptions: {
       type: 'fixed' as RigidBodyType, // Фиксированное тело, не будет двигаться
-      position: { x: -10, y: 0, z: -10 },
+      position: { x: 0, y: 0, z: 0 },
       rotation: { x: 0, y: 0, z: 0, w: 1 }
     }
   });
-  buildingEntity.spawn(world, { x: -10, y: 7, z: -10 });
+  buildingEntity.spawn(world, { x: -10, y: 2, z: -10 });
 
   world.onPlayerJoin = player => {
     const playerEntity = new PlayerEntity({
       player,
       name: 'Player',
-      modelUri: 'models/players/player.gltf',
+      modelUri: 'models/players/PlayerModel.gltf',
       modelLoopedAnimations: [ 'idle' ],
       modelScale: 0.5,
       controller: new MyEntityController(),
@@ -59,8 +59,12 @@ startServer(world => {
     player.camera.setForwardOffset(0.3);
     
     // Спавним игрока на безопасном расстоянии от объектов
-    playerEntity.spawn(world, { x: 0, y: 2, z: 0 });
-    console.log('Spawned player entity!');
+    if (world) {
+        playerEntity.spawn(world, { x: 0, y: 2, z: 0 });
+        console.log('Spawned player entity!');
+    } else {
+        console.error('World is undefined!');
+    }
     
     player.ui.load('ui/index.html');
   };

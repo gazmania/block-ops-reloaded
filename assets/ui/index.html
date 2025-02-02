@@ -222,13 +222,13 @@
 </head>
 <body>
     <!-- Форма ввода имени -->
-    <div class="name-input-overlay" id="nameInputOverlay">
+    <!--<div class="name-input-overlay" id="nameInputOverlay">
         <div class="name-input-container">
             <h2>Enter Your Name</h2>
             <input type="text" class="name-input" id="nameInput" placeholder="Your name..." maxlength="15">
             <button class="name-submit" id="nameSubmit">Play</button>
         </div>
-    </div>
+    </div> -->
 
     <!-- Экран смерти -->
     <div class="death-screen" id="deathScreen">
@@ -262,34 +262,41 @@
 </body>
 <script>
     // Обработка ввода имени
-    const nameInput = document.getElementById('nameInput');
-    const nameSubmit = document.getElementById('nameSubmit');
-    const nameOverlay = document.getElementById('nameInputOverlay');
+    //const nameInput = document.getElementById('nameInput');
+    //const nameSubmit = document.getElementById('nameSubmit');
+    //const nameOverlay = document.getElementById('nameInputOverlay');
     const killFeed = document.getElementById('killFeed');
 
-    let playerName = '';
+    //let playerName = '';
 
-    nameSubmit.addEventListener('click', () => {
-        playerName = nameInput.value.trim() || 'Player';
-        nameOverlay.style.display = 'none';
+    //nameSubmit.addEventListener('click', () => {
+     //   playerName = nameInput.value.trim() || 'Player';
+     //   nameOverlay.style.display = 'none';
         // Отправляем имя в игру
-        hytopia.sendData({
-            type: 'set-name',
-            name: playerName
-        });
-    });
+     //   hytopia.sendData({
+     //       type: 'set-name',
+     //       name: playerName
+      //  });
+   // });
 
     // Массив для хранения последних убийств
     const kills = [];
     const MAX_KILLS_SHOWN = 2;
 
-    function addKill(killer, victim) {
-        kills.unshift({ killer, victim, time: Date.now() });
-        if (kills.length > MAX_KILLS_SHOWN) {
-            kills.pop();
-        }
-        updateKillFeed();
+function addKill(killer, victim) {
+    // Use the current player's name for the killer
+    const killerName = (killer === playerName) ? playerName : killer; // Check if the killer is the current player
+    const victimName = victim; // Use the victim's name directly
+
+    kills.unshift({ killer: killerName, victim: victimName, time: Date.now() }); // Use the correct names
+    if (kills.length > MAX_KILLS_SHOWN) {
+        kills.pop();
     }
+    updateKillFeed();
+
+    // Log the action in the console
+    console.log(`${killerName} killed ${victimName}`); // Log the kill action
+}
 
     function updateKillFeed() {
         killFeed.innerHTML = '';
@@ -325,8 +332,8 @@
             document.querySelector('.health-count').textContent = data.health;
             document.querySelector('.bullets-count').textContent = data.ammo;
         }
-        else if (data.type === 'kill-feed') {
-            addKill(data.killer, data.victim);
+        else  if (data.type === 'kill-feed') {
+            addKill(data.killer, data.victim); // Ensure these are the correct names
         }
         else if (data.type === 'player-died') {
             showDeathScreen(data.respawnTime);
@@ -340,6 +347,15 @@
         else if (data.type === 'player-name') {
             playerName = data.name;
         }
+        else if (data.type === 'victory-screen') {
+            showVictoryScreen(data.message); // Отображаем экран победы
+        }
     });
+
+    function showVictoryScreen(message) {
+        // Логика для отображения экрана победы
+        alert(message); // Например, просто используем alert для демонстрации
+        // Вы можете создать более сложный интерфейс для отображения победного экрана
+    }
 </script>
 </html>

@@ -2,6 +2,9 @@
   "name": "hytopia-demo",
   "module": "index.ts",
   "type": "module",
+  "scripts": {
+    "start": "bun --watch index.ts"
+  },
   "devDependencies": {
     "@types/bun": "latest"
   },
@@ -10,6 +13,6 @@
   },
   "dependencies": {
     "@hytopia.com/assets": "^0.2.5",
-    "hytopia": "^0.1.93"
+    "hytopia": "^0.1.94"
   }
 }
