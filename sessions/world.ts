@@ -81,10 +81,10 @@ export class GunWorld extends World {
             // controller: new MyEntityController(),
         });
 
-        // player.camera.setMode(PlayerCameraMode.FIRST_PERSON);
-        // player.camera.setOffset({ x: 0, y: 0.4, z: 0 });
-        // player.camera.setModelHiddenNodes(['head', 'neck']);
-        // player.camera.setForwardOffset(0.3);
+        player.camera.setMode(PlayerCameraMode.FIRST_PERSON);
+        player.camera.setOffset({ x: 0, y: 0.4, z: 0 });
+        player.camera.setModelHiddenNodes(['head', 'neck']);
+        player.camera.setForwardOffset(0.3);
 
         // Спавним игрока на безопасном расстоянии от объектов
 

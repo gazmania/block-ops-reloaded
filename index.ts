@@ -84,9 +84,8 @@ startServer(world => {
               console.log(`[Player ${playerEntity.name}] can't get into game '${gameWorld.name}' as it's full; player count ${gameWorld.playerCount}`);
             }
 
-            console.log(`[Player ${playerEntity.name}] Is being sent to game '${gameWorld.name}' with ${gameWorld.playerCount} other players`)
+            console.log(`[Player ${playerEntity.name}] is being sent to game '${gameWorld.name}' with ${gameWorld.playerCount} other players`)
             gameWorld.join(playerEntity.player);
-
           }
         }
       ],
