@@ -12,6 +12,7 @@ import {
 
 import mapData from './assets/maps/boilerplate.json';
 import { GunWorld } from './sessions/world';
+import MyEntityController from './MyEntityController';
 
 startServer(world => {
   // Включаем отладку физики, чтобы видеть коллайдеры
@@ -51,7 +52,7 @@ startServer(world => {
     "one-on-one": new GunWorld({
       id: 2,
       name: "One on One Action",
-      skyboxUri: "./assets/skyboxes/partly-cloudy",
+      skyboxUri: "skyboxes/partly-cloudy",
       minPlayerCount: 2,
       maxPlayerCount: 2,
       maxWaitingTime: 10 * 1000,
@@ -81,17 +82,17 @@ startServer(world => {
 
             const gameWorld = worldRegistry["one-on-one"];
             if (gameWorld.playerCount >= gameWorld.maxPlayerCount) {
-              console.log(`[Player ${playerEntity.name}] can't get into game '${gameWorld.name}' as it's full; player count ${gameWorld.playerCount}`);
+              console.log(`[Entity ${playerEntity.id}] can't get into game '${gameWorld.name}' as it's full; player count ${gameWorld.playerCount}`);
             }
 
-            console.log(`[Player ${playerEntity.name}] is being sent to game '${gameWorld.name}' with ${gameWorld.playerCount} other players`)
+            console.log(`[Entity ${playerEntity.id}] is being sent to game '${gameWorld.name}' with ${gameWorld.playerCount} other players, ${playerEntity.modelUri}`)
             gameWorld.join(playerEntity.player);
           }
         }
       ],
     }
   });
-  oneOnOneGatewayEntity.spawn(world, { x: 10, y: 1.5, z: 10 });
+  oneOnOneGatewayEntity.spawn(world, { x: 5, y: 1.5, z: 5 });
 
   world.onPlayerJoin = player => {
     const playerEntity = new PlayerEntity({
@@ -111,7 +112,7 @@ startServer(world => {
   };
 
   world.onPlayerLeave = player => {
-    console.log("Player Leavng WOerld")
+    console.log("Player Leavng World")
     world.entityManager.getPlayerEntitiesByPlayer(player).forEach(entity => entity.despawn());
   };
 });

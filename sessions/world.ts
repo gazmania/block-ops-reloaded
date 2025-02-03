@@ -78,7 +78,7 @@ export class GunWorld extends World {
             modelUri: 'models/players/PlayerModel.gltf',
             modelLoopedAnimations: ['idle'],
             modelScale: 0.5,
-            // controller: new MyEntityController(),
+            controller: new MyEntityController(),
         });
 
         player.camera.setMode(PlayerCameraMode.FIRST_PERSON);
@@ -86,12 +86,12 @@ export class GunWorld extends World {
         player.camera.setModelHiddenNodes(['head', 'neck']);
         player.camera.setForwardOffset(0.3);
 
-        // Спавним игрока на безопасном расстоянии от объектов
-
         playerEntity.spawn(this, { x: Math.random() * 10 - 5, y: 4, z: Math.random() * 10 - 5 });
-        console.log('Spawned player entity!');
+        // console.log('Spawned player entity!');
 
+        player.camera.setAttachedToEntity(playerEntity);
 
+        console.log("number of assigned player entities",this.entityManager.getPlayerEntitiesByPlayer(player).length)
         // player.ui.load('ui/index.html');
 
         this._worldState.players.push(player);
