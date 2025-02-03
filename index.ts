@@ -11,6 +11,48 @@ import MyEntityController from './MyEntityController';
 
 import mapData from './assets/maps/boilerplate.json';
 
+// Класс для управления сессиями
+class GameSession {
+    private players: PlayerEntity[] = [];
+    private maxPlayers: number = 2; // Максимум 2 игрока
+
+    public addPlayer(player: PlayerEntity): boolean {
+        if (this.players.length < this.maxPlayers) {
+            this.players.push(player);
+            return true; // Игрок успешно добавлен
+        }
+        return false; // Сессия полна
+    }
+
+    public removePlayer(player: PlayerEntity): void {
+        this.players = this.players.filter(p => p !== player);
+    }
+
+    public isFull(): boolean {
+        return this.players.length >= this.maxPlayers;
+    }
+
+    public getPlayers(): PlayerEntity[] {
+        return this.players;
+    }
+}
+
+const sessions: GameSession[] = [];
+
+function findOrCreateSession(): GameSession {
+    // Найти первую неполную сессию
+    for (const session of sessions) {
+        if (!session.isFull()) {
+            return session;
+        }
+    }
+
+    // Если все сессии полные, создайте новую
+    const newSession = new GameSession();
+    sessions.push(newSession);
+    return newSession;
+}
+
 startServer(world => {
   // Включаем отладку физики, чтобы видеть коллайдеры
     //world.simulation.enableDebugRaycasting(true);
@@ -53,23 +95,38 @@ startServer(world => {
       controller: new MyEntityController(),
     });
 
-    player.camera.setMode(PlayerCameraMode.FIRST_PERSON);
-    player.camera.setOffset({ x: 0, y: 0.4, z: 0 });
-    player.camera.setModelHiddenNodes([ 'head', 'neck' ]);
-    player.camera.setForwardOffset(0.3);
-    
-    // Спавним игрока на безопасном расстоянии от объектов
-    if (world) {
-        playerEntity.spawn(world, { x: 0, y: 2, z: 0 });
-        console.log('Spawned player entity!');
+    const session = findOrCreateSession();
+    if (session.addPlayer(playerEntity)) {
+        // Успешно добавлен в сессию
+        console.log(`Player joined session. Total players: ${session.getPlayers().length}`);
+        player.camera.setMode(PlayerCameraMode.FIRST_PERSON);
+        player.camera.setOffset({ x: 0, y: 0.4, z: 0 });
+        player.camera.setModelHiddenNodes([ 'head', 'neck' ]);
+        player.camera.setForwardOffset(0.3);
+        
+        // Спавним игрока на безопасном расстоянии от объектов
+        if (world) {
+            playerEntity.spawn(world, { x: 0, y: 2, z: 0 });
+            console.log('Spawned player entity!');
+        } else {
+            console.error('World is undefined!');
+        }
+        
+        player.ui.load('ui/index.html');
     } else {
-        console.error('World is undefined!');
+        // Сессия полна, отправьте сообщение игроку
     }
-    
-    player.ui.load('ui/index.html');
   };
   
   world.onPlayerLeave = player => {
-    world.entityManager.getPlayerEntitiesByPlayer(player).forEach(entity => entity.despawn());
+    const playerEntity = world.entityManager.getPlayerEntitiesByPlayer(player)[0];
+    if (playerEntity) {
+        const session = sessions.find(s => s.getPlayers().includes(playerEntity));
+        if (session) {
+            session.removePlayer(playerEntity);
+            console.log(`Player left session. Total players: ${session.getPlayers().length}`);
+        }
+        world.entityManager.getPlayerEntitiesByPlayer(player).forEach(entity => entity.despawn());
+    }
   };
 });

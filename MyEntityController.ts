@@ -374,7 +374,7 @@ export default class MyEntityController extends BaseEntityController {
         this._currentSpread = this.currentWeapon.spread;
     }
 
-    private playWeaponSound(entity: Entity, weapon:WeaponConfig, isReload: boolean): void {
+    private playWeaponSound(entity: Entity, weapon: WeaponConfig, isReload: boolean): void {
         if (!entity.world) return;
 
         const audio = new Audio({
@@ -407,7 +407,7 @@ export default class MyEntityController extends BaseEntityController {
 
         super.tickWithPlayerInput(entity, input, cameraOrientation, deltaTimeMs);
 
-        const { w, a, s, d, sp, sh, ml, r } = input;
+        const { w, a, s, d, sp, sh, ml, r, mr } = input;
         const { yaw } = cameraOrientation;
         const currentVelocity = entity.linearVelocity;
         const targetVelocities = { x: 0, y: 0, z: 0 };
@@ -416,6 +416,15 @@ export default class MyEntityController extends BaseEntityController {
         // Handle reload
         if (r && !this._isReloading) {
             this.startReload(entity);
+        }
+
+        // Handle aiming with right mouse button
+        if (mr) {
+            const zoomLevel = this.currentWeapon.zoomLevel || 1;
+            entity.player.camera.setFov(60 / zoomLevel);
+        } else {
+            
+            entity.player.camera.setFov(60);
         }
 
         // Handle movement animations
@@ -513,7 +522,6 @@ export default class MyEntityController extends BaseEntityController {
 
         if (ml && !this._isDead && this.currentAmmo > 0 && !this._isReloading) {
             if (currentTime - this.lastFireTime >= this.currentWeapon.fireRate) {
-                const isFirstShot = currentTime - this._lastShotTime > this.currentWeapon.spreadRecoveryTime;
                 console.log(`[${this.getPlayerIdentifier(entity)}] Firing ${this.currentWeapon.name}!`);
 
                 // Play fire sound
@@ -526,34 +534,35 @@ export default class MyEntityController extends BaseEntityController {
                     z: entity.position.z
                 };
 
-                // Apply spread to the facing direction
                 const facingDir = { ...entity.player.camera.facingDirection };
-                if (!isFirstShot) {
-                    const spread = this._currentSpread;
-                    facingDir.x += (Math.random() - 0.5) * spread;
-                    facingDir.y += (Math.random() - 0.5) * spread;
-                    facingDir.z += (Math.random() - 0.5) * spread;
-
-                    // Normalize the direction vector
-                    const length = Math.sqrt(facingDir.x * facingDir.x + facingDir.y * facingDir.y + facingDir.z * facingDir.z);
-                    facingDir.x /= length;
-                    facingDir.y /= length;
-                    facingDir.z /= length;
-                }
-
-                // Apply recoil (updates spread)
-                this.applyRecoil(entity);
 
                 const ray = entity.world.simulation.raycast(
                     rayStart,
                     facingDir,
                     this.currentWeapon.range,
-                    {
+                    { 
                         filterExcludeRigidBody: entity.rawRigidBody
                     },
                 );
 
-                if (ray?.hitEntity) {
+                if (this.currentWeapon.name === 'rpg' && ray?.hitPoint) {
+                    // Урон по площади
+                    const explosionRadius = 5; // Установите радиус взрыва
+                    const damage = this.currentWeapon.damage; // Урон от RPG
+
+                    // Наносим урон всем игрокам в радиусе
+                    const allPlayerEntities = entity.world.entityManager.getAllPlayerEntities();
+                    allPlayerEntities.forEach((player) => {
+                        const distance = this.calculateDistance(ray.hitPoint, player.position);
+                        if (distance <= explosionRadius) {
+                            const controller = player.controller;
+                            if (controller instanceof MyEntityController) {
+                                controller.takeDamage(damage, player, entity); // Наносим урон
+                                console.log(`[${this.getPlayerIdentifier(player)}] Hit by RPG explosion! Damage: ${damage}`);
+                            }
+                        }
+                    });
+                } else if (ray?.hitEntity) {
                     const hitEntity = ray.hitEntity;
                     if (hitEntity instanceof PlayerEntity) {
                         const controller = hitEntity.controller;
@@ -571,15 +580,23 @@ export default class MyEntityController extends BaseEntityController {
                 this.updateUI(entity);
 
                 // Play firing animation
-                entity.startModelOneshotAnimations([this.currentWeapon.fireAnimation]);
+                const fireAnimation = `fire_${this.currentWeapon.name}`;
+                console.log(`Attempting to play ${fireAnimation} animation.`);
+                entity.startModelOneshotAnimations([fireAnimation]);
 
                 // Update last fire times
                 this.lastFireTime = currentTime;
-                this._lastShotTime = currentTime;
             }
         }
     }
 
+    // Метод для расчета расстояния
+    private calculateDistance(pointA: { x: number, y: number, z: number }, pointB: { x: number, y: number, z: number }): number {
+        const dx = pointA.x - pointB.x;
+        const dy = pointA.y - pointB.y;
+        const dz = pointA.z - pointB.z;
+        return Math.sqrt(dx * dx + dy * dy + dz * dz);
+    }
 
     public switchWeapon(newWeapon: WeaponConfig, entity: PlayerEntity): void {
         this.currentWeapon = newWeapon;
