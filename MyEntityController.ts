@@ -147,6 +147,15 @@ export default class MyEntityController extends BaseEntityController {
                 bullets: this.currentAmmo
             });
         }
+
+        if (playerEntity.player) {
+            entity.world?.eventRouter.emit("GUNGAME.PLAYER_UPDATE", {
+                player: playerEntity.player.username,
+                weapon: this.currentWeapon.name,
+                health: this.health.toFixed(1),
+                ammo: this.currentAmmo
+            });
+        }
     }
 
     private calculateDamage(weapon: WeaponConfig, hitLocation: 'head' | 'body' | 'limbs'): number {

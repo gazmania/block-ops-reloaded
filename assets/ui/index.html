@@ -222,13 +222,13 @@
 </head>
 <body>
     <!-- Форма ввода имени -->
-    <div class="name-input-overlay" id="nameInputOverlay">
+    <!-- <div class="name-input-overlay" id="nameInputOverlay">
         <div class="name-input-container">
             <h2>Enter Your Name</h2>
             <input type="text" class="name-input" id="nameInput" placeholder="Your name..." maxlength="15">
             <button class="name-submit" id="nameSubmit">Play</button>
         </div>
-    </div>
+    </div> -->
 
     <!-- Экран смерти -->
     <div class="death-screen" id="deathScreen">
@@ -261,6 +261,7 @@
 
 </body>
 <script>
+    console.log("TEST TEST TEST");
     // Обработка ввода имени
     const nameInput = document.getElementById('nameInput');
     const nameSubmit = document.getElementById('nameSubmit');
@@ -317,7 +318,8 @@
         respawnCountdown.textContent = `Respawning in ${time} seconds`;
     }
 
-    hytopia.onData(data => { 
+    hytopia.onData(data => {
+        console.log(JSON.stringify(data));
         if (data.type === 'bullets-count') {
             document.querySelector('.bullets-count').textContent = data.bullets;
         }

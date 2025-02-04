@@ -2,7 +2,9 @@ import { Player, PlayerCameraMode, PlayerEntity, World, WorldOptions } from "hyt
 import MyEntityController from "../MyEntityController";
 import mapData from '../assets/maps/boilerplate.json';
 
-export interface GunWorldOptions extends WorldOptions {
+export interface GunWorldOptions {
+    id: number;
+    name: string;
     minPlayerCount: number;
     maxPlayerCount: number;
     maxWaitingTime: number;
@@ -29,7 +31,11 @@ export class GunWorld extends World {
     public get playerCount(): number { return this._worldState.players.length; }
 
     constructor(options: GunWorldOptions) {
-        super(options)
+        super({
+            id: options.id,
+            name: options.name,
+            skyboxUri: "skyboxes/partly-cloudy"
+        })
 
         this._minPlayerCount = options.minPlayerCount;
         this._maxPlayerCount = options.maxPlayerCount;
@@ -49,23 +55,21 @@ export class GunWorld extends World {
         //         this._worldState.players.length < this._minPlayerCount) {
         //         return;
         //     }
-    
+
         //     // if any of the above guards are false we'll get here
         //     // start the game
         //     this._worldState.playState = GunWorldPlayState.ACTIVE;
-    
+
         //     clearInterval(waitingRoomInterval);
-    
+
         // }, 1000);
     }
 
     public join(player: Player) {
-        if (!player) return false;
-        if (this.playerCount >= this.maxPlayerCount) return false;
+        if (!player) return "No player specifid so can't join world";
+        if (this.playerCount >= this.maxPlayerCount) return `Sorry, we're full (${this.playerCount}/${this.maxPlayerCount})`;
 
         player.joinWorld(this);
-
-        return true;
     }
 
     /**
@@ -88,13 +92,25 @@ export class GunWorld extends World {
 
         playerEntity.spawn(this, { x: Math.random() * 10 - 5, y: 4, z: Math.random() * 10 - 5 });
         // console.log('Spawned player entity!');
+        this.chatManager.sendBroadcastMessage(`[${player.username}] has joined the game.`)
 
         player.camera.setAttachedToEntity(playerEntity);
-
-        console.log("number of assigned player entities",this.entityManager.getPlayerEntitiesByPlayer(player).length)
         // player.ui.load('ui/index.html');
 
         this._worldState.players.push(player);
+
+        this.eventRouter.on("GUNGAME.PLAYER_UPDATE", (payload: {
+            player: string,
+            weapon: string,
+            health: number,
+            ammo: number
+         }) => {
+            if (payload.player != player.username) return;
+            console.log(`Sending ${JSON.stringify(payload)} to ${player.username} UI`);
+            player.ui.sendData(payload);
+        });
+
+        this.chatManager.sendPlayerMessage(player, `[${player.username}] Welcome to ${this.name}, current player count ${this.playerCount}/${this.maxPlayerCount}`, "00ff00");
     }
 
     /**
@@ -103,5 +119,42 @@ export class GunWorld extends World {
     onPlayerLeave = (player: Player) => {
         this._worldState.players = this._worldState.players.filter(p => p !== player);
         this.entityManager.getPlayerEntitiesByPlayer(player).forEach(entity => entity.despawn());
+        this.chatManager.sendBroadcastMessage(`[${player.username}] has left the game.`)
     }
+}
+
+const worldRegistry: GunWorld[] = [];
+
+const worldConfigs: GunWorldOptions[] = [
+    {
+        id: 1,
+        name: "My Amazing World",
+        minPlayerCount: 2,
+        maxPlayerCount: 2,
+        maxWaitingTime: 10000,
+    },
+    {
+        id: 2,
+        name: "My Calm and Non-shooty World",
+        minPlayerCount: 1,
+        maxPlayerCount: 1,
+        maxWaitingTime: 0,
+    }
+];
+
+export const startWorlds = () => {
+    // instantiate and start the worlds
+    worldConfigs.forEach(config => {
+        const world = new GunWorld({ ...config });
+        world.start();
+        worldRegistry.push(world);
+    });
+}
+
+export const getWorld = (id: number) => {
+    return worldRegistry.find(world => world.id === id);
+}
+
+export const listWorlds = () => {
+    return Object.values(worldRegistry).sort((a, b) => a.id - b.id);
 }

@@ -5,13 +5,13 @@
       "name": "hytopia-demo",
       "dependencies": {
         "@hytopia.com/assets": "^0.2.5",
-        "hytopia": "^0.1.94",
+        "hytopia": "^0.1.98",
       },
       "devDependencies": {
         "@types/bun": "latest",
       },
       "peerDependencies": {
-        "typescript": "^5.0.0",
+        "typescript": "^5.7.3",
       },
     },
   },

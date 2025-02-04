@@ -6,12 +6,14 @@ import {
   WorldMap,
   RigidBodyType,
   Collider,
-  BlockType
+  BlockType,
+  ColliderShape,
+  Player
 } from 'hytopia';
 
 
 import mapData from './assets/maps/boilerplate.json';
-import { GunWorld } from './sessions/world';
+import { getWorld, GunWorld, listWorlds, startWorlds } from './sessions/world';
 import MyEntityController from './MyEntityController';
 
 startServer(world => {
@@ -48,51 +50,75 @@ startServer(world => {
 
 
 
-  const worldRegistry: Record<string, GunWorld> = {
-    "one-on-one": new GunWorld({
-      id: 2,
-      name: "One on One Action",
-      skyboxUri: "skyboxes/partly-cloudy",
-      minPlayerCount: 2,
-      maxPlayerCount: 2,
-      maxWaitingTime: 10 * 1000,
-    })
-  }
+  
+  // const worldRegistry: Record<string, GunWorld> = {
+  //   "one-on-one": new GunWorld({
+  //     id: 1,
+  //     name: "One on One Action",
+  //     minPlayerCount: 2,
+  //     maxPlayerCount: 2,
+  //     maxWaitingTime: 10 * 1000,
+  //   })
+  // }
 
-  Object.values(worldRegistry).forEach(world => {
-    console.log(`Starting world ${world.name}`);
-    world.start();
-  });
+  // Object.values(worldRegistry).forEach(world => {
+  //   console.log(`Starting world ${world.name}`);
+  //   world.start();
+  // });
+
+  startWorlds();
 
 
-  const oneOnOneGatewayEntity = new Entity({
-    name: "one-on-one",
-    blockHalfExtents: { x: 0.5, y: 0.5, z: 0.5 },
-    blockTextureUri: "blocks/sand.png",
-    rigidBodyOptions: {
-      type: RigidBodyType.FIXED,
-      colliders: [
-        {
-          ...Collider.optionsFromBlockHalfExtents({ x: 0.5, y: 0.5, z: 0.5 }),
-          onCollision: (other: BlockType | Entity, started: boolean) => {
-            if (!started) return;
-            if (!(other instanceof PlayerEntity)) return;
+  // const oneOnOneGatewayEntity = new Entity({
+  //   name: "one-on-one",
+  //   blockHalfExtents: { x: 0.5, y: 0.5, z: 0.5 },
+  //   blockTextureUri: "blocks/sand.png",
+  //   rigidBodyOptions: {
+  //     type: RigidBodyType.FIXED,
+  //     // colliders: [
+  //     //   {
+  //     //     ...Collider.optionsFromBlockHalfExtents({ x: 0.5, y: 0.5, z: 0.5 }),
+  //     //     onCollision: (other: BlockType | Entity, started: boolean) => {
+  //     //       if (!started) return;
+  //     //       if (!(other instanceof PlayerEntity)) return;
 
-            const playerEntity = other as PlayerEntity;
+  //     //       const playerEntity = other as PlayerEntity;
 
-            const gameWorld = worldRegistry["one-on-one"];
-            if (gameWorld.playerCount >= gameWorld.maxPlayerCount) {
-              console.log(`[Entity ${playerEntity.id}] can't get into game '${gameWorld.name}' as it's full; player count ${gameWorld.playerCount}`);
-            }
+  //     //       const gameWorld = worldRegistry["one-on-one"];
+  //     //       if (gameWorld.playerCount >= gameWorld.maxPlayerCount) {
+  //     //         console.log(`[Entity ${playerEntity.id}] can't get into game '${gameWorld.name}' as it's full; player count ${gameWorld.playerCount}`);
+  //     //       }
 
-            console.log(`[Entity ${playerEntity.id}] is being sent to game '${gameWorld.name}' with ${gameWorld.playerCount} other players, ${playerEntity.modelUri}`)
-            gameWorld.join(playerEntity.player);
-          }
-        }
-      ],
-    }
-  });
-  oneOnOneGatewayEntity.spawn(world, { x: 5, y: 1.5, z: 5 });
+  //     //       console.log(`[Entity ${playerEntity.id}] is being sent to game '${gameWorld.name}' with ${gameWorld.playerCount} other players, ${playerEntity.modelUri}`)
+  //     //       gameWorld.join(playerEntity.player);
+  //     //     }
+  //     //   }
+  //     // ],
+  //   }
+  // });
+  // oneOnOneGatewayEntity.spawn(world, { x: 5, y: 1.5, z: 5 });
+
+  // const oneOnOneGatewaySensor = new Collider({
+  //   shape: ColliderShape.BLOCK,
+  //   halfExtents: { x: 0.5, y: 0.5, z: 0.5 },
+  //   isSensor: true,
+  //   relativePosition: { x: 5, y: 1.5, z: 5 },
+  //   onCollision: (other: BlockType | Entity, started: boolean) => {
+  //     if (!started) return;
+  //     if (!(other instanceof PlayerEntity)) return;
+
+  //     const playerEntity = other as PlayerEntity;
+
+  //     const gameWorld = worldRegistry["one-on-one"];
+  //     if (gameWorld.playerCount >= gameWorld.maxPlayerCount) {
+  //       console.log(`[Entity ${playerEntity.id}] can't get into game '${gameWorld.name}' as it's full; player count ${gameWorld.playerCount}`);
+  //     }
+
+  //     console.log(`[Entity ${playerEntity.id}] is being sent to game '${gameWorld.name}' with ${gameWorld.playerCount} other players, ${playerEntity.modelUri}`)
+  //     gameWorld.join(playerEntity.player);
+  //   }
+  // });
+  // oneOnOneGatewaySensor.addToSimulation(world.simulation);
 
   world.onPlayerJoin = player => {
     const playerEntity = new PlayerEntity({
@@ -103,16 +129,72 @@ startServer(world => {
       modelScale: 0.5
     });
 
-    player.camera.setMode(PlayerCameraMode.FIRST_PERSON);
-    player.camera.setOffset({ x: 0, y: 0.4, z: 0 });
-    player.camera.setModelHiddenNodes(['head', 'neck']);
-    player.camera.setForwardOffset(0.3);
+    // player.camera.setMode(PlayerCameraMode.FIRST_PERSON);
+    // player.camera.setOffset({ x: 0, y: 0.4, z: 0 });
+    // player.camera.setModelHiddenNodes(['head', 'neck']);
+    // player.camera.setForwardOffset(0.3);
 
     playerEntity.spawn(world, { x: 0, y: 4, z: 0 });
+
+    player.ui.load('ui/index.html');
   };
 
   world.onPlayerLeave = player => {
     console.log("Player Leavng World")
     world.entityManager.getPlayerEntitiesByPlayer(player).forEach(entity => entity.despawn());
   };
+
+  world.chatManager.registerCommand("/ping", (player: Player, args: string[], message: string) => {
+    console.log("sending ping to UI");
+    world.entityManager.getAllPlayerEntities().forEach((p)=> p.player.ui.sendData({message:"test message"}));
+    // player.ui.sendData({message:"test message"});
+  });
+
+  world.chatManager.registerCommand("/list", (player: Player, args: string[], message: string) => {
+    // const pe = world.entityManager.getAllPlayerEntities()[0];
+    const worlds = listWorlds(); // Object.values(worldRegistry).sort((a, b) => a.id - b.id);
+
+    if (worlds.length == 0) {
+      world.chatManager.sendPlayerMessage(player, `No games are available right now`, "FF0000");
+      return;
+    }
+
+    world.chatManager.sendPlayerMessage(player, `Available Games:`, "FFFF00");
+    for (let i = 0; i < worlds.length; i++) {
+      world.chatManager.sendPlayerMessage(player, `${worlds[i].id}) ${worlds[i].name} (${worlds[i].playerCount}/${worlds[i].maxPlayerCount})`, (worlds[i].playerCount < worlds[i].maxPlayerCount) ? "FFFF00" : "909050");
+    }
+    world.chatManager.sendPlayerMessage(player, `To join a game type '/join <game_number>'`, "FFFF00");
+
+
+
+
+    // const worldNames = Object.values(worldRegistry));
+    // world.chatManager.sendPlayerMessage(player, `Open worlds:`, "FFFF00");
+    // worldNames.forEach((worldName, i) => {
+    //   world.chatManager.sendPlayerMessage(player, `${i}: ${worldName} (Max Players: ${worldRegistry[worldName].maxPlayerCount})`, "FFFF00");
+    // });
+
+  });
+
+  world.chatManager.registerCommand("/join", (player: Player, args: string[], message: string) => {
+
+
+    if (args.length != 1 || !/^\d+$/.test(args[0].trim())) {
+      world.chatManager.sendPlayerMessage(player, `You need to specify a valid game number, '/join <game_number>'`, "FF0000");
+      return;
+    }
+
+    const gameNumber = parseInt(args[0]); // -1 as the user will specific a 1-indexed
+    const targetWorld = getWorld(gameNumber); // Object.values(worldRegistry).find((w) => w.id == gameNumber);
+
+    if (!targetWorld) {
+      world.chatManager.sendPlayerMessage(player, `You need to specify a valid game number, '/join <game_number>'.  The game ${gameNumber} doesn't exist.`, "FF0000");
+      return;
+    };
+
+    const error = targetWorld.join(player);
+    if (error) {
+      world.chatManager.sendPlayerMessage(player, `${error}`, "FF0000");
+    }
+  });
 });
