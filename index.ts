@@ -8,13 +8,13 @@ import {
   Collider,
   BlockType,
   ColliderShape,
-  Player
+  Player,
+  PlayerUI
 } from 'hytopia';
 
 
 import mapData from './assets/maps/boilerplate.json';
 import { getWorld, GunWorld, listWorlds, startWorlds } from './sessions/world';
-import MyEntityController from './MyEntityController';
 
 startServer(world => {
   // Включаем отладку физики, чтобы видеть коллайдеры
@@ -22,7 +22,7 @@ startServer(world => {
   //world.simulation.enableDebugRendering(true);
 
   // Загружаем базовую карту
-  world.loadMap(mapData);
+  // world.loadMap(mapData);
 
   // // Создаем и спавним машину с динамической физикой
   // const carEntity = new Entity({
@@ -50,7 +50,7 @@ startServer(world => {
 
 
 
-  
+
   // const worldRegistry: Record<string, GunWorld> = {
   //   "one-on-one": new GunWorld({
   //     id: 1,
@@ -66,7 +66,24 @@ startServer(world => {
   //   world.start();
   // });
 
-  startWorlds();
+  startWorlds(world);
+
+  // const cameraAnchor = new Entity({
+  //   blockHalfExtents: { x: 1, y: 1, z: 1 },
+  //   blockTextureUri: "blocks/sand.png",
+  //   rigidBodyOptions: {
+  //     type: RigidBodyType.FIXED,
+  //   }
+  // });
+  // cameraAnchor.spawn(world, { x: 0, y: 25, z: 0 })
+  // const cameraTarget = new Entity({
+  //   blockHalfExtents: { x: 1, y: 1, z: 1 },
+  //   blockTextureUri: "blocks/sand.png",
+  //   rigidBodyOptions: {
+  //     type: RigidBodyType.FIXED,
+  //   }
+  // });
+  // cameraTarget.spawn(world, { x: 0, y: 50, z: 0 })
 
 
   // const oneOnOneGatewayEntity = new Entity({
@@ -121,32 +138,42 @@ startServer(world => {
   // oneOnOneGatewaySensor.addToSimulation(world.simulation);
 
   world.onPlayerJoin = player => {
-    const playerEntity = new PlayerEntity({
-      player,
-      name: 'Player',
-      modelUri: 'models/players/PlayerModel.gltf',
-      modelLoopedAnimations: ['idle'],
-      modelScale: 0.5
-    });
+    // const playerEntity = new PlayerEntity({
+    //   player,
+    //   name: 'Player',
+    //   modelUri: 'models/players/PlayerModel.gltf',
+    //   modelLoopedAnimations: ['idle'],
+    //   modelScale: 0.5
+    // });
 
+    // player.camera.setAttachedToPosition({x:0, y: 0, z: 0});
     // player.camera.setMode(PlayerCameraMode.FIRST_PERSON);
     // player.camera.setOffset({ x: 0, y: 0.4, z: 0 });
     // player.camera.setModelHiddenNodes(['head', 'neck']);
     // player.camera.setForwardOffset(0.3);
 
-    playerEntity.spawn(world, { x: 0, y: 4, z: 0 });
+    // playerEntity.spawn(world, { x: 0, y: 4, z: 0 });
+
+    // player.camera.setMode(PlayerCameraMode.FIRST_PERSON);
+    // player.camera.setAttachedToEntity(cameraAnchor);
+    // player.camera.setTrackedEntity(cameraTarget);
 
     player.ui.load('ui/index.html');
+
+    // player.ui.onData = ((playerUI, data) => { console.log(data); });
+
+    world.chatManager.sendPlayerMessage(player, `Welcome to The Shooty Game`, "00FF00");
+
   };
 
   world.onPlayerLeave = player => {
-    console.log("Player Leavng World")
-    world.entityManager.getPlayerEntitiesByPlayer(player).forEach(entity => entity.despawn());
+    // console.log("Player Leavng World")
+    world.entityManager.getPlayerEntitiesByPlayer(player).forEach(entity => { entity.despawn() });
   };
 
   world.chatManager.registerCommand("/ping", (player: Player, args: string[], message: string) => {
     console.log("sending ping to UI");
-    world.entityManager.getAllPlayerEntities().forEach((p)=> p.player.ui.sendData({message:"test message"}));
+    world.entityManager.getAllPlayerEntities().forEach((p) => p.player.ui.sendData({ message: "test message" }));
     // player.ui.sendData({message:"test message"});
   });
 
@@ -163,7 +190,7 @@ startServer(world => {
     for (let i = 0; i < worlds.length; i++) {
       world.chatManager.sendPlayerMessage(player, `${worlds[i].id}) ${worlds[i].name} (${worlds[i].playerCount}/${worlds[i].maxPlayerCount})`, (worlds[i].playerCount < worlds[i].maxPlayerCount) ? "FFFF00" : "909050");
     }
-    world.chatManager.sendPlayerMessage(player, `To join a game type '/join <game_number>'`, "FFFF00");
+    world.chatManager.sendPlayerMessage(player, `To join a game type '/join <game_number>', e.g. /join 1`, "FFFF00");
 
 
 

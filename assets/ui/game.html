@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Game UI</title>
+    <style>
+        body {
+            margin: 0;
+            overflow: hidden;
+            font-family: 'Trebuchet MS', 'Arial', sans-serif;
+        }
+        .crosshair {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 20px;
+            height: 20px;
+            opacity: 0.5;
+            pointer-events: none;
+        }
+        .crosshair::before,
+        .crosshair::after {
+            content: '';
+            position: absolute;
+            background-color: rgb(255, 0, 0);
+        }
+        .crosshair::before {
+            width: 2px;
+            height: 100%;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+        .crosshair::after {
+            height: 2px;
+            width: 100%;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+        .charcher-panel{
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: linear-gradient(to bottom, rgba(40, 40, 40, 0.92), rgba(25, 25, 25, 0.92));
+            border: 3px solid rgba(180, 180, 180, 0.4);
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5),
+                        inset 0 0 20px rgba(255, 255, 255, 0.05);
+            border-radius: 12px;
+            padding: 15px;
+            width: 220px;
+            backdrop-filter: blur(4px);
+        }
+
+        .info-row {
+            display: flex;
+            align-items: center;
+            margin: 8px 0;
+            padding: 6px 8px;
+            background: rgba(30, 30, 30, 0.6);
+            border: 1px solid rgba(200, 200, 200, 0.15);
+            border-radius: 6px;
+            transition: all 0.2s ease;
+        }
+
+        .info-row:hover {
+            background: rgba(255, 255, 255, 0.1);
+            transform: translateX(-3px);
+        }
+
+        .icon {
+            width: 32px;
+            height: 32px;
+            margin-right: 12px;
+            background-size: contain;
+            background-repeat: no-repeat;
+            filter: drop-shadow(0 2px 2px rgba(0, 0, 0, 0.5));
+        }
+
+        .name-row {
+            flex: 1;
+            color: #ffffff;
+            font-family: 'Trebuchet MS', 'Arial', sans-serif;
+            font-size: 15px;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.8);
+            letter-spacing: 0.5px;
+        }
+
+        .count{
+            font-weight: bold;
+            font-size: 16px;
+            color: #00ffaa;
+            text-shadow: 0 0 8px rgba(0, 255, 170, 0.4),
+                        1px 1px 2px rgba(0, 0, 0, 0.8);
+            font-family: 'Georgia', serif;
+            padding: 0 6px;
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 4px;
+        }
+
+        .weapon-icon {
+            background-image: url('https://static.wikia.nocookie.net/runescape2/images/4/4a/Sword_shop_map_icon.png');
+        }
+        .hp-icon {
+            background-image: url('https://static.wikia.nocookie.net/runescape2/images/4/4a/Sword_shop_map_icon.png');
+        }
+
+        .kill-feed {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            width: 220px;
+            background: linear-gradient(to bottom, rgba(40, 40, 40, 0.92), rgba(25, 25, 25, 0.92));
+            border: 3px solid rgba(180, 180, 180, 0.4);
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5),
+                        inset 0 0 20px rgba(255, 255, 255, 0.05);
+            border-radius: 12px;
+            padding: 15px;
+            backdrop-filter: blur(4px);
+        }
+
+        .kill-entry {
+            color: #ffffff;
+            font-size: 14px;
+            margin: 5px 0;
+            padding: 8px;
+            background: rgba(30, 30, 30, 0.6);
+            border: 1px solid rgba(200, 200, 200, 0.15);
+            border-radius: 6px;
+        }
+
+        .killer {
+            color: #ff4444;
+            font-weight: bold;
+        }
+
+        .victim {
+            color: #cccccc;
+        }
+
+        .name-input-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+        }
+
+        .name-input-container {
+            background: linear-gradient(to bottom, rgba(40, 40, 40, 0.95), rgba(25, 25, 25, 0.95));
+            padding: 30px;
+            border-radius: 15px;
+            border: 3px solid rgba(180, 180, 180, 0.4);
+            text-align: center;
+            width: 300px;
+        }
+
+        .name-input-container h2 {
+            color: #ffffff;
+            margin-bottom: 20px;
+        }
+
+        .name-input {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: none;
+            border-radius: 5px;
+            background: rgba(255, 255, 255, 0.1);
+            color: #ffffff;
+            font-size: 16px;
+            box-sizing: border-box;
+        }
+
+        .name-submit {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            background: #4CAF50;
+            color: white;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        .name-submit:hover {
+            background: #45a049;
+        }
+
+        .death-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            z-index: 1000;
+        }
+
+        .death-screen h1 {
+            color: #ff4444;
+            font-size: 48px;
+            margin-bottom: 20px;
+            text-shadow: 0 0 10px rgba(255, 0, 0, 0.5);
+        }
+
+        .death-screen .countdown {
+            color: #ffffff;
+            font-size: 36px;
+            font-family: 'Georgia', serif;
+        }
+    </style>
+</head>
+<body>
+    <!-- Форма ввода имени -->
+    <!-- <div class="name-input-overlay" id="nameInputOverlay">
+        <div class="name-input-container">
+            <h2>Enter Your Name</h2>
+            <input type="text" class="name-input" id="nameInput" placeholder="Your name..." maxlength="15">
+            <button class="name-submit" id="nameSubmit" onclick="hytopia.sendData({message:'TEST TEST'})">Play</button>
+        </div>
+    </div> -->
+
+    <!-- Экран смерти -->
+    <div class="death-screen" id="deathScreen">
+        <h1>YOU DIED</h1>
+        <div class="countdown" id="respawnCountdown"></div>
+    </div>
+
+    <!-- Лента убийств -->
+    <div class="kill-feed">
+        <div class="info-row">
+            <div class="icon weapon-icon"></div>
+            <div class="name-row">Kills</div>
+        </div>
+        <div id="killFeed"></div>
+    </div>
+    
+    <div class="crosshair"></div>
+    <div class="charcher-panel">
+        <div class="info-row">
+            <div class="icon hp-icon"></div>
+            <div class="name-row">HP</div>
+            <div class="count health-count">100</div>
+        </div>
+        <div class="info-row">
+            <div class="icon weapon-icon"></div>
+            <div class="name-row">Bullets</div>
+            <div class="count bullets-count">0</div>
+        </div>
+    </div>
+
+</body>
+<script>
+    console.log("-1");
+    // Обработка ввода имени
+    // const nameInput = document.getElementById('nameInput');
+    // const nameSubmit = document.getElementById('nameSubmit');
+    // const nameOverlay = document.getElementById('nameInputOverlay');
+    
+
+    let playerName = '';
+    console.log("0");
+    // nameSubmit.addEventListener('click', () => {
+    //     playerName = nameInput.value.trim() || 'Player';
+    //     nameOverlay.style.display = 'none';
+    //     // Отправляем имя в игру
+    //     hytopia.sendData({
+    //         type: 'set-name',
+    //         name: playerName
+    //     });
+    // });
+
+    // Массив для хранения последних убийств
+    const kills = [];
+    const MAX_KILLS_SHOWN = 2;
+
+    console.log("1");
+
+    function addKill(killer, victim) {
+        kills.unshift({ killer, victim, time: Date.now() });
+        if (kills.length > MAX_KILLS_SHOWN) {
+            kills.pop();
+        }
+        updateKillFeed();
+    }
+    console.log("2");
+
+    const killFeed = document.getElementById('killFeed');
+    function updateKillFeed() {
+        killFeed.innerHTML = '';
+        kills.forEach(kill => {
+            const killEntry = document.createElement('div');
+            killEntry.className = 'kill-entry';
+            killEntry.innerHTML = `<span class="killer">${kill.killer}</span> killed <span class="victim">${kill.victim}</span>`;
+            killFeed.appendChild(killEntry);
+        });
+    }
+
+    console.log("3");
+    const deathScreen = document.getElementById('deathScreen');
+    const respawnCountdown = document.getElementById('respawnCountdown');
+
+    console.log("4");
+    function showDeathScreen(time) {
+        deathScreen.style.display = 'flex';
+        updateRespawnTimer(time);
+    }
+    console.log("5");
+    function hideDeathScreen() {
+        deathScreen.style.display = 'none';
+    }
+    console.log("6");
+    function updateRespawnTimer(time) {
+        respawnCountdown.textContent = `Respawning in ${time} seconds`;
+    }
+    console.log("7");
+    hytopia.onData(data => {
+        console.log(JSON.stringify(data));
+        if (data.type === 'bullets-count') {
+            document.querySelector('.bullets-count').textContent = data.bullets;
+        }
+        else if (data.type === 'stats-update') {
+            document.querySelector('.health-count').textContent = data.health;
+            document.querySelector('.bullets-count').textContent = data.ammo;
+        }
+        else if (data.type === 'kill-feed') {
+            addKill(data.killer, data.victim);
+        }
+        else if (data.type === 'player-died') {
+            showDeathScreen(data.respawnTime);
+        }
+        else if (data.type === 'respawn-countdown') {
+            updateRespawnTimer(data.timeLeft);
+            if (data.timeLeft <= 0) {
+                hideDeathScreen();
+            }
+        }
+        else if (data.type === 'player-name') {
+            playerName = data.name;
+        }
+    });
+</script>
+</html>

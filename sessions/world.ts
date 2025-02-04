@@ -1,4 +1,4 @@
-import { Player, PlayerCameraMode, PlayerEntity, World, WorldOptions } from "hytopia";
+import { Entity, Player, PlayerCameraMode, PlayerEntity, RigidBodyType, World, WorldOptions } from "hytopia";
 import MyEntityController from "../MyEntityController";
 import mapData from '../assets/maps/boilerplate.json';
 
@@ -21,6 +21,8 @@ export interface GunWorldState {
 }
 
 export class GunWorld extends World {
+    private _lobby: World;
+
     private _minPlayerCount: number;
     private _maxPlayerCount: number;
     private _maxWaitingTime: number;
@@ -30,13 +32,15 @@ export class GunWorld extends World {
     public get maxPlayerCount(): number { return this._maxPlayerCount; }
     public get playerCount(): number { return this._worldState.players.length; }
 
-    constructor(options: GunWorldOptions) {
+    private _dummy: Entity;
+
+    constructor(options: GunWorldOptions, lobby: World) {
         super({
             id: options.id,
             name: options.name,
             skyboxUri: "skyboxes/partly-cloudy"
         })
-
+        this._lobby = lobby;
         this._minPlayerCount = options.minPlayerCount;
         this._maxPlayerCount = options.maxPlayerCount;
         this._maxWaitingTime = options.maxWaitingTime;
@@ -48,6 +52,29 @@ export class GunWorld extends World {
         };
 
         this.loadMap(mapData);
+
+        // this._dummy = new Entity({
+        //     blockHalfExtents: { x: 0.01, y: 0.01, z: 0.01 },
+        //     blockTextureUri: "blocks/sand.png",
+        //     rigidBodyOptions: {
+        //         type: RigidBodyType.FIXED,
+        //     }
+        // });
+        // this._dummy.spawn(this, { x: 0, y: -25, z: 0 })
+        // const cameraTarget = new Entity({
+        //     blockHalfExtents: { x: 1, y: 1, z: 1 },
+        //     blockTextureUri: "blocks/sand.png",
+        //     rigidBodyOptions: {
+        //       type: RigidBodyType.FIXED,
+        //     }
+        //   });
+        //   cameraTarget.spawn(this, { x: 0, y: -50, z: 0 })
+
+        this.chatManager.registerCommand("/leave", (player: Player, args: string[], message: string) => {
+            player.joinWorld(this._lobby);
+        });
+
+
 
         // const waitingRoomInterval = setInterval(() => {
         //     if (this._worldState.playState == GunWorldPlayState.WAITING &&
@@ -85,17 +112,17 @@ export class GunWorld extends World {
             controller: new MyEntityController(),
         });
 
-        player.camera.setMode(PlayerCameraMode.FIRST_PERSON);
-        player.camera.setOffset({ x: 0, y: 0.4, z: 0 });
-        player.camera.setModelHiddenNodes(['head', 'neck']);
-        player.camera.setForwardOffset(0.3);
-
         playerEntity.spawn(this, { x: Math.random() * 10 - 5, y: 4, z: Math.random() * 10 - 5 });
         // console.log('Spawned player entity!');
         this.chatManager.sendBroadcastMessage(`[${player.username}] has joined the game.`)
 
         player.camera.setAttachedToEntity(playerEntity);
-        // player.ui.load('ui/index.html');
+        player.camera.setMode(PlayerCameraMode.FIRST_PERSON);
+        player.camera.setOffset({ x: 0, y: 0.4, z: 0 });
+        player.camera.setModelHiddenNodes(['head', 'neck']);
+        player.camera.setForwardOffset(0.3);
+
+        player.ui.load('ui/game.html');
 
         this._worldState.players.push(player);
 
@@ -104,7 +131,7 @@ export class GunWorld extends World {
             weapon: string,
             health: number,
             ammo: number
-         }) => {
+        }) => {
             if (payload.player != player.username) return;
             console.log(`Sending ${JSON.stringify(payload)} to ${player.username} UI`);
             player.ui.sendData(payload);
@@ -118,7 +145,10 @@ export class GunWorld extends World {
      */
     onPlayerLeave = (player: Player) => {
         this._worldState.players = this._worldState.players.filter(p => p !== player);
-        this.entityManager.getPlayerEntitiesByPlayer(player).forEach(entity => entity.despawn());
+        this.entityManager.getPlayerEntitiesByPlayer(player).forEach(entity => {
+            entity.despawn();
+        });
+        // player.camera.setAttachedToPosition({x:0,y:10,z:0});
         this.chatManager.sendBroadcastMessage(`[${player.username}] has left the game.`)
     }
 }
@@ -130,7 +160,7 @@ const worldConfigs: GunWorldOptions[] = [
         id: 1,
         name: "My Amazing World",
         minPlayerCount: 2,
-        maxPlayerCount: 2,
+        maxPlayerCount: 3,
         maxWaitingTime: 10000,
     },
     {
@@ -142,10 +172,10 @@ const worldConfigs: GunWorldOptions[] = [
     }
 ];
 
-export const startWorlds = () => {
+export const startWorlds = (lobby: World) => {
     // instantiate and start the worlds
     worldConfigs.forEach(config => {
-        const world = new GunWorld({ ...config });
+        const world = new GunWorld(config, lobby);
         world.start();
         worldRegistry.push(world);
     });
