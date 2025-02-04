@@ -9,7 +9,7 @@ import {
 
 import MyEntityController from './MyEntityController';
 
-import mapData from './assets/maps/boilerplate.json';
+import mapData from './assets/maps/map_main.json';
 
 // Класс для управления сессиями
 class GameSession {

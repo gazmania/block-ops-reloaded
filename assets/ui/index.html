@@ -222,13 +222,13 @@
 </head>
 <body>
     <!-- Форма ввода имени -->
-    <div class="name-input-overlay" id="nameInputOverlay">
+    <!-- <div class="name-input-overlay" id="nameInputOverlay">
         <div class="name-input-container">
             <h2>Enter Your Name</h2>
             <input type="text" class="name-input" id="nameInput" placeholder="Your name..." maxlength="15">
             <button class="name-submit" id="nameSubmit">Play</button>
         </div>
-    </div>
+    </div> -->
 
     <!-- Экран смерти -->
     <div class="death-screen" id="deathScreen">
@@ -269,15 +269,15 @@
 
     let playerName = '';
 
-    nameSubmit.addEventListener('click', () => {
-        playerName = nameInput.value.trim() || 'Player';
-        nameOverlay.style.display = 'none';
-        // Отправляем имя в игру
-        hytopia.sendData({
-            type: 'set-name',
-            name: playerName
-        });
-    });
+    // nameSubmit.addEventListener('click', () => {
+    //     playerName = nameInput.value.trim() || 'Player';
+    //     nameOverlay.style.display = 'none';
+    //     // Отправляем имя в игру
+    //     hytopia.sendData({
+    //         type: 'set-name',
+    //         name: playerName
+    //     });
+    // });
 
     // Массив для хранения последних убийств
     const kills = [];

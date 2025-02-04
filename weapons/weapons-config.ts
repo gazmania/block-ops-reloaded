@@ -28,7 +28,7 @@ const weaponConfigs = [
         zoomLevel: 0, // Уровень зума для пистолета
     },
     {
-        name: "ak47",
+        name: "ak",
         damage: 15,
         fireRate: 100,
         range: 70,
