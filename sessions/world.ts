@@ -17,7 +17,7 @@ enum GunWorldPlayState {
     STARTING,   // Countdown to game start
     ACTIVE,     // Game is in progress
     ENDING,     // Game is ending (showing results)
-    RESTARTING  // Transitioning to new round
+    // RESTARTING  // Transitioning to new round
 }
 
 export interface GunWorldState {
@@ -43,7 +43,7 @@ export class GunWorld extends World {
 
     private readonly ROUND_DURATION = 300000; // 5 minutes per round
     private readonly START_COUNTDOWN = 5000;  // 5 second countdown
-    private readonly END_SCREEN_DURATION = 5000; // 5 seconds to show results
+    private readonly END_SCREEN_DURATION = 10000; // 10 seconds to show results
 
     private _lastLoggedPlayerCount: number = 0;
     private _lastCountdownTime: number = -1;
@@ -51,14 +51,14 @@ export class GunWorld extends World {
     public get maxPlayerCount(): number { return this._maxPlayerCount; }
     public get playerCount(): number { return this._worldState.players.length; }
 
-    public incrementScore(player:Player) {
+    public incrementScore(player: Player) {
         const score = this._worldState.scores.get(player.username);
         if (score) {
             this._worldState.scores.set(player.username, score + 1);
         }
     }
 
-    public resetScore(player:Player) {
+    public resetScore(player: Player) {
         const score = this._worldState.scores.get(player.username);
         if (score) {
             this._worldState.scores.set(player.username, 0);
@@ -76,15 +76,9 @@ export class GunWorld extends World {
         this._maxPlayerCount = options.maxPlayerCount;
         this._maxWaitingTime = options.maxWaitingTime;
 
-        this._worldState = {
-            startTime: Date.now(),
-            players: [],
-            playState: GunWorldPlayState.WAITING,
-            roundNumber: 0,
-            roundDuration: this.ROUND_DURATION,
-            scores: new Map()
-        };
+        this._worldState = this.defaultState();
 
+        // @ts-ignore
         this.loadMap(mapData);
 
         // Initialize game background music (not splash screen)
@@ -130,9 +124,9 @@ export class GunWorld extends World {
             case GunWorldPlayState.ENDING:
                 this.handleEndingState();
                 break;
-            case GunWorldPlayState.RESTARTING:
-                this.handleRestartingState();
-                break;
+            // case GunWorldPlayState.RESTARTING:
+            //     this.handleRestartingState();
+            //     break;
         }
     }
 
@@ -182,20 +176,36 @@ export class GunWorld extends World {
         }
     }
 
+    private kickPlayersToLobby() {
+        for (const p of this.entityManager.getAllPlayerEntities()) {
+            // give the eventloop/gameloop time to sort itself out
+            // if the player moves worlds straight away, the despawn doesn't compete and leaves a zombie entitiy in the world
+            setTimeout(() => {
+                // kick the players to lobby
+                p.player.joinWorld(this._lobby);
+            }, 100);
+        }
+
+        // kick the players back to the lobby
+        this.entityManager.getAllPlayerEntities().forEach((p) => {
+            p.despawn();
+        });
+    }
+
     private handleEndingState(): void {
         if (!this._worldState.roundEndTime) return;
 
         const timeElapsed = Date.now() - this._worldState.roundEndTime;
         if (timeElapsed >= this.END_SCREEN_DURATION) {
-            // TODO find out what this is meant to do, it doesn't exist
-            // this.resetAndRestartGame();
+            this.kickPlayersToLobby();
+            this.resetWorld();
         }
     }
 
-    private handleRestartingState(): void {
-        this._worldState.playState = GunWorldPlayState.WAITING;
-        this.resetGame();
-    }
+    // private handleRestartingState(): void {
+    //     this._worldState.playState = GunWorldPlayState.WAITING;
+    //     this.resetGame();
+    // }
 
     private startGame(): void {
         if (this._worldState.playState !== GunWorldPlayState.WAITING) {
@@ -274,15 +284,23 @@ export class GunWorld extends World {
         this.displayScores(scores);
     }
 
-    private restartGame(): void {
-        this._worldState.playState = GunWorldPlayState.RESTARTING;
+    // private restartGame(): void {
+    //     this._worldState.playState = GunWorldPlayState.RESTARTING;
+    // }
+
+    private resetWorld() {
+        this._worldState = this.defaultState();
     }
 
-    private resetGame(): void {
-        this._worldState.scores.clear();
-        this._worldState.roundNumber = 0;
-        this._worldState.roundStartTime = undefined;
-        this._worldState.roundEndTime = undefined;
+    private defaultState() {
+        return {
+            startTime: Date.now(),
+            players: [],
+            playState: GunWorldPlayState.WAITING,
+            roundNumber: 0,
+            roundDuration: this.ROUND_DURATION,
+            scores: new Map()
+        };
     }
 
     private respawnPlayer(player: Player): void {
@@ -422,7 +440,7 @@ export class GunWorld extends World {
             if (!this._worldState.players.includes(player)) {
                 this._worldState.players.push(player);
             }
-            
+
             this._worldState.scores.set(player.username, 0);
 
             // Set initial freeze state
@@ -468,41 +486,35 @@ export class GunWorld extends World {
         console.log(`[GAME] ${winner.player.username} won the game with baguette!`);
 
         // Announce the winner
-        const winMessage = `🏆 ${winner.player.username} WON THE GAME! New game starting in 5 seconds... 🏆`;
+        const winMessage = `🏆 ${winner.player.username} WON THE GAME! 🏆`;
         this.broadcastGameMessage(winMessage);
 
         // Schedule reset
         setTimeout(() => {
             console.log("[GAME] Victory period ended, resetting game...");
             // Reset game state
-            this._worldState = {
-                startTime: Date.now(),
-                players: this._worldState.players,
-                playState: GunWorldPlayState.WAITING,
-                roundNumber: 0,
-                roundDuration: this.ROUND_DURATION,
-                scores: new Map()
-            };
+            this.kickPlayersToLobby();
+            this.resetWorld();
+            
+            // // Reset and respawn all players
 
-            // Reset and respawn all players
+            // // TODO - we've got confusion here around responsibilities here.
+            // const allPlayers = this.entityManager.getAllPlayerEntities();
+            // allPlayers.forEach(playerEntity => {
+            //     if (playerEntity.controller instanceof MyEntityController) {
+            //         const controller = playerEntity.controller as MyEntityController;
+            //         controller.resetStats()
+            //         controller.switchWeapon(getStartingWeapon(), playerEntity);
+            //     }
+            // });
 
-            // TODO - we've got confusion here around responsibilities here.
-            const allPlayers = this.entityManager.getAllPlayerEntities();
-            allPlayers.forEach(playerEntity => {
-                if (playerEntity.controller instanceof MyEntityController) {
-                    const controller = playerEntity.controller as MyEntityController;
-                    controller.resetStats()
-                    controller.switchWeapon(getStartingWeapon(), playerEntity);
-                }
-            });
+            // // Respawn all players in new positions
+            // this._worldState.players.forEach(player => {
+            //     this.respawnPlayer(player);
+            // });
 
-            // Respawn all players in new positions
-            this._worldState.players.forEach(player => {
-                this.respawnPlayer(player);
-            });
-
-            // Start new game
-            this.checkGameStart();
+            // // Start new game
+            // this.checkGameStart();
         }, 5000);
     }
 

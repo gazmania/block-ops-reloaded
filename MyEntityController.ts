@@ -335,7 +335,18 @@ export default class MyEntityController extends BaseEntityController {
         // Restore weapon from before death
         this.currentWeapon = this._lastWeaponBeforeDeath;
         this.currentAmmo = this.currentWeapon.maxAmmo;
-        entity.setPosition({ x: 0, y: 2, z: 0 });
+
+        const spawnRadius = 10;
+        const randomAngle = Math.random() * Math.PI * 2;
+        const spawnPos = {
+            x: Math.round(Math.cos(randomAngle) * spawnRadius * Math.random()),
+            y: 2,
+            z: Math.round(Math.sin(randomAngle) * spawnRadius * Math.random())
+        };
+        console.log(JSON.stringify(spawnPos));
+        entity.setPosition(spawnPos);
+
+        // entity.setPosition({ x: 0, y: 2, z: 0 });
 
         console.log(`[${this.getPlayerIdentifier(entity)}] Respawning with ${this.currentWeapon.name}, freeze: ${this._freeze}`);
         this.updateWeaponModel(entity);
@@ -430,14 +441,13 @@ export default class MyEntityController extends BaseEntityController {
 
         this.playWeaponSound(entity, this.currentWeapon, true);
 
-        let remainingTime = this.currentWeapon.reloadTime / 1000;
-        const updateInterval = setInterval(() => {
-            console.log(`[${this.getPlayerIdentifier(entity)}] Reloading... ${remainingTime.toFixed(1)}s`);
-            remainingTime -= 0.1;
-        }, 100);
+        // let remainingTime = this.currentWeapon.reloadTime / 1000;
+        // const updateInterval = setInterval(() => {
+        //     remainingTime -= 0.1;
+        // }, 100);
 
         setTimeout(() => {
-            clearInterval(updateInterval);
+            // clearInterval(updateInterval);
             if (!this._isDead) {
                 this.currentAmmo = this.currentWeapon.maxAmmo;
                 this._isReloading = false;

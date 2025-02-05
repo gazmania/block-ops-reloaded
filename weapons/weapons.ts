@@ -26,7 +26,7 @@ export interface WeaponConfig {
 }
 
 import { Vector3Like } from "hytopia";
-import weaponConfigs from "./weapons-config-test";
+import weaponConfigs from "./weapons-config";
 
 // no longer needed
 // type WeaponKeys = typeof weaponConfigs[number]['name'];
