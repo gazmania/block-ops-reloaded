@@ -26,7 +26,7 @@ export interface WeaponConfig {
 }
 
 import { Vector3Like } from "hytopia";
-import weaponConfigs from "./weapons-config";
+import weaponConfigs from "./weapons-config-test";
 
 // no longer needed
 // type WeaponKeys = typeof weaponConfigs[number]['name'];
@@ -36,8 +36,11 @@ export const getStartingWeapon = () => {
 }
 
 export const getWeaponByKillCount = (killCount: number) => {
-    return Object.values(weaponConfigs)
+    console.log(`[WEAPONS] Getting weapon for kill count: ${killCount}`);
+    const weapon = Object.values(weaponConfigs)
         .sort((a,b) => b.requiredKills - a.requiredKills)
         .find(weapon => killCount >= weapon.requiredKills) ?? getStartingWeapon();
+    console.log(`[WEAPONS] Selected weapon: ${weapon.name}`);
+    return weapon;
 }
 
