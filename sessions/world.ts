@@ -91,7 +91,7 @@ export class GunWorld extends World {
         this._backgroundMusic = new Audio({
             uri: 'audio/music-first-track.mp3',
             loop: true,
-            volume: 0.15,
+            volume: 1,
         });
 
         // Start playing as soon as world is created

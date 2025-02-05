@@ -14,7 +14,7 @@ export class LobbyWorld extends World {
         this._lobbyMusic = new Audio({
             uri: 'audio/game-splash-screen-music.mp3',
             loop: true,
-            volume: 0.05,
+            volume: 1,
             // spatialSound: false
         });
 

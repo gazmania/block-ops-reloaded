@@ -16,7 +16,7 @@ startServer(world => {
   // const backgroundMusic = new Audio({
   //   uri: 'audio/game-splash-screen-music.mp3',
   //   loop: true,
-  //   volume: 0.05,
+  //   volume: 1,
   // });
   // backgroundMusic.play(world);
 
