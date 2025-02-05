@@ -55,16 +55,21 @@ startServer(world => {
     for (let i = 0; i < worlds.length; i++) {
       world.chatManager.sendPlayerMessage(player, `${worlds[i].id}) ${worlds[i].name} (${worlds[i].playerCount}/${worlds[i].maxPlayerCount})`, (worlds[i].playerCount < worlds[i].maxPlayerCount) ? "FFFF00" : "909050");
     }
-    world.chatManager.sendPlayerMessage(player, `Type '/join 1' to join the game`, "FFFF00");
+    world.chatManager.sendPlayerMessage(player, `Type '/join <game_number>' to join, e.g. '/join 1'`, "FFFF00");
   });
 
   world.chatManager.registerCommand("/join", (player: Player, args: string[], message: string) => {
-    if (args.length != 1 || args[0] !== "1") {
-      world.chatManager.sendPlayerMessage(player, `Use '/join 1' to join the game`, "FF0000");
+    if (args.length != 1) {
+      world.chatManager.sendPlayerMessage(player, `Type '/join <game_number>' to join, e.g. '/join 1'`, "FF0000");
       return;
     }
-
-    const targetWorld = getWorld(1);
+    const gameId = parseInt(args[0]);
+    if (isNaN(gameId)) {
+      world.chatManager.sendPlayerMessage(player, `Please provide a valid game number`, "FF0000");
+      return;
+    }
+    
+    const targetWorld = getWorld(gameId);
     if (!targetWorld) {
       world.chatManager.sendPlayerMessage(player, `Game is not available right now`, "FF0000");
       return;
