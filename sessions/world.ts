@@ -1,8 +1,7 @@
-import { Entity, Player, PlayerCameraMode, PlayerEntity, RigidBodyType, World, WorldOptions, Audio } from "hytopia";
+import { Player, PlayerCameraMode, PlayerEntity, World, Audio } from "hytopia";
 import MyEntityController from "../MyEntityController";
-import { getStartingWeapon } from "../weapons/weapons";
 
-import mapData from '../assets/maps/final-map.json';
+import mapData from '../assets/maps/FINAL-map-version.json';
 
 export interface GunWorldOptions {
     id: number;
