@@ -383,6 +383,17 @@ export class GunWorld extends World {
         });
     }
 
+    private broadcastEndGameMessage(winner: Player): void {
+        console.log("Broadcasting EndGameMessages messages")
+        this._worldState.players.forEach(player => {
+            player.ui.sendData({
+                type: (player === winner) ? "player-won" : "player-lost",
+            });
+
+            this.chatManager.sendPlayerMessage(player, `🏆 ${winner.username} WON THE GAME! 🏆` , "FFFF00");
+        });
+    }
+
     public join(player: Player) {
         try {
             console.log(`[GAME JOIN] ${player.username} joining ${this.name}`);
@@ -486,8 +497,9 @@ export class GunWorld extends World {
         console.log(`[GAME] ${winner.player.username} won the game with baguette!`);
 
         // Announce the winner
-        const winMessage = `🏆 ${winner.player.username} WON THE GAME! 🏆`;
-        this.broadcastGameMessage(winMessage);
+        // const winMessage = `🏆 ${winner.player.username} WON THE GAME! 🏆`;
+        // this.broadcastGameMessage(winMessage);
+        this.broadcastEndGameMessage(winner.player);
 
         // Schedule reset
         setTimeout(() => {
@@ -495,7 +507,7 @@ export class GunWorld extends World {
             // Reset game state
             this.kickPlayersToLobby();
             this.resetWorld();
-            
+
             // // Reset and respawn all players
 
             // // TODO - we've got confusion here around responsibilities here.
@@ -515,7 +527,7 @@ export class GunWorld extends World {
 
             // // Start new game
             // this.checkGameStart();
-        }, 5000);
+        }, this.END_SCREEN_DURATION);
     }
 
     // Add this new method to check if we should start the game
