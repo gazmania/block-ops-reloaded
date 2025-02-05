@@ -75,30 +75,35 @@ startServer(world => {
       return;
     }
 
-    try {
-      // First send the message
-      world.chatManager.sendPlayerMessage(player, `Joining game...`, "00FF00");
-      
-      // Then attempt to join
-      setTimeout(() => {
-        targetWorld.join(player);
-      }, 100);
-    } catch (err) {
-      console.error(`[JOIN] Error:`, err);
-      world.chatManager.sendPlayerMessage(player, `Error joining game. Please try again.`, "FF0000");
+    const error = targetWorld.join(player);
+    if (error) {
+      world.chatManager.sendPlayerMessage(player, `${error}`, "FF0000");
     }
+
+    // try {
+    //   // First send the message
+    //   world.chatManager.sendPlayerMessage(player, `Joining game...`, "00FF00");
+      
+    //   // Then attempt to join
+    //   setTimeout(() => {
+    //     targetWorld.join(player);
+    //   }, 100);
+    // } catch (err) {
+    //   console.error(`[JOIN] Error:`, err);
+    //   world.chatManager.sendPlayerMessage(player, `Error joining game. Please try again.`, "FF0000");
+    // }
   });
 
   world.chatManager.registerCommand("/debug", (player: Player, args: string[], message: string) => {
     const worlds = listWorlds();
     console.log("[DEBUG] Current worlds:", worlds.map(w => `${w.id}: ${w.name} (${w.playerCount}/${w.maxPlayerCount})`));
     world.chatManager.sendPlayerMessage(player, `Debug Info:`, "FFFF00");
-    worlds.forEach(w => {
-      world.chatManager.sendPlayerMessage(
-        player,
-        `World ${w.id}: ${w.name} - Players: ${w.playerCount}/${w.maxPlayerCount} - State: ${w._worldState.playState}`,
-        "FFFF00"
-      );
-    });
+    // worlds.forEach(w => {
+    //   world.chatManager.sendPlayerMessage(
+    //     player,
+    //     `World ${w.id}: ${w.name} - Players: ${w.playerCount}/${w.maxPlayerCount} - State: ${w._worldState.playState}`,
+    //     "FFFF00"
+    //   );
+    // });
   });
 });

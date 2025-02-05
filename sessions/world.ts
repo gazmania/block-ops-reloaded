@@ -187,7 +187,8 @@ export class GunWorld extends World {
 
         const timeElapsed = Date.now() - this._worldState.roundEndTime;
         if (timeElapsed >= this.END_SCREEN_DURATION) {
-            this.resetAndRestartGame();
+            // TODO find out what this is meant to do, it doesn't exist
+            // this.resetAndRestartGame();
         }
     }
 
