@@ -51,6 +51,20 @@ export class GunWorld extends World {
     public get maxPlayerCount(): number { return this._maxPlayerCount; }
     public get playerCount(): number { return this._worldState.players.length; }
 
+    public incrementScore(player:Player) {
+        const score = this._worldState.scores.get(player.username);
+        if (score) {
+            this._worldState.scores.set(player.username, score + 1);
+        }
+    }
+
+    public resetScore(player:Player) {
+        const score = this._worldState.scores.get(player.username);
+        if (score) {
+            this._worldState.scores.set(player.username, 0);
+        }
+    }
+
     constructor(options: GunWorldOptions, lobby: World) {
         super({
             id: options.id,
@@ -407,6 +421,7 @@ export class GunWorld extends World {
             if (!this._worldState.players.includes(player)) {
                 this._worldState.players.push(player);
             }
+            
             this._worldState.scores.set(player.username, 0);
 
             // Set initial freeze state
@@ -469,12 +484,13 @@ export class GunWorld extends World {
             };
 
             // Reset and respawn all players
+
+            // TODO - we've got confusion here around responsibilities here.
             const allPlayers = this.entityManager.getAllPlayerEntities();
             allPlayers.forEach(playerEntity => {
                 if (playerEntity.controller instanceof MyEntityController) {
                     const controller = playerEntity.controller as MyEntityController;
-                    controller.health = 100;
-                    controller.kills = 0;
+                    controller.resetStats()
                     controller.switchWeapon(getStartingWeapon(), playerEntity);
                 }
             });

@@ -48,6 +48,11 @@ export default class MyEntityController extends BaseEntityController {
     public get isOnPlatform(): boolean { return !!this._platform; }
     public get platform(): Entity | undefined { return this._platform; }
 
+    public resetStats() {
+        this.health = 100;
+        this.kills = 0;
+    }
+
     private _lastWeaponBeforeDeath: WeaponConfig = this.currentWeapon;
     private _playerNames: Map<number, string> = new Map();
 
@@ -235,12 +240,12 @@ export default class MyEntityController extends BaseEntityController {
         }
     }
 
-    private die(entity: PlayerEntity, attackerEntity: PlayerEntity): void {
-        console.log(`[${this.getPlayerIdentifier(entity)}] Died!`);
+    private die(playerEntity: PlayerEntity, attackerEntity: PlayerEntity): void {
+        console.log(`[${playerEntity.player.username}] Died!`);
 
         // Log the killer's name
         if (attackerEntity) {
-            console.log(`${this.getPlayerIdentifier(attackerEntity)} killed ${this.getPlayerIdentifier(entity)}`);
+            console.log(`${attackerEntity.player.username} killed ${playerEntity.player.username}`);
         }
 
         // Save current weapon before death
@@ -257,23 +262,25 @@ export default class MyEntityController extends BaseEntityController {
             const attackerController = attackerEntity.controller;
             
             // First check if this was a baguette kill
-            if (attackerController.currentWeapon.name === 'baguette' && attackerController.currentWeapon.victory) {
-                console.log(`[GAME] ${this.getPlayerIdentifier(attackerEntity)} got a kill with baguette! Triggering win condition...`);
+            if (attackerController.currentWeapon.victory) {
+                console.log(`[GAME] ${playerEntity.player.username} got a winning kill! Triggering win condition...`);
                 if (attackerEntity.world instanceof GunWorld) {
-                    attackerEntity.world.handleGameWin(attackerEntity);
+                    const gunWorld = attackerEntity.world as GunWorld;
+                    gunWorld.handleGameWin(attackerEntity);
                     return; // Exit early as game is ending
                 }
             }
 
             // If not a winning kill, proceed with normal kill logic
             attackerController.kills++;
-            console.log(`[WEAPON] ${this.getPlayerIdentifier(attackerEntity)} now has ${attackerController.kills} kills`);
+            console.log(`[WEAPON] ${playerEntity.player.username} now has ${attackerController.kills} kills`);
             
             // Update score
             if (attackerEntity.world instanceof GunWorld) {
-                const world = attackerEntity.world;
-                const currentScore = world._worldState.scores.get(attackerEntity.player.username) || 0;
-                world._worldState.scores.set(attackerEntity.player.username, currentScore + 1);
+                const attackerWorld = attackerEntity.world as GunWorld;
+                attackerWorld.incrementScore(attackerEntity.player)
+                // const currentScore = attackerWorld. _worldState.scores.get(attackerEntity.player.username) || 0;
+                // attackerWorld._worldState.scores.set(attackerEntity.player.username, currentScore + 1);
             }
 
             // Handle weapon progression
@@ -287,33 +294,33 @@ export default class MyEntityController extends BaseEntityController {
         }
 
         // Send death UI message
-        if (entity.player && entity.player.ui) {
-            entity.player.ui.sendData({
+        if (playerEntity.player && playerEntity.player.ui) {
+            playerEntity.player.ui.sendData({
                 type: 'player-died',
                 respawnTime: 5
             });
         }
 
         // Send kill feed
-        if (entity.world && attackerEntity) {
-            this.broadcastKillFeed(entity.world, attackerEntity, entity);
+        if (playerEntity.world && attackerEntity) {
+            this.broadcastKillFeed(playerEntity.world, attackerEntity, playerEntity);
         }
 
         // Handle respawn timer
         let respawnTime = 5;
         const countdownInterval = setInterval(() => {
-            if (entity.player && entity.player.ui) {
-                entity.player.ui.sendData({
+            if (playerEntity.player && playerEntity.player.ui) {
+                playerEntity.player.ui.sendData({
                     type: 'respawn-countdown',
                     timeLeft: respawnTime
                 });
             }
-            console.log(`[${this.getPlayerIdentifier(entity)}] Respawning in ${respawnTime} seconds...`);
+            console.log(`[${this.getPlayerIdentifier(playerEntity)}] Respawning in ${respawnTime} seconds...`);
             respawnTime--;
 
             if (respawnTime < 0) {
                 clearInterval(countdownInterval);
-                this.respawn(entity);
+                this.respawn(playerEntity);
             }
         }, 1000);
     }
@@ -735,7 +742,7 @@ export default class MyEntityController extends BaseEntityController {
             levelUpSound.play(entity.world);
         }
 
-        console.log(`Available animations for ${newWeapon.name}:`, entity.modelAnimationNames);
+        // console.log(`Available animations for ${newWeapon.name}:`, entity.modelLoopedAnimationsNames);
     }
 
     private getDistanceToPlayer(entity: PlayerEntity, otherPlayer: PlayerEntity): number {
