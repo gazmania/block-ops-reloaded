@@ -1,33 +1,29 @@
 import {
-  PlayerCameraMode,
   startServer,
-  PlayerEntity,
-  Entity,
-  WorldMap,
-  RigidBodyType,
-  Collider,
-  BlockType,
-  ColliderShape,
   Player,
-  PlayerUI,
-  World,
   Audio
 } from 'hytopia';
 
-import mapData from './assets/maps/map_main.json';
-import { getWorld, GunWorld, listWorlds, startWorlds } from './sessions/world';
-import { LobbyWorld } from './sessions/lobby';
+import { getWorld, listWorlds, startWorlds } from './sessions/world';
 
 startServer(world => {
   console.log("[SERVER] Starting server...");
-  
+
   // Create lobby first but don't use it for spawning
-  const lobby = new LobbyWorld();
-  console.log("[SERVER] Lobby world created");
-  
+  // const lobby = new LobbyWorld();
+  // console.log("[SERVER] Lobby world created");
+
+  // const backgroundMusic = new Audio({
+  //   uri: 'audio/game-splash-screen-music.mp3',
+  //   loop: true,
+  //   volume: 0.05,
+  // });
+  // backgroundMusic.play(world);
+
+
   // Start game worlds immediately
   console.log("[SERVER] Initializing game worlds...");
-  startWorlds(lobby);
+  startWorlds(world);
 
   // Handle new players joining the server - KEEP THEM IN THE VOID
   world.onPlayerJoin = player => {
@@ -38,7 +34,7 @@ startServer(world => {
 
   world.onPlayerLeave = player => {
     console.log(`[SERVER] Player ${player.username} left server`);
-    world.entityManager.getPlayerEntitiesByPlayer(player).forEach(entity => { 
+    world.entityManager.getPlayerEntitiesByPlayer(player).forEach(entity => {
       entity.despawn();
     });
   };
@@ -50,7 +46,7 @@ startServer(world => {
       world.chatManager.sendPlayerMessage(player, `No games are available right now`, "FF0000");
       return;
     }
-    
+
     world.chatManager.sendPlayerMessage(player, `Available Games:`, "FFFF00");
     for (let i = 0; i < worlds.length; i++) {
       world.chatManager.sendPlayerMessage(player, `${worlds[i].id}) ${worlds[i].name} (${worlds[i].playerCount}/${worlds[i].maxPlayerCount})`, (worlds[i].playerCount < worlds[i].maxPlayerCount) ? "FFFF00" : "909050");
@@ -68,7 +64,7 @@ startServer(world => {
       world.chatManager.sendPlayerMessage(player, `Please provide a valid game number`, "FF0000");
       return;
     }
-    
+
     const targetWorld = getWorld(gameId);
     if (!targetWorld) {
       world.chatManager.sendPlayerMessage(player, `Game is not available right now`, "FF0000");
@@ -83,7 +79,7 @@ startServer(world => {
     // try {
     //   // First send the message
     //   world.chatManager.sendPlayerMessage(player, `Joining game...`, "00FF00");
-      
+
     //   // Then attempt to join
     //   setTimeout(() => {
     //     targetWorld.join(player);

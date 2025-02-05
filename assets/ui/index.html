@@ -6,13 +6,27 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Block Ops Reloaded</title>
     <style>
+        @font-face {
+            font-family: 'Inter';
+            src: url('{{CDN_ASSETS_URL}}/ui/fonts/Inter-Regular.ttf') format('truetype');
+            font-weight: 400;
+            font-style: normal;
+        }
+
+        @font-face {
+            font-family: 'Inter';
+            src: url('{{CDN_ASSETS_URL}}/ui/fonts/Inter-Bold.ttf') format('truetype');
+            font-weight: 700;
+            font-style: normal;
+        }
+
         html,
         body {
             margin: 0;
             padding: 0;
             height: 100%;
             overflow: hidden;
-            font-family: 'Trebuchet MS', 'Inter', sans-serif;
+            font-family: 'Inter', sans-serif;
         }
 
         body {
@@ -56,8 +70,10 @@
 
         .background-screen h1 img {
             max-width: 80%;
-            display: block; /* Add this */
-            margin: 0 auto; /* Add this */
+            display: block;
+            /* Add this */
+            margin: 0 auto;
+            /* Add this */
         }
 
         .background-screen p {
@@ -100,7 +116,8 @@
     <div class="background-screen" id="background">
         <h1><img src="{{CDN_ASSETS_URL}}/ui/BOR.png" alt="Block Ops Reloaded"></h1>
         <div class="instructions">
-            <p class="summary"> BLOCK OPS: Reloaded is a fast-paced game mode where every elimination upgrades your weapon, progressing
+            <p class="summary"> BLOCK OPS: Reloaded is a fast-paced game mode where every elimination upgrades your
+                weapon, progressing
                 through a set arsenal until the final challenge – a kill with a MEGA baguette – secures victory.</p>
 
             <p>— INSTRUCTIONS —</p>
@@ -117,7 +134,7 @@
                 <br>SPACE to jump
                 <br>WASD to move
             </p>
-            
+
         </div>
     </div>
 </body>
