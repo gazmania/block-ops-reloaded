@@ -1,6 +1,6 @@
 import { Entity, Player, PlayerCameraMode, PlayerEntity, RigidBodyType, World, WorldOptions } from "hytopia";
 import MyEntityController from "../MyEntityController";
-import mapData from '../assets/maps/boilerplate.json';
+import mapData from '../assets/maps/map_main.json';
 
 export interface GunWorldOptions {
     id: number;
@@ -31,8 +31,6 @@ export class GunWorld extends World {
 
     public get maxPlayerCount(): number { return this._maxPlayerCount; }
     public get playerCount(): number { return this._worldState.players.length; }
-
-    private _dummy: Entity;
 
     constructor(options: GunWorldOptions, lobby: World) {
         super({
@@ -71,7 +69,16 @@ export class GunWorld extends World {
         //   cameraTarget.spawn(this, { x: 0, y: -50, z: 0 })
 
         this.chatManager.registerCommand("/leave", (player: Player, args: string[], message: string) => {
-            player.joinWorld(this._lobby);
+
+            this.entityManager.getPlayerEntitiesByPlayer(player).forEach(entity => {
+                console.log(`despawning ${entity.id}`);
+                entity.despawn();
+            });
+
+            // this gives the despawn chance to run before leaving this world and joining back to the lobby
+            setImmediate(() => {
+                player.joinWorld(this._lobby);
+            });
         });
 
 
@@ -145,9 +152,7 @@ export class GunWorld extends World {
      */
     onPlayerLeave = (player: Player) => {
         this._worldState.players = this._worldState.players.filter(p => p !== player);
-        this.entityManager.getPlayerEntitiesByPlayer(player).forEach(entity => {
-            entity.despawn();
-        });
+
         // player.camera.setAttachedToPosition({x:0,y:10,z:0});
         this.chatManager.sendBroadcastMessage(`[${player.username}] has left the game.`)
     }

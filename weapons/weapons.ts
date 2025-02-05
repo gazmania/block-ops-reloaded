@@ -22,6 +22,7 @@ export interface WeaponConfig {
     bodyDamage: number;
     limbDamage: number;
     victory: boolean;
+    zoomLevel: number;
 }
 
 import { Vector3Like } from "hytopia";

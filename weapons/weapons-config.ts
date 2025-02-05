@@ -25,9 +25,10 @@ const weaponConfigs = [
         bodyDamage: 5, // Урон по телу
         limbDamage: 3, // Урон по конечностям
         victory: false, // Не приводит к победе
+        zoomLevel: 0, // Уровень зума для пистолета
     },
     {
-        name: "ak47",
+        name: "ak",
         damage: 15,
         fireRate: 100,
         range: 70,
@@ -43,13 +44,14 @@ const weaponConfigs = [
         idleAnimation: "idle_ak",
         walkAnimation: 'walk_ak', // Анимация ходьбы
         fireAnimation: 'fire_ak', // Анимация выстрела
-        fireAudio: "audio/ak-fire.mp3",
+        fireAudio: "audio/ak47-fire.mp3",
         reloadAnimation: "recharge_ak",
-        reloadAudio: "audio/ak-reload.mp3",
+        reloadAudio: "audio/ak47-reload.mp3",
         headDamage: 14, // Урон по голове
         bodyDamage: 7, // Урон по телу
         limbDamage: 3, // Урон по конечностям
         victory: false, //
+        zoomLevel: 0, // Уровень зума для AK-47
     },
     {
         name: "shotgun",
@@ -75,6 +77,7 @@ const weaponConfigs = [
         bodyDamage: 7, // Урон по телу
         limbDamage: 3, // Урон по конечностям
         victory: false, //
+        zoomLevel:0,
     },
     {
         name: "awp",
@@ -100,6 +103,7 @@ const weaponConfigs = [
         bodyDamage: 7, // Урон по телу
         limbDamage: 3, // Урон по конечностям
         victory: false, //
+        zoomLevel: 2.5, // Уровень зума для снайперской винтовки
     },
     {
         name: "rpg",
@@ -125,6 +129,7 @@ const weaponConfigs = [
         bodyDamage: 7, // Урон по телу
         limbDamage: 3, // Урон по конечностям
         victory: false, //
+        zoomLevel: 0,
     },
     {
         name: "baguette",
@@ -150,6 +155,7 @@ const weaponConfigs = [
         bodyDamage: 7, // Урон по телу
         limbDamage: 3, // Урон по конечностям
         victory: true, //
+        zoomLevel: 0,
     },
 ] satisfies WeaponConfig[];
 

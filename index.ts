@@ -13,7 +13,7 @@ import {
 } from 'hytopia';
 
 
-import mapData from './assets/maps/boilerplate.json';
+import mapData from './assets/maps/map_main.json';
 import { getWorld, GunWorld, listWorlds, startWorlds } from './sessions/world';
 
 startServer(world => {
