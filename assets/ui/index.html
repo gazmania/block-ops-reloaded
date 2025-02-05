@@ -1,14 +1,36 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Game UI</title>
+    <title>Block Ops Reloaded</title>
     <style>
+        html,
         body {
             margin: 0;
+            padding: 0;
+            height: 100%;
             overflow: hidden;
-            font-family: 'Trebuchet MS', 'Arial', sans-serif;
+            font-family: 'Trebuchet MS', 'Inter', sans-serif;
+        }
+
+        body {
+            /* background-image: url('{{CDN_ASSETS_URL}}/ui/BG.png'); 
+            background-size: cover; 
+            background-position: center; 
+            background-repeat: no-repeat;  */
+            min-height: 100vh;
+        }
+
+        .bg-image {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: 1;
         }
 
         .background-screen {
@@ -17,7 +39,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0, 0, 0, 0.7);
+            background: rgba(0, 0, 0, 0.2);
             display: flex;
             justify-content: center;
             align-items: center;
@@ -34,17 +56,63 @@
 
         .background-screen p {
             color: #ffffff;
-            font-size: 16px;
-            margin-bottom: 12px;
+            font-size: 18px;
+            margin: 10px 0;
+            text-align: center;
+            font-family: 'Inter';
+        }
+
+        .background-screen strong {
+            color: #ff5555;
+        }
+
+        .instructions {
+            color: #ffffff;
+            background-color: rgba(0, 0, 0, 0.7);
+            padding: 20px;
+            border-radius: 8px;
+            display: flex;
+            flex-direction: column;
+            gap: 2px;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .instructions .summary {
+            color: rgba(255, 255, 255, 0.9);
+            font-size: 20px;
+        }
+
+        .instructions .commands {
+            margin: 1px;
         }
     </style>
 </head>
+
 <body>
+    <img class="bg-image" src="{{CDN_ASSETS_URL}}/ui/BG.png" alt="Background">
     <div class="background-screen" id="background">
-        <h1>The Shooty Game</h1>
-        <p>Yes it's janky, but you can use for following commands in the chat box to get going:</p>
-        <p><strong>/list</strong> - List of joinable games</p>
-        <p><strong>/join</strong> - Join a game by it's game number, e.g. /join 1</p>
+        <h1><img src="{{CDN_ASSETS_URL}}/ui/BOR.png" alt="Block Ops Reloaded"></h1>
+        <div class="instructions">
+            <p class="summary"> BLOCK OPS: Reloaded is a fast-paced game mode where every elimination upgrades your weapon, progressing
+                through a set arsenal until the final challenge – a kill with a MEGA baguette – secures victory.</p>
+
+            <p>— INSTRUCTIONS —</p>
+            <p>Use the following commands in the chat box to get going:</p>
+            <div class="commands">
+                <p><strong>/list</strong> — shows list of joinable games</p>
+                <p><strong>/join</strong> — join a game by its number (e.g. /join 1)</p>
+            </div>
+            <p>— CONTROLS — </p>
+            <p>R KEY for reload
+                <br>LEFT CLICK to fire
+                <br>RIGHT CLICK for sniper scope
+                <br>SHIFT to sprint
+                <br>SPACE to jump
+                <br>WASD to move
+            </p>
+            
+        </div>
     </div>
 </body>
 
