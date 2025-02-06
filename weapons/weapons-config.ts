@@ -29,7 +29,7 @@ const weaponConfigs = [
     },
     {
         name: "ak47",
-        damage: 7.2,
+        damage: 6,
         fireRate: 100,
         range: 35,
         maxAmmo: 30,
