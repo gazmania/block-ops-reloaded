@@ -18824,234 +18824,6 @@
     "-7,24,7": 122,
     "-7,24,6": 122,
     "-43,1,28": 1,
-    "-17,2,-37": 166,
-    "-17,2,-38": 166,
-    "-17,3,-37": 166,
-    "-17,5,-37": 166,
-    "-18,1,-35": 166,
-    "-18,2,-35": 166,
-    "-18,3,-35": 166,
-    "-18,4,-35": 166,
-    "-16,1,-49": 166,
-    "-15,1,-49": 166,
-    "-14,1,-49": 166,
-    "-13,1,-49": 166,
-    "-12,1,-49": 166,
-    "-11,1,-49": 166,
-    "-10,1,-49": 166,
-    "-9,1,-49": 166,
-    "-8,1,-49": 166,
-    "-7,1,-49": 166,
-    "-6,1,-49": 166,
-    "-5,1,-49": 166,
-    "-4,1,-49": 166,
-    "-3,1,-49": 166,
-    "-2,1,-49": 166,
-    "-1,1,-49": 166,
-    "-15,2,-49": 166,
-    "-14,2,-49": 166,
-    "-13,2,-49": 166,
-    "-12,2,-49": 166,
-    "-11,2,-49": 166,
-    "-10,2,-49": 166,
-    "-9,2,-49": 166,
-    "-8,2,-49": 166,
-    "-15,3,-49": 166,
-    "-14,3,-49": 166,
-    "-13,3,-49": 166,
-    "-12,3,-49": 166,
-    "-11,3,-49": 166,
-    "-10,3,-49": 166,
-    "-9,3,-49": 166,
-    "-8,3,-49": 166,
-    "-7,3,-49": 166,
-    "-8,4,-49": 166,
-    "-5,3,-49": 166,
-    "-4,2,-49": 166,
-    "-4,3,-49": 166,
-    "-3,2,-49": 166,
-    "-3,3,-49": 166,
-    "-2,2,-49": 166,
-    "-2,3,-49": 166,
-    "-1,2,-49": 166,
-    "0,1,-49": 166,
-    "2,1,-49": 166,
-    "3,1,-49": 166,
-    "4,1,-49": 166,
-    "5,1,-49": 166,
-    "6,1,-49": 166,
-    "7,1,-49": 166,
-    "8,1,-49": 166,
-    "9,1,-49": 166,
-    "10,1,-49": 166,
-    "11,1,-49": 166,
-    "12,1,-49": 166,
-    "13,1,-49": 166,
-    "14,1,-49": 166,
-    "15,1,-49": 166,
-    "16,1,-49": 166,
-    "17,1,-49": 166,
-    "19,1,-49": 166,
-    "20,1,-49": 166,
-    "22,1,-50": 166,
-    "23,1,-50": 166,
-    "22,1,-49": 166,
-    "21,1,-49": 166,
-    "23,1,-49": 166,
-    "24,1,-49": 166,
-    "19,2,-49": 166,
-    "20,2,-49": 166,
-    "18,2,-49": 166,
-    "15,2,-49": 166,
-    "16,2,-49": 166,
-    "17,2,-49": 166,
-    "18,3,-49": 166,
-    "19,3,-49": 166,
-    "19,4,-49": 166,
-    "20,3,-49": 166,
-    "21,2,-49": 166,
-    "21,3,-49": 166,
-    "22,3,-49": 166,
-    "22,4,-49": 166,
-    "23,3,-49": 166,
-    "23,4,-49": 166,
-    "23,4,-48": 166,
-    "15,3,-49": 166,
-    "16,3,-49": 166,
-    "17,3,-49": 166,
-    "12,2,-49": 166,
-    "13,2,-49": 166,
-    "10,2,-49": 166,
-    "8,2,-49": 166,
-    "10,3,-49": 166,
-    "7,3,-49": 166,
-    "8,3,-49": 166,
-    "9,3,-49": 166,
-    "8,4,-49": 166,
-    "8,4,-48": 166,
-    "8,5,-48": 166,
-    "9,4,-48": 166,
-    "25,1,-37": 166,
-    "25,1,-38": 166,
-    "25,1,-39": 166,
-    "25,1,-40": 166,
-    "25,2,-40": 166,
-    "25,2,-39": 166,
-    "25,2,-38": 166,
-    "25,2,-37": 166,
-    "25,3,-37": 166,
-    "25,3,-38": 166,
-    "27,1,-39": 166,
-    "25,3,-39": 166,
-    "25,3,-40": 166,
-    "49,1,-9": 166,
-    "49,1,-8": 166,
-    "49,1,-7": 166,
-    "49,1,-6": 166,
-    "49,1,-5": 166,
-    "49,1,-4": 166,
-    "49,1,-3": 166,
-    "49,1,-2": 166,
-    "49,1,-1": 166,
-    "49,1,0": 166,
-    "49,1,1": 166,
-    "49,1,2": 166,
-    "49,1,3": 166,
-    "49,1,4": 166,
-    "49,1,5": 166,
-    "49,1,6": 166,
-    "49,2,6": 166,
-    "49,2,5": 166,
-    "49,2,4": 166,
-    "49,2,3": 166,
-    "49,2,2": 166,
-    "50,2,2": 166,
-    "49,2,1": 166,
-    "50,2,1": 166,
-    "49,2,0": 166,
-    "50,2,0": 166,
-    "49,2,-1": 166,
-    "50,2,-1": 166,
-    "49,2,-2": 166,
-    "50,2,-2": 166,
-    "49,2,-3": 166,
-    "49,2,-4": 166,
-    "50,2,-3": 166,
-    "50,2,-4": 166,
-    "49,2,-6": 166,
-    "49,2,-5": 166,
-    "49,2,-8": 166,
-    "49,2,-7": 166,
-    "49,3,-6": 166,
-    "49,3,-5": 166,
-    "49,3,-4": 166,
-    "49,3,-3": 166,
-    "49,3,-2": 166,
-    "49,3,-1": 166,
-    "49,3,0": 166,
-    "49,3,1": 166,
-    "49,3,2": 166,
-    "49,3,3": 166,
-    "49,4,3": 166,
-    "49,4,4": 166,
-    "49,4,5": 166,
-    "49,4,6": 166,
-    "49,1,7": 166,
-    "49,1,8": 166,
-    "49,1,9": 166,
-    "49,1,10": 166,
-    "49,2,10": 166,
-    "49,2,11": 166,
-    "49,2,12": 166,
-    "49,1,12": 166,
-    "49,1,13": 166,
-    "49,1,14": 166,
-    "49,1,15": 166,
-    "49,1,16": 166,
-    "49,1,17": 166,
-    "49,1,18": 166,
-    "49,2,17": 166,
-    "49,2,18": 166,
-    "49,1,19": 166,
-    "49,1,20": 166,
-    "49,1,21": 166,
-    "49,1,22": 166,
-    "49,1,23": 166,
-    "49,1,24": 166,
-    "49,1,25": 166,
-    "49,2,24": 166,
-    "49,2,25": 166,
-    "49,2,26": 166,
-    "49,1,26": 166,
-    "49,1,27": 166,
-    "49,1,28": 166,
-    "49,1,29": 166,
-    "49,1,30": 166,
-    "49,1,31": 166,
-    "49,1,32": 166,
-    "49,1,33": 166,
-    "49,1,34": 166,
-    "49,1,35": 166,
-    "49,1,36": 166,
-    "49,2,36": 166,
-    "49,1,37": 166,
-    "49,2,37": 166,
-    "49,1,38": 166,
-    "49,1,39": 166,
-    "49,2,38": 166,
-    "49,2,39": 166,
-    "49,1,40": 166,
-    "49,2,32": 166,
-    "49,2,33": 166,
-    "50,2,32": 166,
-    "49,2,31": 166,
-    "49,2,30": 166,
-    "49,2,29": 166,
-    "50,2,29": 166,
-    "50,2,31": 166,
-    "49,3,33": 166,
-    "49,3,34": 166,
-    "49,3,35": 166,
     "11,0,44": 37,
     "-45,0,-42": 37,
     "-50,0,-42": 37,
@@ -19807,11 +19579,6 @@
     "-34,5,-33": 120,
     "-34,5,-34": 120,
     "-34,5,-35": 120,
-    "-50,1,-23": 166,
-    "-50,2,-23": 166,
-    "-50,3,-23": 166,
-    "-50,4,-23": 166,
-    "-50,5,-23": 166,
     "-5,1,-22": 16,
     "-4,1,-23": 16,
     "-4,1,-24": 16,
@@ -20325,35 +20092,63 @@
     "44,2,36": 17,
     "41,1,36": 17,
     "44,1,36": 17,
-    "19,1,50": 166,
-    "22,1,50": 166,
-    "21,1,50": 166,
-    "20,1,50": 166,
-    "9,1,50": 166,
-    "10,1,50": 166,
-    "11,1,50": 166,
-    "12,1,50": 166,
-    "13,1,50": 166,
-    "14,1,50": 166,
-    "6,1,50": 166,
-    "7,1,50": 166,
-    "8,1,50": 166,
-    "7,3,50": 166,
-    "8,2,50": 166,
-    "9,2,50": 166,
-    "-7,1,50": 166,
-    "-6,1,50": 166,
-    "3,1,50": 166,
-    "0,1,50": 166,
-    "1,1,50": 166,
-    "20,2,50": 166,
-    "21,2,50": 166,
-    "17,1,50": 166,
-    "18,3,50": 166,
-    "17,3,50": 166,
-    "16,3,50": 166
+    "8,1,-42": 16,
+    "-3,1,-42": 16,
+    "-23,1,-44": 139,
+    "-26,1,-48": 139
   },
   "entities": {
+    "-21.90713890141129,1.1875,-47.38708362678355": {
+      "modelUri": "models/environment/wood-pallet.gltf",
+      "modelLoopedAnimations": [
+        "idle"
+      ],
+      "modelScale": 1,
+      "name": "wood-pallet",
+      "rigidBodyOptions": {
+        "type": "kinematic_velocity",
+        "rotation": {
+          "x": 0,
+          "y": 0,
+          "z": 0,
+          "w": 1
+        }
+      }
+    },
+    "13.723454971464621,1.1875,49.06737913541296": {
+      "modelUri": "models/environment/wood-pallet.gltf",
+      "modelLoopedAnimations": [
+        "idle"
+      ],
+      "modelScale": 1,
+      "name": "wood-pallet",
+      "rigidBodyOptions": {
+        "type": "kinematic_velocity",
+        "rotation": {
+          "x": 0,
+          "y": 0,
+          "z": 0,
+          "w": 1
+        }
+      }
+    },
+    "-46.408938982994634,1.1875,31.284337392789364": {
+      "modelUri": "models/environment/wood-pallet.gltf",
+      "modelLoopedAnimations": [
+        "idle"
+      ],
+      "modelScale": 1,
+      "name": "wood-pallet",
+      "rigidBodyOptions": {
+        "type": "kinematic_velocity",
+        "rotation": {
+          "x": 0,
+          "y": 0,
+          "z": 0,
+          "w": 1
+        }
+      }
+    },
     "-40.26311803070768,1.1875,44.557338714787974": {
       "modelUri": "models/environment/wood-pallet.gltf",
       "modelLoopedAnimations": [
@@ -20422,57 +20217,6 @@
         }
       }
     },
-    "-46.408938982994634,1.1875,31.284337392789364": {
-      "modelUri": "models/environment/wood-pallet.gltf",
-      "modelLoopedAnimations": [
-        "idle"
-      ],
-      "modelScale": 1,
-      "name": "wood-pallet",
-      "rigidBodyOptions": {
-        "type": "kinematic_velocity",
-        "rotation": {
-          "x": 0,
-          "y": 0,
-          "z": 0,
-          "w": 1
-        }
-      }
-    },
-    "13.723454971464621,1.1875,49.06737913541296": {
-      "modelUri": "models/environment/wood-pallet.gltf",
-      "modelLoopedAnimations": [
-        "idle"
-      ],
-      "modelScale": 1,
-      "name": "wood-pallet",
-      "rigidBodyOptions": {
-        "type": "kinematic_velocity",
-        "rotation": {
-          "x": 0,
-          "y": 0,
-          "z": 0,
-          "w": 1
-        }
-      }
-    },
-    "-21.90713890141129,1.1875,-47.38708362678355": {
-      "modelUri": "models/environment/wood-pallet.gltf",
-      "modelLoopedAnimations": [
-        "idle"
-      ],
-      "modelScale": 1,
-      "name": "wood-pallet",
-      "rigidBodyOptions": {
-        "type": "kinematic_velocity",
-        "rotation": {
-          "x": 0,
-          "y": 0,
-          "z": 0,
-          "w": 1
-        }
-      }
-    },
     "20.089531535808785,3.2163113498831173,30.717255719547946": {
       "modelUri": "models/environment/truck3.gltf",
       "modelLoopedAnimations": [
@@ -20490,13 +20234,98 @@
         }
       }
     },
-    "20.891370849256383,3.2163113498831173,-5.012135278056855": {
-      "modelUri": "models/environment/truck.gltf",
+    "-20.160045756493645,1.734375,-48.86602711217512": {
+      "modelUri": "models/environment/trash bag.gltf",
       "modelLoopedAnimations": [
         "idle"
       ],
       "modelScale": 1,
-      "name": "truck",
+      "name": "trash bag",
+      "rigidBodyOptions": {
+        "type": "kinematic_velocity",
+        "rotation": {
+          "x": 0,
+          "y": 0,
+          "z": 0,
+          "w": 1
+        }
+      }
+    },
+    "-38.035148743984706,1.734375,48.491625833234025": {
+      "modelUri": "models/environment/trash bag.gltf",
+      "modelLoopedAnimations": [
+        "idle"
+      ],
+      "modelScale": 1,
+      "name": "trash bag",
+      "rigidBodyOptions": {
+        "type": "kinematic_velocity",
+        "rotation": {
+          "x": 0,
+          "y": 0,
+          "z": 0,
+          "w": 1
+        }
+      }
+    },
+    "10.047101584060684,1.734375,-44.19451613943783": {
+      "modelUri": "models/environment/trash bag.gltf",
+      "modelLoopedAnimations": [
+        "idle"
+      ],
+      "modelScale": 1,
+      "name": "trash bag",
+      "rigidBodyOptions": {
+        "type": "kinematic_velocity",
+        "rotation": {
+          "x": 0,
+          "y": 0,
+          "z": 0,
+          "w": 1
+        }
+      }
+    },
+    "4.982664730417331,1.734375,-47.036983255815954": {
+      "modelUri": "models/environment/trash bag.gltf",
+      "modelLoopedAnimations": [
+        "idle"
+      ],
+      "modelScale": 1,
+      "name": "trash bag",
+      "rigidBodyOptions": {
+        "type": "kinematic_velocity",
+        "rotation": {
+          "x": 0,
+          "y": 0,
+          "z": 0,
+          "w": 1
+        }
+      }
+    },
+    "2.5963586875750035,1.734375,-44.68716706969674": {
+      "modelUri": "models/environment/trash bag.gltf",
+      "modelLoopedAnimations": [
+        "idle"
+      ],
+      "modelScale": 1,
+      "name": "trash bag",
+      "rigidBodyOptions": {
+        "type": "kinematic_velocity",
+        "rotation": {
+          "x": 0,
+          "y": 0,
+          "z": 0,
+          "w": 1
+        }
+      }
+    },
+    "9.559173283895019,1.734375,-10.753456482764701": {
+      "modelUri": "models/environment/trash bag.gltf",
+      "modelLoopedAnimations": [
+        "idle"
+      ],
+      "modelScale": 1,
+      "name": "trash bag",
       "rigidBodyOptions": {
         "type": "kinematic_velocity",
         "rotation": {
@@ -20626,13 +20455,13 @@
         }
       }
     },
-    "9.559173283895019,1.734375,-10.753456482764701": {
-      "modelUri": "models/environment/trash bag.gltf",
+    "-37.21910627324216,1.2376903504133225,27.107378931789633": {
+      "modelUri": "models/environment/pot.gltf",
       "modelLoopedAnimations": [
         "idle"
       ],
       "modelScale": 1,
-      "name": "trash bag",
+      "name": "pot",
       "rigidBodyOptions": {
         "type": "kinematic_velocity",
         "rotation": {
@@ -20643,13 +20472,13 @@
         }
       }
     },
-    "2.5963586875750035,1.734375,-44.68716706969674": {
-      "modelUri": "models/environment/trash bag.gltf",
+    "-29.93341008718899,1.2376903504133225,-0.5726904329439773": {
+      "modelUri": "models/environment/pot.gltf",
       "modelLoopedAnimations": [
         "idle"
       ],
       "modelScale": 1,
-      "name": "trash bag",
+      "name": "pot",
       "rigidBodyOptions": {
         "type": "kinematic_velocity",
         "rotation": {
@@ -20660,13 +20489,13 @@
         }
       }
     },
-    "4.982664730417331,1.734375,-47.036983255815954": {
-      "modelUri": "models/environment/trash bag.gltf",
+    "-45.546268809987794,1.2376903504133225,-15.41444368042765": {
+      "modelUri": "models/environment/pot.gltf",
       "modelLoopedAnimations": [
         "idle"
       ],
       "modelScale": 1,
-      "name": "trash bag",
+      "name": "pot",
       "rigidBodyOptions": {
         "type": "kinematic_velocity",
         "rotation": {
@@ -20677,13 +20506,13 @@
         }
       }
     },
-    "10.047101584060684,1.734375,-44.19451613943783": {
-      "modelUri": "models/environment/trash bag.gltf",
+    "-17.49,1.2376903504133225,-34.95206925106534": {
+      "modelUri": "models/environment/pot.gltf",
       "modelLoopedAnimations": [
         "idle"
       ],
       "modelScale": 1,
-      "name": "trash bag",
+      "name": "pot",
       "rigidBodyOptions": {
         "type": "kinematic_velocity",
         "rotation": {
@@ -20694,13 +20523,13 @@
         }
       }
     },
-    "-38.035148743984706,1.734375,48.491625833234025": {
-      "modelUri": "models/environment/trash bag.gltf",
+    "12.546325408185407,1.2376903504133225,-10.466309546043494": {
+      "modelUri": "models/environment/pot.gltf",
       "modelLoopedAnimations": [
         "idle"
       ],
       "modelScale": 1,
-      "name": "trash bag",
+      "name": "pot",
       "rigidBodyOptions": {
         "type": "kinematic_velocity",
         "rotation": {
@@ -20711,13 +20540,30 @@
         }
       }
     },
-    "-20.160045756493645,1.734375,-48.86602711217512": {
-      "modelUri": "models/environment/trash bag.gltf",
+    "9.851473736691975,1.2376903504133225,-13.9593247810588": {
+      "modelUri": "models/environment/pot.gltf",
       "modelLoopedAnimations": [
         "idle"
       ],
       "modelScale": 1,
-      "name": "trash bag",
+      "name": "pot",
+      "rigidBodyOptions": {
+        "type": "kinematic_velocity",
+        "rotation": {
+          "x": 0,
+          "y": 0,
+          "z": 0,
+          "w": 1
+        }
+      }
+    },
+    "40.20501467591341,1.2376903504133225,4.818977269182621": {
+      "modelUri": "models/environment/pot.gltf",
+      "modelLoopedAnimations": [
+        "idle"
+      ],
+      "modelScale": 1,
+      "name": "pot",
       "rigidBodyOptions": {
         "type": "kinematic_velocity",
         "rotation": {
@@ -20847,115 +20693,13 @@
         }
       }
     },
-    "40.20501467591341,1.2376903504133225,4.818977269182621": {
-      "modelUri": "models/environment/pot.gltf",
+    "26.283122852457396,3.195812024222583,40.82016533180591": {
+      "modelUri": "models/environment/fence.gltf",
       "modelLoopedAnimations": [
         "idle"
       ],
       "modelScale": 1,
-      "name": "pot",
-      "rigidBodyOptions": {
-        "type": "kinematic_velocity",
-        "rotation": {
-          "x": 0,
-          "y": 0,
-          "z": 0,
-          "w": 1
-        }
-      }
-    },
-    "9.851473736691975,1.2376903504133225,-13.9593247810588": {
-      "modelUri": "models/environment/pot.gltf",
-      "modelLoopedAnimations": [
-        "idle"
-      ],
-      "modelScale": 1,
-      "name": "pot",
-      "rigidBodyOptions": {
-        "type": "kinematic_velocity",
-        "rotation": {
-          "x": 0,
-          "y": 0,
-          "z": 0,
-          "w": 1
-        }
-      }
-    },
-    "12.546325408185407,1.2376903504133225,-10.466309546043494": {
-      "modelUri": "models/environment/pot.gltf",
-      "modelLoopedAnimations": [
-        "idle"
-      ],
-      "modelScale": 1,
-      "name": "pot",
-      "rigidBodyOptions": {
-        "type": "kinematic_velocity",
-        "rotation": {
-          "x": 0,
-          "y": 0,
-          "z": 0,
-          "w": 1
-        }
-      }
-    },
-    "-17.49,1.2376903504133225,-34.95206925106534": {
-      "modelUri": "models/environment/pot.gltf",
-      "modelLoopedAnimations": [
-        "idle"
-      ],
-      "modelScale": 1,
-      "name": "pot",
-      "rigidBodyOptions": {
-        "type": "kinematic_velocity",
-        "rotation": {
-          "x": 0,
-          "y": 0,
-          "z": 0,
-          "w": 1
-        }
-      }
-    },
-    "-45.546268809987794,1.2376903504133225,-15.41444368042765": {
-      "modelUri": "models/environment/pot.gltf",
-      "modelLoopedAnimations": [
-        "idle"
-      ],
-      "modelScale": 1,
-      "name": "pot",
-      "rigidBodyOptions": {
-        "type": "kinematic_velocity",
-        "rotation": {
-          "x": 0,
-          "y": 0,
-          "z": 0,
-          "w": 1
-        }
-      }
-    },
-    "-29.93341008718899,1.2376903504133225,-0.5726904329439773": {
-      "modelUri": "models/environment/pot.gltf",
-      "modelLoopedAnimations": [
-        "idle"
-      ],
-      "modelScale": 1,
-      "name": "pot",
-      "rigidBodyOptions": {
-        "type": "kinematic_velocity",
-        "rotation": {
-          "x": 0,
-          "y": 0,
-          "z": 0,
-          "w": 1
-        }
-      }
-    },
-    "-37.21910627324216,1.2376903504133225,27.107378931789633": {
-      "modelUri": "models/environment/pot.gltf",
-      "modelLoopedAnimations": [
-        "idle"
-      ],
-      "modelScale": 1,
-      "name": "pot",
+      "name": "fence",
       "rigidBodyOptions": {
         "type": "kinematic_velocity",
         "rotation": {
@@ -20983,13 +20727,13 @@
         }
       }
     },
-    "26.283122852457396,3.195812024222583,40.82016533180591": {
-      "modelUri": "models/environment/fence.gltf",
+    "41.376591232002916,3.195812024222583,40.748933076278426": {
+      "modelUri": "models/environment/fenc1e.gltf",
       "modelLoopedAnimations": [
         "idle"
       ],
       "modelScale": 1,
-      "name": "fence",
+      "name": "fenc1e",
       "rigidBodyOptions": {
         "type": "kinematic_velocity",
         "rotation": {
@@ -21034,13 +20778,149 @@
         }
       }
     },
-    "41.376591232002916,3.195812024222583,40.748933076278426": {
-      "modelUri": "models/environment/fenc1e.gltf",
+    "-9.258487551601096,1.566562486886978,39.55752108732741": {
+      "modelUri": "models/environment/conus.gltf",
       "modelLoopedAnimations": [
         "idle"
       ],
       "modelScale": 1,
-      "name": "fenc1e",
+      "name": "conus",
+      "rigidBodyOptions": {
+        "type": "kinematic_velocity",
+        "rotation": {
+          "x": 0,
+          "y": 0,
+          "z": 0,
+          "w": 1
+        }
+      }
+    },
+    "-14.942360228710665,1.566562486886978,39.77374813770611": {
+      "modelUri": "models/environment/conus.gltf",
+      "modelLoopedAnimations": [
+        "idle"
+      ],
+      "modelScale": 1,
+      "name": "conus",
+      "rigidBodyOptions": {
+        "type": "kinematic_velocity",
+        "rotation": {
+          "x": 0,
+          "y": 0,
+          "z": 0,
+          "w": 1
+        }
+      }
+    },
+    "-48.621909472525765,1.566562486886978,21.959167234180647": {
+      "modelUri": "models/environment/conus.gltf",
+      "modelLoopedAnimations": [
+        "idle"
+      ],
+      "modelScale": 1,
+      "name": "conus",
+      "rigidBodyOptions": {
+        "type": "kinematic_velocity",
+        "rotation": {
+          "x": 0,
+          "y": 0,
+          "z": 0,
+          "w": 1
+        }
+      }
+    },
+    "-48.55920939536172,1.566562486886978,19.060389532875824": {
+      "modelUri": "models/environment/conus.gltf",
+      "modelLoopedAnimations": [
+        "idle"
+      ],
+      "modelScale": 1,
+      "name": "conus",
+      "rigidBodyOptions": {
+        "type": "kinematic_velocity",
+        "rotation": {
+          "x": 0,
+          "y": 0,
+          "z": 0,
+          "w": 1
+        }
+      }
+    },
+    "-47.775057333129034,1.566562486886978,-19.370108452214225": {
+      "modelUri": "models/environment/conus.gltf",
+      "modelLoopedAnimations": [
+        "idle"
+      ],
+      "modelScale": 1,
+      "name": "conus",
+      "rigidBodyOptions": {
+        "type": "kinematic_velocity",
+        "rotation": {
+          "x": 0,
+          "y": 0,
+          "z": 0,
+          "w": 1
+        }
+      }
+    },
+    "22.246402581580373,1.566562486886978,-46.38307506961627": {
+      "modelUri": "models/environment/conus.gltf",
+      "modelLoopedAnimations": [
+        "idle"
+      ],
+      "modelScale": 1,
+      "name": "conus",
+      "rigidBodyOptions": {
+        "type": "kinematic_velocity",
+        "rotation": {
+          "x": 0,
+          "y": 0,
+          "z": 0,
+          "w": 1
+        }
+      }
+    },
+    "17.630113590634565,1.566562486886978,-46.18336238406367": {
+      "modelUri": "models/environment/conus.gltf",
+      "modelLoopedAnimations": [
+        "idle"
+      ],
+      "modelScale": 1,
+      "name": "conus",
+      "rigidBodyOptions": {
+        "type": "kinematic_velocity",
+        "rotation": {
+          "x": 0,
+          "y": 0,
+          "z": 0,
+          "w": 1
+        }
+      }
+    },
+    "-10.94774864644354,1.566562486886978,-46.04906942197516": {
+      "modelUri": "models/environment/conus.gltf",
+      "modelLoopedAnimations": [
+        "idle"
+      ],
+      "modelScale": 1,
+      "name": "conus",
+      "rigidBodyOptions": {
+        "type": "kinematic_velocity",
+        "rotation": {
+          "x": 0,
+          "y": 0,
+          "z": 0,
+          "w": 1
+        }
+      }
+    },
+    "-13.373230315348842,1.566562486886978,-46.032963003734324": {
+      "modelUri": "models/environment/conus.gltf",
+      "modelLoopedAnimations": [
+        "idle"
+      ],
+      "modelScale": 1,
+      "name": "conus",
       "rigidBodyOptions": {
         "type": "kinematic_velocity",
         "rotation": {
@@ -21221,13 +21101,13 @@
         }
       }
     },
-    "-13.373230315348842,1.566562486886978,-46.032963003734324": {
-      "modelUri": "models/environment/conus.gltf",
+    "-16.474119251848812,1.6167567478802416,48.78770828717765": {
+      "modelUri": "models/environment/cartonbox.gltf",
       "modelLoopedAnimations": [
         "idle"
       ],
       "modelScale": 1,
-      "name": "conus",
+      "name": "cartonbox",
       "rigidBodyOptions": {
         "type": "kinematic_velocity",
         "rotation": {
@@ -21238,132 +21118,13 @@
         }
       }
     },
-    "-10.94774864644354,1.566562486886978,-46.04906942197516": {
-      "modelUri": "models/environment/conus.gltf",
+    "-6.586381561144995,1.6167567478802416,40.329681012085224": {
+      "modelUri": "models/environment/cartonbox.gltf",
       "modelLoopedAnimations": [
         "idle"
       ],
       "modelScale": 1,
-      "name": "conus",
-      "rigidBodyOptions": {
-        "type": "kinematic_velocity",
-        "rotation": {
-          "x": 0,
-          "y": 0,
-          "z": 0,
-          "w": 1
-        }
-      }
-    },
-    "17.630113590634565,1.566562486886978,-46.18336238406367": {
-      "modelUri": "models/environment/conus.gltf",
-      "modelLoopedAnimations": [
-        "idle"
-      ],
-      "modelScale": 1,
-      "name": "conus",
-      "rigidBodyOptions": {
-        "type": "kinematic_velocity",
-        "rotation": {
-          "x": 0,
-          "y": 0,
-          "z": 0,
-          "w": 1
-        }
-      }
-    },
-    "22.246402581580373,1.566562486886978,-46.38307506961627": {
-      "modelUri": "models/environment/conus.gltf",
-      "modelLoopedAnimations": [
-        "idle"
-      ],
-      "modelScale": 1,
-      "name": "conus",
-      "rigidBodyOptions": {
-        "type": "kinematic_velocity",
-        "rotation": {
-          "x": 0,
-          "y": 0,
-          "z": 0,
-          "w": 1
-        }
-      }
-    },
-    "-47.775057333129034,1.566562486886978,-19.370108452214225": {
-      "modelUri": "models/environment/conus.gltf",
-      "modelLoopedAnimations": [
-        "idle"
-      ],
-      "modelScale": 1,
-      "name": "conus",
-      "rigidBodyOptions": {
-        "type": "kinematic_velocity",
-        "rotation": {
-          "x": 0,
-          "y": 0,
-          "z": 0,
-          "w": 1
-        }
-      }
-    },
-    "-48.55920939536172,1.566562486886978,19.060389532875824": {
-      "modelUri": "models/environment/conus.gltf",
-      "modelLoopedAnimations": [
-        "idle"
-      ],
-      "modelScale": 1,
-      "name": "conus",
-      "rigidBodyOptions": {
-        "type": "kinematic_velocity",
-        "rotation": {
-          "x": 0,
-          "y": 0,
-          "z": 0,
-          "w": 1
-        }
-      }
-    },
-    "-48.621909472525765,1.566562486886978,21.959167234180647": {
-      "modelUri": "models/environment/conus.gltf",
-      "modelLoopedAnimations": [
-        "idle"
-      ],
-      "modelScale": 1,
-      "name": "conus",
-      "rigidBodyOptions": {
-        "type": "kinematic_velocity",
-        "rotation": {
-          "x": 0,
-          "y": 0,
-          "z": 0,
-          "w": 1
-        }
-      }
-    },
-    "-14.942360228710665,1.566562486886978,39.77374813770611": {
-      "modelUri": "models/environment/conus.gltf",
-      "modelLoopedAnimations": [
-        "idle"
-      ],
-      "modelScale": 1,
-      "name": "conus",
-      "rigidBodyOptions": {
-        "type": "kinematic_velocity",
-        "rotation": {
-          "x": 0,
-          "y": 0,
-          "z": 0,
-          "w": 1
-        }
-      }
-    },
-    "-9.258487551601096,1.566562486886978,39.55752108732741": {
-      "modelUri": "models/environment/conus.gltf",
-      "modelLoopedAnimations": [
-        "idle"
-      ],
-      "modelScale": 1,
-      "name": "conus",
+      "name": "cartonbox",
       "rigidBodyOptions": {
         "type": "kinematic_velocity",
         "rotation": {
@@ -21425,13 +21186,13 @@
         }
       }
     },
-    "-6.586381561144995,1.6167567478802416,40.329681012085224": {
-      "modelUri": "models/environment/cartonbox.gltf",
+    "20.891370849256383,3.2163113498831173,-5.012135278056855": {
+      "modelUri": "models/environment/truck.gltf",
       "modelLoopedAnimations": [
         "idle"
       ],
       "modelScale": 1,
-      "name": "cartonbox",
+      "name": "truck",
       "rigidBodyOptions": {
         "type": "kinematic_velocity",
         "rotation": {
@@ -21442,13 +21203,13 @@
         }
       }
     },
-    "-16.474119251848812,1.6167567478802416,48.78770828717765": {
-      "modelUri": "models/environment/cartonbox.gltf",
+    "44.94054608273484,1.4375,-8.50121265531243": {
+      "modelUri": "models/environment/bench.gltf",
       "modelLoopedAnimations": [
         "idle"
       ],
       "modelScale": 1,
-      "name": "cartonbox",
+      "name": "bench",
       "rigidBodyOptions": {
         "type": "kinematic_velocity",
         "rotation": {
@@ -21459,13 +21220,13 @@
         }
       }
     },
-    "18.61577577132254,1.95,-42.324567221158745": {
-      "modelUri": "models/environment/car.gltf",
+    "-5.431412249257039,1.4375,-35.169806382857814": {
+      "modelUri": "models/environment/bench.gltf",
       "modelLoopedAnimations": [
         "idle"
       ],
-      "modelScale": 0.75,
-      "name": "car",
+      "modelScale": 1,
+      "name": "bench",
       "rigidBodyOptions": {
         "type": "kinematic_velocity",
         "rotation": {
@@ -21476,13 +21237,13 @@
         }
       }
     },
-    "-13.807478035422065,1.95,-10.668380101029136": {
-      "modelUri": "models/environment/car.gltf",
+    "-0.8495434957279162,1.4375,-45.6556684097788": {
+      "modelUri": "models/environment/bench.gltf",
       "modelLoopedAnimations": [
         "idle"
       ],
-      "modelScale": 0.75,
-      "name": "car",
+      "modelScale": 1,
+      "name": "bench",
       "rigidBodyOptions": {
         "type": "kinematic_velocity",
         "rotation": {
@@ -21493,13 +21254,13 @@
         }
       }
     },
-    "29.326987748250357,1.95,-23.52502639054835": {
-      "modelUri": "models/environment/car.gltf",
+    "7.6614808978527655,1.4375,-45.93524693651594": {
+      "modelUri": "models/environment/bench.gltf",
       "modelLoopedAnimations": [
         "idle"
       ],
-      "modelScale": 0.75,
-      "name": "car",
+      "modelScale": 1,
+      "name": "bench",
       "rigidBodyOptions": {
         "type": "kinematic_velocity",
         "rotation": {
@@ -21510,13 +21271,13 @@
         }
       }
     },
-    "29.204001526783188,1.95,-30.980049265605004": {
-      "modelUri": "models/environment/car.gltf",
+    "6.734929938103504,1.4375,-10.913739993260927": {
+      "modelUri": "models/environment/bench.gltf",
       "modelLoopedAnimations": [
         "idle"
       ],
-      "modelScale": 0.75,
-      "name": "car",
+      "modelScale": 1,
+      "name": "bench",
       "rigidBodyOptions": {
         "type": "kinematic_velocity",
         "rotation": {
@@ -21527,13 +21288,13 @@
         }
       }
     },
-    "17.00234518468796,1.95,14.433461631159071": {
-      "modelUri": "models/environment/car.gltf",
+    "2.2188523417532657,1.4375,-11.1667727867202": {
+      "modelUri": "models/environment/bench.gltf",
       "modelLoopedAnimations": [
         "idle"
       ],
-      "modelScale": 0.75,
-      "name": "car",
+      "modelScale": 1,
+      "name": "bench",
       "rigidBodyOptions": {
         "type": "kinematic_velocity",
         "rotation": {
@@ -21544,47 +21305,13 @@
         }
       }
     },
-    "18.691688312516675,1.95,-35.31561169238546": {
-      "modelUri": "models/environment/car_1.gltf",
+    "-1.6234249632601738,1.4375,-11.079653133004742": {
+      "modelUri": "models/environment/bench.gltf",
       "modelLoopedAnimations": [
         "idle"
       ],
-      "modelScale": 0.75,
-      "name": "car_1",
-      "rigidBodyOptions": {
-        "type": "kinematic_velocity",
-        "rotation": {
-          "x": 0,
-          "y": 0,
-          "z": 0,
-          "w": 1
-        }
-      }
-    },
-    "-8.250022403308716,1.95,18.082927437149586": {
-      "modelUri": "models/environment/car_1.gltf",
-      "modelLoopedAnimations": [
-        "idle"
-      ],
-      "modelScale": 0.75,
-      "name": "car_1",
-      "rigidBodyOptions": {
-        "type": "kinematic_velocity",
-        "rotation": {
-          "x": 0,
-          "y": 0,
-          "z": 0,
-          "w": 1
-        }
-      }
-    },
-    "-25.31596393673775,1.95,-44.22395112263697": {
-      "modelUri": "models/environment/car_1.gltf",
-      "modelLoopedAnimations": [
-        "idle"
-      ],
-      "modelScale": 0.75,
-      "name": "car_1",
+      "modelScale": 1,
+      "name": "bench",
       "rigidBodyOptions": {
         "type": "kinematic_velocity",
         "rotation": {
@@ -21731,13 +21458,13 @@
         }
       }
     },
-    "-1.6234249632601738,1.4375,-11.079653133004742": {
-      "modelUri": "models/environment/bench.gltf",
+    "-25.31596393673775,1.95,-44.22395112263697": {
+      "modelUri": "models/environment/car_1.gltf",
       "modelLoopedAnimations": [
         "idle"
       ],
-      "modelScale": 1,
-      "name": "bench",
+      "modelScale": 0.75,
+      "name": "car_1",
       "rigidBodyOptions": {
         "type": "kinematic_velocity",
         "rotation": {
@@ -21748,13 +21475,13 @@
         }
       }
     },
-    "2.2188523417532657,1.4375,-11.1667727867202": {
-      "modelUri": "models/environment/bench.gltf",
+    "18.691688312516675,1.95,-35.31561169238546": {
+      "modelUri": "models/environment/car_1.gltf",
       "modelLoopedAnimations": [
         "idle"
       ],
-      "modelScale": 1,
-      "name": "bench",
+      "modelScale": 0.75,
+      "name": "car_1",
       "rigidBodyOptions": {
         "type": "kinematic_velocity",
         "rotation": {
@@ -21765,13 +21492,13 @@
         }
       }
     },
-    "6.734929938103504,1.4375,-10.913739993260927": {
-      "modelUri": "models/environment/bench.gltf",
+    "-8.250022403308716,1.95,18.082927437149586": {
+      "modelUri": "models/environment/car_1.gltf",
       "modelLoopedAnimations": [
         "idle"
       ],
-      "modelScale": 1,
-      "name": "bench",
+      "modelScale": 0.75,
+      "name": "car_1",
       "rigidBodyOptions": {
         "type": "kinematic_velocity",
         "rotation": {
@@ -21782,13 +21509,13 @@
         }
       }
     },
-    "7.6614808978527655,1.4375,-45.93524693651594": {
-      "modelUri": "models/environment/bench.gltf",
+    "-5.4270783565438245,1.53125,39.289546911629465": {
+      "modelUri": "models/environment/barrel.gltf",
       "modelLoopedAnimations": [
         "idle"
       ],
       "modelScale": 1,
-      "name": "bench",
+      "name": "barrel",
       "rigidBodyOptions": {
         "type": "kinematic_velocity",
         "rotation": {
@@ -21799,47 +21526,13 @@
         }
       }
     },
-    "-0.8495434957279162,1.4375,-45.6556684097788": {
-      "modelUri": "models/environment/bench.gltf",
+    "44.58073059929528,1.53125,-13.793795181206407": {
+      "modelUri": "models/environment/barrel.gltf",
       "modelLoopedAnimations": [
         "idle"
       ],
       "modelScale": 1,
-      "name": "bench",
-      "rigidBodyOptions": {
-        "type": "kinematic_velocity",
-        "rotation": {
-          "x": 0,
-          "y": 0,
-          "z": 0,
-          "w": 1
-        }
-      }
-    },
-    "-5.431412249257039,1.4375,-35.169806382857814": {
-      "modelUri": "models/environment/bench.gltf",
-      "modelLoopedAnimations": [
-        "idle"
-      ],
-      "modelScale": 1,
-      "name": "bench",
-      "rigidBodyOptions": {
-        "type": "kinematic_velocity",
-        "rotation": {
-          "x": 0,
-          "y": 0,
-          "z": 0,
-          "w": 1
-        }
-      }
-    },
-    "44.94054608273484,1.4375,-8.50121265531243": {
-      "modelUri": "models/environment/bench.gltf",
-      "modelLoopedAnimations": [
-        "idle"
-      ],
-      "modelScale": 1,
-      "name": "bench",
+      "name": "barrel",
       "rigidBodyOptions": {
         "type": "kinematic_velocity",
         "rotation": {
@@ -21884,13 +21577,13 @@
         }
       }
     },
-    "44.58073059929528,1.53125,-13.793795181206407": {
-      "modelUri": "models/environment/barrel.gltf",
+    "48.38125286311716,1.7278125286102295,-25.607531636982948": {
+      "modelUri": "models/environment/barre23l.gltf",
       "modelLoopedAnimations": [
         "idle"
       ],
       "modelScale": 1,
-      "name": "barrel",
+      "name": "barre23l",
       "rigidBodyOptions": {
         "type": "kinematic_velocity",
         "rotation": {
@@ -21901,13 +21594,98 @@
         }
       }
     },
-    "-5.4270783565438245,1.53125,39.289546911629465": {
-      "modelUri": "models/environment/barrel.gltf",
+    "-7.100012859024666,1.7278125286102295,46.159942968916454": {
+      "modelUri": "models/environment/barre23l.gltf",
       "modelLoopedAnimations": [
         "idle"
       ],
       "modelScale": 1,
-      "name": "barrel",
+      "name": "barre23l",
+      "rigidBodyOptions": {
+        "type": "kinematic_velocity",
+        "rotation": {
+          "x": 0,
+          "y": 0,
+          "z": 0,
+          "w": 1
+        }
+      }
+    },
+    "-2.1895163773624304,1.7278125286102295,41.58400371673337": {
+      "modelUri": "models/environment/barre23l.gltf",
+      "modelLoopedAnimations": [
+        "idle"
+      ],
+      "modelScale": 1,
+      "name": "barre23l",
+      "rigidBodyOptions": {
+        "type": "kinematic_velocity",
+        "rotation": {
+          "x": 0,
+          "y": 0,
+          "z": 0,
+          "w": 1
+        }
+      }
+    },
+    "26.30988799926625,1.7278125286102295,49.550147722793874": {
+      "modelUri": "models/environment/barre23l.gltf",
+      "modelLoopedAnimations": [
+        "idle"
+      ],
+      "modelScale": 1,
+      "name": "barre23l",
+      "rigidBodyOptions": {
+        "type": "kinematic_velocity",
+        "rotation": {
+          "x": 0,
+          "y": 0,
+          "z": 0,
+          "w": 1
+        }
+      }
+    },
+    "28.413633074482746,1.7278125286102295,48.21873324360764": {
+      "modelUri": "models/environment/barre23l.gltf",
+      "modelLoopedAnimations": [
+        "idle"
+      ],
+      "modelScale": 1,
+      "name": "barre23l",
+      "rigidBodyOptions": {
+        "type": "kinematic_velocity",
+        "rotation": {
+          "x": 0,
+          "y": 0,
+          "z": 0,
+          "w": 1
+        }
+      }
+    },
+    "47.83871287945681,1.7278125286102295,49.4006844478566": {
+      "modelUri": "models/environment/barre23l.gltf",
+      "modelLoopedAnimations": [
+        "idle"
+      ],
+      "modelScale": 1,
+      "name": "barre23l",
+      "rigidBodyOptions": {
+        "type": "kinematic_velocity",
+        "rotation": {
+          "x": 0,
+          "y": 0,
+          "z": 0,
+          "w": 1
+        }
+      }
+    },
+    "48.327595004625344,1.7278125286102295,44.55447400105707": {
+      "modelUri": "models/environment/barre23l.gltf",
+      "modelLoopedAnimations": [
+        "idle"
+      ],
+      "modelScale": 1,
+      "name": "barre23l",
       "rigidBodyOptions": {
         "type": "kinematic_velocity",
         "rotation": {
@@ -22037,13 +21815,13 @@
         }
       }
     },
-    "48.327595004625344,1.7278125286102295,44.55447400105707": {
-      "modelUri": "models/environment/barre23l.gltf",
+    "28.676748782136208,1.7278125286102295,-18.026094045301466": {
+      "modelUri": "models/environment/barre2l.gltf",
       "modelLoopedAnimations": [
         "idle"
       ],
       "modelScale": 1,
-      "name": "barre23l",
+      "name": "barre2l",
       "rigidBodyOptions": {
         "type": "kinematic_velocity",
         "rotation": {
@@ -22054,98 +21832,13 @@
         }
       }
     },
-    "47.83871287945681,1.7278125286102295,49.4006844478566": {
-      "modelUri": "models/environment/barre23l.gltf",
+    "48.22452696322203,1.7278125286102295,-15.281033155784336": {
+      "modelUri": "models/environment/barre2l.gltf",
       "modelLoopedAnimations": [
         "idle"
       ],
       "modelScale": 1,
-      "name": "barre23l",
-      "rigidBodyOptions": {
-        "type": "kinematic_velocity",
-        "rotation": {
-          "x": 0,
-          "y": 0,
-          "z": 0,
-          "w": 1
-        }
-      }
-    },
-    "28.413633074482746,1.7278125286102295,48.21873324360764": {
-      "modelUri": "models/environment/barre23l.gltf",
-      "modelLoopedAnimations": [
-        "idle"
-      ],
-      "modelScale": 1,
-      "name": "barre23l",
-      "rigidBodyOptions": {
-        "type": "kinematic_velocity",
-        "rotation": {
-          "x": 0,
-          "y": 0,
-          "z": 0,
-          "w": 1
-        }
-      }
-    },
-    "26.30988799926625,1.7278125286102295,49.550147722793874": {
-      "modelUri": "models/environment/barre23l.gltf",
-      "modelLoopedAnimations": [
-        "idle"
-      ],
-      "modelScale": 1,
-      "name": "barre23l",
-      "rigidBodyOptions": {
-        "type": "kinematic_velocity",
-        "rotation": {
-          "x": 0,
-          "y": 0,
-          "z": 0,
-          "w": 1
-        }
-      }
-    },
-    "-2.1895163773624304,1.7278125286102295,41.58400371673337": {
-      "modelUri": "models/environment/barre23l.gltf",
-      "modelLoopedAnimations": [
-        "idle"
-      ],
-      "modelScale": 1,
-      "name": "barre23l",
-      "rigidBodyOptions": {
-        "type": "kinematic_velocity",
-        "rotation": {
-          "x": 0,
-          "y": 0,
-          "z": 0,
-          "w": 1
-        }
-      }
-    },
-    "-7.100012859024666,1.7278125286102295,46.159942968916454": {
-      "modelUri": "models/environment/barre23l.gltf",
-      "modelLoopedAnimations": [
-        "idle"
-      ],
-      "modelScale": 1,
-      "name": "barre23l",
-      "rigidBodyOptions": {
-        "type": "kinematic_velocity",
-        "rotation": {
-          "x": 0,
-          "y": 0,
-          "z": 0,
-          "w": 1
-        }
-      }
-    },
-    "48.38125286311716,1.7278125286102295,-25.607531636982948": {
-      "modelUri": "models/environment/barre23l.gltf",
-      "modelLoopedAnimations": [
-        "idle"
-      ],
-      "modelScale": 1,
-      "name": "barre23l",
+      "name": "barre2l",
       "rigidBodyOptions": {
         "type": "kinematic_velocity",
         "rotation": {
@@ -22190,13 +21883,13 @@
         }
       }
     },
-    "48.22452696322203,1.7278125286102295,-15.281033155784336": {
-      "modelUri": "models/environment/barre2l.gltf",
+    "25.87653279280441,3.195812024222583,-33.78344150009382": {
+      "modelUri": "models/environment/fence2_1.gltf",
       "modelLoopedAnimations": [
         "idle"
       ],
       "modelScale": 1,
-      "name": "barre2l",
+      "name": "fence2_1",
       "rigidBodyOptions": {
         "type": "kinematic_velocity",
         "rotation": {
@@ -22207,13 +21900,13 @@
         }
       }
     },
-    "28.676748782136208,1.7278125286102295,-18.026094045301466": {
-      "modelUri": "models/environment/barre2l.gltf",
+    "25.97547349679114,3.195812024222583,-46.76437581641677": {
+      "modelUri": "models/environment/fence2_1.gltf",
       "modelLoopedAnimations": [
         "idle"
       ],
       "modelScale": 1,
-      "name": "barre2l",
+      "name": "fence2_1",
       "rigidBodyOptions": {
         "type": "kinematic_velocity",
         "rotation": {
@@ -22258,13 +21951,13 @@
         }
       }
     },
-    "25.97547349679114,3.195812024222583,-46.76437581641677": {
-      "modelUri": "models/environment/fence2_1.gltf",
+    "25.66452434841689,3.195812024222583,-18.763989981889992": {
+      "modelUri": "models/environment/fence2_3.gltf",
       "modelLoopedAnimations": [
         "idle"
       ],
       "modelScale": 1,
-      "name": "fence2_1",
+      "name": "fence2_3",
       "rigidBodyOptions": {
         "type": "kinematic_velocity",
         "rotation": {
@@ -22275,13 +21968,13 @@
         }
       }
     },
-    "25.87653279280441,3.195812024222583,-33.78344150009382": {
-      "modelUri": "models/environment/fence2_1.gltf",
+    "25.711149104362296,3.195812024222583,-13.69902428452956": {
+      "modelUri": "models/environment/fence2_3.gltf",
       "modelLoopedAnimations": [
         "idle"
       ],
       "modelScale": 1,
-      "name": "fence2_1",
+      "name": "fence2_3",
       "rigidBodyOptions": {
         "type": "kinematic_velocity",
         "rotation": {
@@ -22343,13 +22036,13 @@
         }
       }
     },
-    "25.711149104362296,3.195812024222583,-13.69902428452956": {
-      "modelUri": "models/environment/fence2_3.gltf",
+    "3.612229743572536,2.719377467316976,48.915185222918545": {
+      "modelUri": "models/environment/bak.gltf",
       "modelLoopedAnimations": [
         "idle"
       ],
       "modelScale": 1,
-      "name": "fence2_3",
+      "name": "bak",
       "rigidBodyOptions": {
         "type": "kinematic_velocity",
         "rotation": {
@@ -22360,13 +22053,13 @@
         }
       }
     },
-    "25.66452434841689,3.195812024222583,-18.763989981889992": {
-      "modelUri": "models/environment/fence2_3.gltf",
+    "-20.691073015615604,2.719377467316976,-38.086639239860226": {
+      "modelUri": "models/environment/bak.gltf",
       "modelLoopedAnimations": [
         "idle"
       ],
       "modelScale": 1,
-      "name": "fence2_3",
+      "name": "bak",
       "rigidBodyOptions": {
         "type": "kinematic_velocity",
         "rotation": {
@@ -22377,13 +22070,13 @@
         }
       }
     },
-    "-15.871215371297634,3.195812024222583,-46.79390130269738": {
-      "modelUri": "models/environment/fence3_1.gltf",
+    "47.70517210050591,2.719377467316976,-12.493012029319353": {
+      "modelUri": "models/environment/bak.gltf",
       "modelLoopedAnimations": [
         "idle"
       ],
       "modelScale": 1,
-      "name": "fence3_1",
+      "name": "bak",
       "rigidBodyOptions": {
         "type": "kinematic_velocity",
         "rotation": {
@@ -22411,6 +22104,23 @@
         }
       }
     },
+    "-15.871215371297634,3.195812024222583,-46.79390130269738": {
+      "modelUri": "models/environment/fence3_1.gltf",
+      "modelLoopedAnimations": [
+        "idle"
+      ],
+      "modelScale": 1,
+      "name": "fence3_1",
+      "rigidBodyOptions": {
+        "type": "kinematic_velocity",
+        "rotation": {
+          "x": 0,
+          "y": 0,
+          "z": 0,
+          "w": 1
+        }
+      }
+    },
     "-15.85652230981165,3.195812024222583,-41.82761528845835": {
       "modelUri": "models/environment/fence3_2.gltf",
       "modelLoopedAnimations": [
@@ -22418,6 +22128,57 @@
       ],
       "modelScale": 1,
       "name": "fence3_2",
+      "rigidBodyOptions": {
+        "type": "kinematic_velocity",
+        "rotation": {
+          "x": 0,
+          "y": 0,
+          "z": 0,
+          "w": 1
+        }
+      }
+    },
+    "47.60689885187085,3.195812024222583,-9.904568623616695": {
+      "modelUri": "models/environment/fence4.gltf",
+      "modelLoopedAnimations": [
+        "idle"
+      ],
+      "modelScale": 1,
+      "name": "fence4",
+      "rigidBodyOptions": {
+        "type": "kinematic_velocity",
+        "rotation": {
+          "x": 0,
+          "y": 0,
+          "z": 0,
+          "w": 1
+        }
+      }
+    },
+    "28.75369914798049,3.195812024222583,-10.064223778930993": {
+      "modelUri": "models/environment/fence4.gltf",
+      "modelLoopedAnimations": [
+        "idle"
+      ],
+      "modelScale": 1,
+      "name": "fence4",
+      "rigidBodyOptions": {
+        "type": "kinematic_velocity",
+        "rotation": {
+          "x": 0,
+          "y": 0,
+          "z": 0,
+          "w": 1
+        }
+      }
+    },
+    "46.9094662523637,3.195812024222583,-40.71085063690808": {
+      "modelUri": "models/environment/fence4.gltf",
+      "modelLoopedAnimations": [
+        "idle"
+      ],
+      "modelScale": 1,
+      "name": "fence4",
       "rigidBodyOptions": {
         "type": "kinematic_velocity",
         "rotation": {
@@ -22496,13 +22257,13 @@
         }
       }
     },
-    "46.9094662523637,3.195812024222583,-40.71085063690808": {
-      "modelUri": "models/environment/fence4.gltf",
+    "17.00234518468796,1.95,14.433461631159071": {
+      "modelUri": "models/environment/car.gltf",
       "modelLoopedAnimations": [
         "idle"
       ],
-      "modelScale": 1,
-      "name": "fence4",
+      "modelScale": 0.75,
+      "name": "car",
       "rigidBodyOptions": {
         "type": "kinematic_velocity",
         "rotation": {
@@ -22513,13 +22274,13 @@
         }
       }
     },
-    "28.75369914798049,3.195812024222583,-10.064223778930993": {
-      "modelUri": "models/environment/fence4.gltf",
+    "29.204001526783188,1.95,-30.980049265605004": {
+      "modelUri": "models/environment/car.gltf",
       "modelLoopedAnimations": [
         "idle"
       ],
-      "modelScale": 1,
-      "name": "fence4",
+      "modelScale": 0.75,
+      "name": "car",
       "rigidBodyOptions": {
         "type": "kinematic_velocity",
         "rotation": {
@@ -22530,13 +22291,13 @@
         }
       }
     },
-    "47.60689885187085,3.195812024222583,-9.904568623616695": {
-      "modelUri": "models/environment/fence4.gltf",
+    "18.61577577132254,1.95,-42.324567221158745": {
+      "modelUri": "models/environment/car.gltf",
       "modelLoopedAnimations": [
         "idle"
       ],
-      "modelScale": 1,
-      "name": "fence4",
+      "modelScale": 0.75,
+      "name": "car",
       "rigidBodyOptions": {
         "type": "kinematic_velocity",
         "rotation": {
@@ -22547,13 +22308,13 @@
         }
       }
     },
-    "-20.691073015615604,2.719377467316976,-38.086639239860226": {
-      "modelUri": "models/environment/bak.gltf",
+    "-13.807478035422065,1.95,-10.668380101029136": {
+      "modelUri": "models/environment/car.gltf",
       "modelLoopedAnimations": [
         "idle"
       ],
-      "modelScale": 1,
-      "name": "bak",
+      "modelScale": 0.75,
+      "name": "car",
       "rigidBodyOptions": {
         "type": "kinematic_velocity",
         "rotation": {
@@ -22564,47 +22325,13 @@
         }
       }
     },
-    "47.70517210050591,2.719377467316976,-12.493012029319353": {
-      "modelUri": "models/environment/bak.gltf",
+    "29.326987748250357,1.95,-23.52502639054835": {
+      "modelUri": "models/environment/car.gltf",
       "modelLoopedAnimations": [
         "idle"
       ],
-      "modelScale": 1,
-      "name": "bak",
-      "rigidBodyOptions": {
-        "type": "kinematic_velocity",
-        "rotation": {
-          "x": 0,
-          "y": 0,
-          "z": 0,
-          "w": 1
-        }
-      }
-    },
-    "3.612229743572536,2.719377467316976,48.915185222918545": {
-      "modelUri": "models/environment/bak.gltf",
-      "modelLoopedAnimations": [
-        "idle"
-      ],
-      "modelScale": 1,
-      "name": "bak",
-      "rigidBodyOptions": {
-        "type": "kinematic_velocity",
-        "rotation": {
-          "x": 0,
-          "y": 0,
-          "z": 0,
-          "w": 1
-        }
-      }
-    },
-    "-19.781100279271804,2.719377467316976,-11.046916700688708": {
-      "modelUri": "models/environment/bak2.gltf",
-      "modelLoopedAnimations": [
-        "idle"
-      ],
-      "modelScale": 1,
-      "name": "bak2",
+      "modelScale": 0.75,
+      "name": "car",
       "rigidBodyOptions": {
         "type": "kinematic_velocity",
         "rotation": {
@@ -22632,13 +22359,13 @@
         }
       }
     },
-    "11.461036147483476,1.95,19.805341716530485": {
-      "modelUri": "models/environment/car3_1.gltf",
+    "-19.781100279271804,2.719377467316976,-11.046916700688708": {
+      "modelUri": "models/environment/bak2.gltf",
       "modelLoopedAnimations": [
         "idle"
       ],
-      "modelScale": 0.75,
-      "name": "car3_1",
+      "modelScale": 1,
+      "name": "bak2",
       "rigidBodyOptions": {
         "type": "kinematic_velocity",
         "rotation": {
@@ -22649,13 +22376,13 @@
         }
       }
     },
-    "43.33621632617164,1.95,24.069913094744706": {
-      "modelUri": "models/environment/car3_1.gltf",
+    "-9.90707688050909,1.95,-18.196662632632126": {
+      "modelUri": "models/environment/car3.gltf",
       "modelLoopedAnimations": [
         "idle"
       ],
       "modelScale": 0.75,
-      "name": "car3_1",
+      "name": "car3",
       "rigidBodyOptions": {
         "type": "kinematic_velocity",
         "rotation": {
@@ -22666,13 +22393,13 @@
         }
       }
     },
-    "45.74643748506518,1.95,-28.462079880017694": {
-      "modelUri": "models/environment/car3_1.gltf",
+    "-10.060473802050627,1.95,31.73621270936448": {
+      "modelUri": "models/environment/car3.gltf",
       "modelLoopedAnimations": [
         "idle"
       ],
       "modelScale": 0.75,
-      "name": "car3_1",
+      "name": "car3",
       "rigidBodyOptions": {
         "type": "kinematic_velocity",
         "rotation": {
@@ -22683,13 +22410,13 @@
         }
       }
     },
-    "45.66087545841679,1.95,-33.88042847780642": {
-      "modelUri": "models/environment/car3_1.gltf",
+    "37.000470505371574,1.95,-15.089406727002567": {
+      "modelUri": "models/environment/car3.gltf",
       "modelLoopedAnimations": [
         "idle"
       ],
       "modelScale": 0.75,
-      "name": "car3_1",
+      "name": "car3",
       "rigidBodyOptions": {
         "type": "kinematic_velocity",
         "rotation": {
@@ -22700,13 +22427,47 @@
         }
       }
     },
-    "28.84887274010534,1.95,2.8104029826886396": {
-      "modelUri": "models/environment/car3_1.gltf",
+    "-41.21356783457463,1.95,-17.99765249924474": {
+      "modelUri": "models/environment/car2_1.gltf",
       "modelLoopedAnimations": [
         "idle"
       ],
       "modelScale": 0.75,
-      "name": "car3_1",
+      "name": "car2_1",
+      "rigidBodyOptions": {
+        "type": "kinematic_velocity",
+        "rotation": {
+          "x": 0,
+          "y": 0,
+          "z": 0,
+          "w": 1
+        }
+      }
+    },
+    "27.55423867028015,1.95,43.04328847741726": {
+      "modelUri": "models/environment/car2_1.gltf",
+      "modelLoopedAnimations": [
+        "idle"
+      ],
+      "modelScale": 0.75,
+      "name": "car2_1",
+      "rigidBodyOptions": {
+        "type": "kinematic_velocity",
+        "rotation": {
+          "x": 0,
+          "y": 0,
+          "z": 0,
+          "w": 1
+        }
+      }
+    },
+    "34.58145062294205,1.95,43.051167754911575": {
+      "modelUri": "models/environment/car2_1.gltf",
+      "modelLoopedAnimations": [
+        "idle"
+      ],
+      "modelScale": 0.75,
+      "name": "car2_1",
       "rigidBodyOptions": {
         "type": "kinematic_velocity",
         "rotation": {
@@ -22768,13 +22529,13 @@
         }
       }
     },
-    "34.58145062294205,1.95,43.051167754911575": {
-      "modelUri": "models/environment/car2_1.gltf",
+    "34.88008925486093,1.706511952335966,-42.762145282565534": {
+      "modelUri": "models/environment/do-not-enter.gltf",
       "modelLoopedAnimations": [
         "idle"
       ],
-      "modelScale": 0.75,
-      "name": "car2_1",
+      "modelScale": 1,
+      "name": "do-not-enter",
       "rigidBodyOptions": {
         "type": "kinematic_velocity",
         "rotation": {
@@ -22785,81 +22546,13 @@
         }
       }
     },
-    "27.55423867028015,1.95,43.04328847741726": {
-      "modelUri": "models/environment/car2_1.gltf",
+    "37.12504428244649,1.706511952335966,-20.632901860470042": {
+      "modelUri": "models/environment/do-not-enter.gltf",
       "modelLoopedAnimations": [
         "idle"
       ],
-      "modelScale": 0.75,
-      "name": "car2_1",
-      "rigidBodyOptions": {
-        "type": "kinematic_velocity",
-        "rotation": {
-          "x": 0,
-          "y": 0,
-          "z": 0,
-          "w": 1
-        }
-      }
-    },
-    "-41.21356783457463,1.95,-17.99765249924474": {
-      "modelUri": "models/environment/car2_1.gltf",
-      "modelLoopedAnimations": [
-        "idle"
-      ],
-      "modelScale": 0.75,
-      "name": "car2_1",
-      "rigidBodyOptions": {
-        "type": "kinematic_velocity",
-        "rotation": {
-          "x": 0,
-          "y": 0,
-          "z": 0,
-          "w": 1
-        }
-      }
-    },
-    "-10.060473802050627,1.95,31.73621270936448": {
-      "modelUri": "models/environment/car3.gltf",
-      "modelLoopedAnimations": [
-        "idle"
-      ],
-      "modelScale": 0.75,
-      "name": "car3",
-      "rigidBodyOptions": {
-        "type": "kinematic_velocity",
-        "rotation": {
-          "x": 0,
-          "y": 0,
-          "z": 0,
-          "w": 1
-        }
-      }
-    },
-    "37.000470505371574,1.95,-15.089406727002567": {
-      "modelUri": "models/environment/car3.gltf",
-      "modelLoopedAnimations": [
-        "idle"
-      ],
-      "modelScale": 0.75,
-      "name": "car3",
-      "rigidBodyOptions": {
-        "type": "kinematic_velocity",
-        "rotation": {
-          "x": 0,
-          "y": 0,
-          "z": 0,
-          "w": 1
-        }
-      }
-    },
-    "-9.90707688050909,1.95,-18.196662632632126": {
-      "modelUri": "models/environment/car3.gltf",
-      "modelLoopedAnimations": [
-        "idle"
-      ],
-      "modelScale": 0.75,
-      "name": "car3",
+      "modelScale": 1,
+      "name": "do-not-enter",
       "rigidBodyOptions": {
         "type": "kinematic_velocity",
         "rotation": {
@@ -22904,30 +22597,13 @@
         }
       }
     },
-    "37.12504428244649,1.706511952335966,-20.632901860470042": {
-      "modelUri": "models/environment/do-not-enter.gltf",
+    "-16.173605127562155,3.7899999618530273,5.143278586046684": {
+      "modelUri": "models/environment/trafficlights.gltf",
       "modelLoopedAnimations": [
         "idle"
       ],
       "modelScale": 1,
-      "name": "do-not-enter",
-      "rigidBodyOptions": {
-        "type": "kinematic_velocity",
-        "rotation": {
-          "x": 0,
-          "y": 0,
-          "z": 0,
-          "w": 1
-        }
-      }
-    },
-    "34.88008925486093,1.706511952335966,-42.762145282565534": {
-      "modelUri": "models/environment/do-not-enter.gltf",
-      "modelLoopedAnimations": [
-        "idle"
-      ],
-      "modelScale": 1,
-      "name": "do-not-enter",
+      "name": "trafficlights",
       "rigidBodyOptions": {
         "type": "kinematic_velocity",
         "rotation": {
@@ -22955,13 +22631,30 @@
         }
       }
     },
-    "-16.173605127562155,3.7899999618530273,5.143278586046684": {
-      "modelUri": "models/environment/trafficlights.gltf",
+    "-33.42366490554413,3.2163113498831173,19.61019427956159": {
+      "modelUri": "models/environment/truck1_2.gltf",
       "modelLoopedAnimations": [
         "idle"
       ],
       "modelScale": 1,
-      "name": "trafficlights",
+      "name": "truck1_2",
+      "rigidBodyOptions": {
+        "type": "kinematic_velocity",
+        "rotation": {
+          "x": 0,
+          "y": 0,
+          "z": 0,
+          "w": 1
+        }
+      }
+    },
+    "-38.087377600970015,1.53125,-1.6452377659759039": {
+      "modelUri": "models/environment/vase1.gltf",
+      "modelLoopedAnimations": [
+        "idle"
+      ],
+      "modelScale": 1,
+      "name": "vase1",
       "rigidBodyOptions": {
         "type": "kinematic_velocity",
         "rotation": {
@@ -23006,13 +22699,13 @@
         }
       }
     },
-    "-38.087377600970015,1.53125,-1.6452377659759039": {
-      "modelUri": "models/environment/vase1.gltf",
+    "28.84887274010534,1.95,2.8104029826886396": {
+      "modelUri": "models/environment/car3_1.gltf",
       "modelLoopedAnimations": [
         "idle"
       ],
-      "modelScale": 1,
-      "name": "vase1",
+      "modelScale": 0.75,
+      "name": "car3_1",
       "rigidBodyOptions": {
         "type": "kinematic_velocity",
         "rotation": {
@@ -23023,13 +22716,81 @@
         }
       }
     },
-    "-33.42366490554413,3.2163113498831173,19.61019427956159": {
-      "modelUri": "models/environment/truck1_2.gltf",
+    "45.66087545841679,1.95,-33.88042847780642": {
+      "modelUri": "models/environment/car3_1.gltf",
+      "modelLoopedAnimations": [
+        "idle"
+      ],
+      "modelScale": 0.75,
+      "name": "car3_1",
+      "rigidBodyOptions": {
+        "type": "kinematic_velocity",
+        "rotation": {
+          "x": 0,
+          "y": 0,
+          "z": 0,
+          "w": 1
+        }
+      }
+    },
+    "11.461036147483476,1.95,19.805341716530485": {
+      "modelUri": "models/environment/car3_1.gltf",
+      "modelLoopedAnimations": [
+        "idle"
+      ],
+      "modelScale": 0.75,
+      "name": "car3_1",
+      "rigidBodyOptions": {
+        "type": "kinematic_velocity",
+        "rotation": {
+          "x": 0,
+          "y": 0,
+          "z": 0,
+          "w": 1
+        }
+      }
+    },
+    "43.33621632617164,1.95,24.069913094744706": {
+      "modelUri": "models/environment/car3_1.gltf",
+      "modelLoopedAnimations": [
+        "idle"
+      ],
+      "modelScale": 0.75,
+      "name": "car3_1",
+      "rigidBodyOptions": {
+        "type": "kinematic_velocity",
+        "rotation": {
+          "x": 0,
+          "y": 0,
+          "z": 0,
+          "w": 1
+        }
+      }
+    },
+    "45.74643748506518,1.95,-28.462079880017694": {
+      "modelUri": "models/environment/car3_1.gltf",
+      "modelLoopedAnimations": [
+        "idle"
+      ],
+      "modelScale": 0.75,
+      "name": "car3_1",
+      "rigidBodyOptions": {
+        "type": "kinematic_velocity",
+        "rotation": {
+          "x": 0,
+          "y": 0,
+          "z": 0,
+          "w": 1
+        }
+      }
+    },
+    "38.72902468718629,2.5625,-47.55246751727867": {
+      "modelUri": "models/environment/shipping-container.gltf",
       "modelLoopedAnimations": [
         "idle"
       ],
       "modelScale": 1,
-      "name": "truck1_2",
+      "name": "shipping-container",
       "rigidBodyOptions": {
         "type": "kinematic_velocity",
         "rotation": {
@@ -23057,13 +22818,132 @@
         }
       }
     },
-    "38.72902468718629,2.5625,-47.55246751727867": {
-      "modelUri": "models/environment/shipping-container.gltf",
+    "-48.58718016867883,3.8125000000000004,-1.4246091181468528": {
+      "modelUri": "models/environment/basic-tree.gltf",
       "modelLoopedAnimations": [
         "idle"
       ],
-      "modelScale": 1,
-      "name": "shipping-container",
+      "modelScale": 2,
+      "name": "basic-tree",
+      "rigidBodyOptions": {
+        "type": "kinematic_velocity",
+        "rotation": {
+          "x": 0,
+          "y": 0,
+          "z": 0,
+          "w": 1
+        }
+      }
+    },
+    "-22.807493318268207,3.8125000000000004,-1.5950731718993505": {
+      "modelUri": "models/environment/basic-tree.gltf",
+      "modelLoopedAnimations": [
+        "idle"
+      ],
+      "modelScale": 2,
+      "name": "basic-tree",
+      "rigidBodyOptions": {
+        "type": "kinematic_velocity",
+        "rotation": {
+          "x": 0,
+          "y": 0,
+          "z": 0,
+          "w": 1
+        }
+      }
+    },
+    "-1.5786491503782805,5.781250000000001,-35.35016486311492": {
+      "modelUri": "models/environment/basic-tree.gltf",
+      "modelLoopedAnimations": [
+        "idle"
+      ],
+      "modelScale": 3.4,
+      "name": "basic-tree",
+      "rigidBodyOptions": {
+        "type": "kinematic_velocity",
+        "rotation": {
+          "x": 0,
+          "y": 0,
+          "z": 0,
+          "w": 1
+        }
+      }
+    },
+    "-4.960080190483982,4.515625,-46.06281917656051": {
+      "modelUri": "models/environment/basic-tree.gltf",
+      "modelLoopedAnimations": [
+        "idle"
+      ],
+      "modelScale": 2.5,
+      "name": "basic-tree",
+      "rigidBodyOptions": {
+        "type": "kinematic_velocity",
+        "rotation": {
+          "x": 0,
+          "y": 0,
+          "z": 0,
+          "w": 1
+        }
+      }
+    },
+    "3.169569092339106,4.515625,-46.66539933110232": {
+      "modelUri": "models/environment/basic-tree.gltf",
+      "modelLoopedAnimations": [
+        "idle"
+      ],
+      "modelScale": 2.5,
+      "name": "basic-tree",
+      "rigidBodyOptions": {
+        "type": "kinematic_velocity",
+        "rotation": {
+          "x": 0,
+          "y": 0,
+          "z": 0,
+          "w": 1
+        }
+      }
+    },
+    "11.090375556214036,4.515625,-46.44714756831699": {
+      "modelUri": "models/environment/basic-tree.gltf",
+      "modelLoopedAnimations": [
+        "idle"
+      ],
+      "modelScale": 2.5,
+      "name": "basic-tree",
+      "rigidBodyOptions": {
+        "type": "kinematic_velocity",
+        "rotation": {
+          "x": 0,
+          "y": 0,
+          "z": 0,
+          "w": 1
+        }
+      }
+    },
+    "4.536679143309198,4.375,-12.856601160208967": {
+      "modelUri": "models/environment/basic-tree.gltf",
+      "modelLoopedAnimations": [
+        "idle"
+      ],
+      "modelScale": 2.4,
+      "name": "basic-tree",
+      "rigidBodyOptions": {
+        "type": "kinematic_velocity",
+        "rotation": {
+          "x": 0,
+          "y": 0,
+          "z": 0,
+          "w": 1
+        }
+      }
+    },
+    "11.637995305393357,4.375,-14.88834364767268": {
+      "modelUri": "models/environment/basic-tree.gltf",
+      "modelLoopedAnimations": [
+        "idle"
+      ],
+      "modelScale": 2.4,
+      "name": "basic-tree",
       "rigidBodyOptions": {
         "type": "kinematic_velocity",
         "rotation": {
@@ -23199,142 +23079,6 @@
         "idle"
       ],
       "modelScale": 1.9,
-      "name": "basic-tree",
-      "rigidBodyOptions": {
-        "type": "kinematic_velocity",
-        "rotation": {
-          "x": 0,
-          "y": 0,
-          "z": 0,
-          "w": 1
-        }
-      }
-    },
-    "11.637995305393357,4.375,-14.88834364767268": {
-      "modelUri": "models/environment/basic-tree.gltf",
-      "modelLoopedAnimations": [
-        "idle"
-      ],
-      "modelScale": 2.4,
-      "name": "basic-tree",
-      "rigidBodyOptions": {
-        "type": "kinematic_velocity",
-        "rotation": {
-          "x": 0,
-          "y": 0,
-          "z": 0,
-          "w": 1
-        }
-      }
-    },
-    "4.536679143309198,4.375,-12.856601160208967": {
-      "modelUri": "models/environment/basic-tree.gltf",
-      "modelLoopedAnimations": [
-        "idle"
-      ],
-      "modelScale": 2.4,
-      "name": "basic-tree",
-      "rigidBodyOptions": {
-        "type": "kinematic_velocity",
-        "rotation": {
-          "x": 0,
-          "y": 0,
-          "z": 0,
-          "w": 1
-        }
-      }
-    },
-    "11.090375556214036,4.515625,-46.44714756831699": {
-      "modelUri": "models/environment/basic-tree.gltf",
-      "modelLoopedAnimations": [
-        "idle"
-      ],
-      "modelScale": 2.5,
-      "name": "basic-tree",
-      "rigidBodyOptions": {
-        "type": "kinematic_velocity",
-        "rotation": {
-          "x": 0,
-          "y": 0,
-          "z": 0,
-          "w": 1
-        }
-      }
-    },
-    "3.169569092339106,4.515625,-46.66539933110232": {
-      "modelUri": "models/environment/basic-tree.gltf",
-      "modelLoopedAnimations": [
-        "idle"
-      ],
-      "modelScale": 2.5,
-      "name": "basic-tree",
-      "rigidBodyOptions": {
-        "type": "kinematic_velocity",
-        "rotation": {
-          "x": 0,
-          "y": 0,
-          "z": 0,
-          "w": 1
-        }
-      }
-    },
-    "-4.960080190483982,4.515625,-46.06281917656051": {
-      "modelUri": "models/environment/basic-tree.gltf",
-      "modelLoopedAnimations": [
-        "idle"
-      ],
-      "modelScale": 2.5,
-      "name": "basic-tree",
-      "rigidBodyOptions": {
-        "type": "kinematic_velocity",
-        "rotation": {
-          "x": 0,
-          "y": 0,
-          "z": 0,
-          "w": 1
-        }
-      }
-    },
-    "-1.5786491503782805,5.781250000000001,-35.35016486311492": {
-      "modelUri": "models/environment/basic-tree.gltf",
-      "modelLoopedAnimations": [
-        "idle"
-      ],
-      "modelScale": 3.4,
-      "name": "basic-tree",
-      "rigidBodyOptions": {
-        "type": "kinematic_velocity",
-        "rotation": {
-          "x": 0,
-          "y": 0,
-          "z": 0,
-          "w": 1
-        }
-      }
-    },
-    "-22.807493318268207,3.8125000000000004,-1.5950731718993505": {
-      "modelUri": "models/environment/basic-tree.gltf",
-      "modelLoopedAnimations": [
-        "idle"
-      ],
-      "modelScale": 2,
-      "name": "basic-tree",
-      "rigidBodyOptions": {
-        "type": "kinematic_velocity",
-        "rotation": {
-          "x": 0,
-          "y": 0,
-          "z": 0,
-          "w": 1
-        }
-      }
-    },
-    "-48.58718016867883,3.8125000000000004,-1.4246091181468528": {
-      "modelUri": "models/environment/basic-tree.gltf",
-      "modelLoopedAnimations": [
-        "idle"
-      ],
-      "modelScale": 2,
       "name": "basic-tree",
       "rigidBodyOptions": {
         "type": "kinematic_velocity",

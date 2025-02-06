@@ -1,7 +1,7 @@
 import { Player, PlayerCameraMode, PlayerEntity, World, Audio, Vector3Like } from "hytopia";
 import MyEntityController from "../MyEntityController";
 
-import mapData from '../assets/maps/final-no-lightposts.json';
+import mapData from '../assets/maps/map-final-fixed-cars-v2.json';
 
 export interface GunWorldOptions {
     id: number;
