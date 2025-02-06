@@ -484,11 +484,9 @@ export default class MyEntityController extends BaseEntityController {
         const relativeHitHeight = hitPoint.y - entityPosition.y;
 
         // Определяем зоны попадания по высоте относительно центра игрока
-        if (relativeHitHeight > 0.5) { // Выше 0.5 - голова
+        if (relativeHitHeight > 0.3) { // Выше 0.5 - голова
             return 'head';
-        } else if (relativeHitHeight < -0.3) { // Ниже -0.3 - ноги
-            return 'limbs';
-        } else if (Math.abs(relativeHitHeight) <= 0.3) { // В пределах ±0.3 - тело
+        } else if (relativeHitHeight > 0) { // В пределах ±0.3 - тело
             return 'body';
         } else { // Остальное - руки
             return 'limbs';
@@ -523,14 +521,16 @@ export default class MyEntityController extends BaseEntityController {
         if (this.isGrounded && (w || a || s || d)) {
             if (isRunning) {
                 const runAnimations = ['run_upper', 'run_lower'];
+                // console.log(`[${entity.player.username}] anims:${Array.from(entity.modelLoopedAnimations)} to ${runAnimations}`);
                 entity.stopModelAnimations(Array.from(entity.modelLoopedAnimations).filter(v => !runAnimations.includes(v)));
                 entity.startModelLoopedAnimations(runAnimations);
                 this._stepAudio?.setPlaybackRate(0.81);
             } else {
                 // Choose walk animation based on current weapon
-                const walkAnimation = this.currentWeapon.walkAnimation;
-                entity.stopModelAnimations(Array.from(entity.modelLoopedAnimations).filter(v => !walkAnimation.includes(v)));
-                entity.startModelLoopedAnimations([walkAnimation]);
+                const walkAnimations = [this.currentWeapon.walkAnimation];
+                // console.log(`[${entity.player.username}] anims:${Array.from(entity.modelLoopedAnimations)} to ${walkAnimations}`);
+                entity.stopModelAnimations(Array.from(entity.modelLoopedAnimations).filter(v => !walkAnimations.includes(v)));
+                entity.startModelLoopedAnimations(walkAnimations);
                 this._stepAudio?.setPlaybackRate(0.55);
             }
             this._stepAudio?.play(entity.world, !this._stepAudio?.isPlaying);
@@ -630,6 +630,11 @@ export default class MyEntityController extends BaseEntityController {
 
             if (currentTime - this.lastFireTime >= this.currentWeapon.fireRate) {
                 console.log(`[${this.getPlayerIdentifier(entity)}] Firing ${this.currentWeapon.name}!`);
+
+                // Update ammo and UI
+                this.currentAmmo--;
+                this.updateUI(entity);
+
                 this.playWeaponSound(entity, this.currentWeapon, false);
 
                 // Fire weapon
@@ -650,6 +655,7 @@ export default class MyEntityController extends BaseEntityController {
                     },
                 );
 
+                // TODO remove this hard coding of weapon type
                 if (this.currentWeapon.name === 'rpg' && ray?.hitPoint) {
                     // Урон по площади
                     const explosionRadius = 5; // Установите радиус взрыва
@@ -676,18 +682,16 @@ export default class MyEntityController extends BaseEntityController {
                             const distance = this.getDistanceToPlayer(entity, hitEntity);
                             const damage = this.calculateDamageWithFalloff(this.currentWeapon, hitLocation, distance);
                             controller.takeDamage(damage, hitEntity, entity);
-                            console.log(`[${this.getPlayerIdentifier(entity)}] Hit ${this.getPlayerIdentifier(hitEntity)} in ${hitLocation} at ${distance.toFixed(1)}m! Damage: ${damage.toFixed(1)}, Their remaining health: ${controller.health.toFixed(1)}`);
+                            console.log(`[${this.getPlayerIdentifier(entity)}] Hit ${this.getPlayerIdentifier(hitEntity)} in ${ray.hitPoint.y}(${hitLocation}) at ${distance.toFixed(1)}m! Damage: ${damage.toFixed(1)}, Their remaining health: ${controller.health.toFixed(1)}`);
                         }
                     }
                 }
 
-                // Update ammo and UI
-                this.currentAmmo--;
-                this.updateUI(entity);
+                
 
                 // Play firing animation
                 const fireAnimation = `fire_${this.currentWeapon.name}`;
-                console.log(`Attempting to play ${fireAnimation} animation.`);
+                console.log(`Current animations: ${Array.from(entity.modelLoopedAnimations)}, Attempting to play ${fireAnimation} animation.`);
                 entity.startModelOneshotAnimations([fireAnimation]);
 
                 // Update last fire times

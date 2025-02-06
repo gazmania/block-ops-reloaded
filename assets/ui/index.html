@@ -69,40 +69,53 @@
         }
 
         .background-screen h1 img {
-            max-width: 80%;
+            max-width: 600px;
             display: block;
-            /* Add this */
             margin: 0 auto;
-            /* Add this */
         }
 
         .background-screen p {
             color: #ffffff;
-            font-size: 18px;
-            margin: 10px 0;
+            font-size: 14px;
+            margin: 8px 0;
             text-align: center;
             font-family: 'Inter';
         }
 
         .background-screen strong {
-            color: #ff5555;
+            color: #ff9f55;
+            /* color: #f4832d; */
         }
 
         .instructions {
             color: #ffffff;
             background-color: rgba(0, 0, 0, 0.7);
-            padding: 20px;
-            border-radius: 8px;
+            padding: 16px;
+            border-radius: 4px;
             display: flex;
             flex-direction: column;
-            gap: 2px;
+            gap: 0px;
             max-width: 600px;
             margin: 0 auto;
         }
 
+        .instructions h2 {
+            color: rgb(255, 230, 160);
+            font-size: 18px;
+            text-align: center;
+        }
+
         .instructions .summary {
             color: rgba(255, 255, 255, 0.9);
-            font-size: 20px;
+            font-size: 16px;
+        }
+
+        .instructions .note {
+            color: rgba(200, 200, 200, 0.8);
+            font-size: 14px;
+            font-style: italic;
+            max-width: 80%;
+            margin: 0 auto;
         }
 
         .instructions .commands {
@@ -120,13 +133,15 @@
                 weapon, progressing
                 through a set arsenal until the final challenge – a kill with a MEGA baguette – secures victory.</p>
 
-            <p>— INSTRUCTIONS —</p>
-            <p>Use the following commands in the chat box to get going:</p>
+            <h2>— INSTRUCTIONS —</h2>
+            <p>Use the following commands in the chatbox to get going:</p>
             <div class="commands">
-                <p><strong>/list</strong> — shows list of joinable games</p>
-                <p><strong>/join</strong> — join a game by its number (e.g. /join 1)</p>
+                <p><strong>/list</strong> — shows list of joinable games<br>
+                    <strong>/join</strong> — join a game by its number (e.g. /join 1)
+                </p>
             </div>
-            <p>— CONTROLS — </p>
+            <h2>— CONTROLS — </h2>
+            <p class="note">“Listen up, recruits! A good soldier doesn’t throw their life away like a fool—so keep your wits about you and don’t go marching off the edge of the map!” – Boss Kade, Street King’s War Manual</p>
             <p>R KEY for reload
                 <br>LEFT CLICK to fire
                 <br>RIGHT CLICK for sniper scope
@@ -134,7 +149,6 @@
                 <br>SPACE to jump
                 <br>WASD to move
             </p>
-
         </div>
     </div>
 </body>

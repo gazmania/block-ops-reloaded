@@ -1,7 +1,7 @@
 import { Player, PlayerCameraMode, PlayerEntity, World, Audio, Vector3Like } from "hytopia";
 import MyEntityController from "../MyEntityController";
 
-import mapData from '../assets/maps/FINAL-map-version.json';
+import mapData from '../assets/maps/no-lightposts.json';
 
 export interface GunWorldOptions {
     id: number;
@@ -80,15 +80,24 @@ export class GunWorld extends World {
     }
 
     constructor(options: GunWorldOptions, lobby: World) {
+
         super({
             id: options.id,
             name: options.name,
-            skyboxUri: "skyboxes/partly-cloudy"
+            skyboxUri: "skyboxes/partly-cloudy",
+            directionalLightPosition: { x: 100, y: 100, z: 100, },
+            directionalLightColor: { r: 255, g: 200, b: 150, },
+            directionalLightIntensity: 2,
+            ambientLightColor: { r: 255, g: 200, b: 150, },
+            ambientLightIntensity: 0.5
+            
         });
+
         this._lobby = lobby;
         this._minPlayerCount = options.minPlayerCount;
         this._maxPlayerCount = options.maxPlayerCount;
         this._maxWaitingTime = options.maxWaitingTime;
+
 
         this._worldState = this.defaultState();
 
@@ -530,32 +539,24 @@ export class GunWorld extends World {
         this.broadcastEndGameMessage(winner.player);
 
         // Schedule reset
-        setTimeout(() => {
-            console.log("[GAME] Victory period ended, resetting game...");
-            // Reset game state
-            this.kickPlayersToLobby();
-            this.resetWorld();
+        let backToLobbyTime = this.END_SCREEN_DURATION / 1000;
+        const lobbyCountdownInterval = setInterval(() => {
 
-            // // Reset and respawn all players
+            this._worldState.players.forEach(player => {
+                player.ui.sendData({
+                    type: 'lobby-countdown',
+                    timeLeft: backToLobbyTime
+                });
+            });
+            backToLobbyTime--;
 
-            // // TODO - we've got confusion here around responsibilities here.
-            // const allPlayers = this.entityManager.getAllPlayerEntities();
-            // allPlayers.forEach(playerEntity => {
-            //     if (playerEntity.controller instanceof MyEntityController) {
-            //         const controller = playerEntity.controller as MyEntityController;
-            //         controller.resetStats()
-            //         controller.switchWeapon(getStartingWeapon(), playerEntity);
-            //     }
-            // });
-
-            // // Respawn all players in new positions
-            // this._worldState.players.forEach(player => {
-            //     this.respawnPlayer(player);
-            // });
-
-            // // Start new game
-            // this.checkGameStart();
-        }, this.END_SCREEN_DURATION);
+            if (backToLobbyTime < 0) {
+                console.log("[GAME] Victory period ended, kicking to lobby...");
+                clearInterval(lobbyCountdownInterval);
+                this.kickPlayersToLobby();
+                this.resetWorld();
+            }
+        }, 1000);
     }
 
     // Add this new method to check if we should start the game

@@ -242,7 +242,7 @@
             text-shadow: 0 0 10px rgba(255, 0, 0, 0.5);
         }
 
-        .death-screen .countdown {
+        .countdown {
             color: #ffffff;
             font-size: 36px;
             font-family: 'Georgia', serif;
@@ -261,10 +261,12 @@
 
     <div class="winner-screen" id="winnerScreen">
         <h1 class="title">YOU WON</h1>
+        <div class="countdown" id="winnerLobbyCountdown"></div>
     </div>
 
     <div class="loser-screen" id="loserScreen">
         <h1 class="title">YOU LOST</h1>
+        <div class="countdown" id="loserLobbyCountdown"></div>
     </div>
 
     <!-- Экран смерти -->
@@ -344,7 +346,10 @@
 
     
     const winnerScreen = document.getElementById('winnerScreen');
+    const winnerLobbyCountdown = document.getElementById('winnerLobbyCountdown');
     const loserScreen = document.getElementById('loserScreen');
+    const loserLobbyCountdown = document.getElementById('loserLobbyCountdown');
+    
     const deathScreen = document.getElementById('deathScreen');
     const respawnCountdown = document.getElementById('respawnCountdown');
 
@@ -357,7 +362,12 @@
         loserScreen.style.display = 'flex';
     }
 
-    
+    function updateLobbyTimer(time) {
+        const message = `Returning to lobby in ${time} seconds`;
+        winnerLobbyCountdown.textContent = message;
+        loserLobbyCountdown.textContent = message;
+    }
+
     function showDeathScreen(time) {
         deathScreen.style.display = 'flex';
         updateRespawnTimer(time);
@@ -388,6 +398,9 @@
         }
         else if (data.type === 'player-lost') {
             showLoserScreen();
+        }
+        else if (data.type === 'lobby-countdown') {
+            updateLobbyTimer(data.timeLeft);
         }
         else if (data.type === 'player-died') {
             showDeathScreen(data.respawnTime);
