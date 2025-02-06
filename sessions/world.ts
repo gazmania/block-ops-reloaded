@@ -63,6 +63,7 @@ export class GunWorld extends World {
     private _usedSpawnPoints: Vector3Like[] = [];
 
     public get maxPlayerCount(): number { return this._maxPlayerCount; }
+    public get minPlayerCount(): number { return this._minPlayerCount; }
     public get playerCount(): number { return this._worldState.players.length; }
 
     public incrementScore(player: Player) {
@@ -573,20 +574,35 @@ export class GunWorld extends World {
     }
 }
 
+
 const worldConfigs: GunWorldOptions[] = [
     {
         id: 1,
-        name: "Gun Game World",
+        name: "Bloodshot Badlands", 
         minPlayerCount: 2,
-        maxPlayerCount: 4,
+        maxPlayerCount: 8,
         maxWaitingTime: 10000,
     },
     {
         id: 2,
-        name: "My Calm and Non-shooty World",
-        minPlayerCount: 1,
-        maxPlayerCount: 1,
-        maxWaitingTime: 0,
+        name: "Bullet Alley",
+        minPlayerCount: 4,
+        maxPlayerCount: 8,
+        maxWaitingTime: 10000,
+    },
+    {
+        id: 3,
+        name: "Crimson Crossfire",
+        minPlayerCount: 4,
+        maxPlayerCount: 10,
+        maxWaitingTime: 10000,
+    },
+    {
+        id: 4,
+        name: "Grimshot Grounds",
+        minPlayerCount: 4,
+        maxPlayerCount: 12,
+        maxWaitingTime: 10000,
     }
 ];
 

@@ -49,7 +49,7 @@ startServer(world => {
 
     world.chatManager.sendPlayerMessage(player, `Available Games:`, "FFFF00");
     for (let i = 0; i < worlds.length; i++) {
-      world.chatManager.sendPlayerMessage(player, `${worlds[i].id}) ${worlds[i].name} (${worlds[i].playerCount}/${worlds[i].maxPlayerCount})`, (worlds[i].playerCount < worlds[i].maxPlayerCount) ? "FFFF00" : "909050");
+      world.chatManager.sendPlayerMessage(player, `${worlds[i].id}) ${worlds[i].name} (min: ${worlds[i].minPlayerCount} / curr: ${worlds[i].playerCount} / max: ${worlds[i].maxPlayerCount})`, (worlds[i].playerCount < worlds[i].maxPlayerCount) ? "FFFF00" : "909050");
     }
     world.chatManager.sendPlayerMessage(player, `Type '/join <game_number>' to join, e.g. '/join 1'`, "FFFF00");
   });
