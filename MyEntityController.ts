@@ -690,7 +690,7 @@ export default class MyEntityController extends BaseEntityController {
                 
 
                 // Play firing animation
-                const fireAnimation = `fire_${this.currentWeapon.name}`;
+                const fireAnimation = this.currentWeapon.fireAnimation;
                 console.log(`Current animations: ${Array.from(entity.modelLoopedAnimations)}, Attempting to play ${fireAnimation} animation.`);
                 entity.startModelOneshotAnimations([fireAnimation]);
 
@@ -735,6 +735,7 @@ export default class MyEntityController extends BaseEntityController {
         this.updateUI(entity);
 
         // Play different sounds based on weapon
+        // TODO - this is more gun specific code that should be in configuration
         const soundUri = newWeapon.name === 'baguette' 
             ? 'audio/engage-baguette.mp3'  // Special baguette sound
             : 'audio/level-up.mp3';        // Normal level up sound
@@ -765,6 +766,7 @@ export default class MyEntityController extends BaseEntityController {
         if (!entity.world) return;
 
         // Map weapon names to their empty sound files
+        // TODO - needs to be in configuration
         const emptySoundMap: { [key: string]: string } = {
             'pistol': 'audio/pistol-empty.mp3',
             'ak47': 'audio/ak47-empty.mp3',

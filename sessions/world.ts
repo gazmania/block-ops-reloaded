@@ -1,7 +1,7 @@
 import { Player, PlayerCameraMode, PlayerEntity, World, Audio, Vector3Like } from "hytopia";
 import MyEntityController from "../MyEntityController";
 
-import mapData from '../assets/maps/map-final-fixed-cars.json';
+import mapData from '../assets/maps/final-no-lightposts.json';
 
 export interface GunWorldOptions {
     id: number;
@@ -331,9 +331,9 @@ export class GunWorld extends World {
         const randomSpawnPointIndex = Math.floor(Math.random() * this._spawnPoints.length) % this._spawnPoints.length; // % incase we get a random 1.0
         const spawnPosition = this._spawnPoints[randomSpawnPointIndex];
         this._spawnPoints.splice(randomSpawnPointIndex, 1); // Remove the used spawn point
-        console.log("Remaining Spawn Points:", this._spawnPoints)
+        // console.log("Remaining Spawn Points:", this._spawnPoints)
         this._usedSpawnPoints.push(spawnPosition); // record the used position
-        console.log("Used Spawn Points:", this._usedSpawnPoints)
+        // console.log("Used Spawn Points:", this._usedSpawnPoints)
         return spawnPosition;
     }
 
