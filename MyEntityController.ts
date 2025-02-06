@@ -336,14 +336,8 @@ export default class MyEntityController extends BaseEntityController {
         this.currentWeapon = this._lastWeaponBeforeDeath;
         this.currentAmmo = this.currentWeapon.maxAmmo;
 
-        const spawnRadius = 10;
-        const randomAngle = Math.random() * Math.PI * 2;
-        const spawnPos = {
-            x: Math.round(Math.cos(randomAngle) * spawnRadius * Math.random()),
-            y: 2,
-            z: Math.round(Math.sin(randomAngle) * spawnRadius * Math.random())
-        };
-        console.log(JSON.stringify(spawnPos));
+        const gunworld = entity.world as GunWorld;
+        const spawnPos = gunworld.generateSpawnPosition();
         entity.setPosition(spawnPos);
 
         // entity.setPosition({ x: 0, y: 2, z: 0 });

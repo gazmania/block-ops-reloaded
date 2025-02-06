@@ -1,4 +1,4 @@
-import { Player, PlayerCameraMode, PlayerEntity, World, Audio } from "hytopia";
+import { Player, PlayerCameraMode, PlayerEntity, World, Audio, Vector3Like } from "hytopia";
 import MyEntityController from "../MyEntityController";
 
 import mapData from '../assets/maps/FINAL-map-version.json';
@@ -46,6 +46,21 @@ export class GunWorld extends World {
 
     private _lastLoggedPlayerCount: number = 0;
     private _lastCountdownTime: number = -1;
+
+    private _spawnPoints: Vector3Like[] = [
+        { x: -44, y: 2, z: 22 },
+        { x: -13, y: 2, z: 35 },
+        { x: 26, y: 2, z: 37 },
+        { x: 36, y: 2, z: 19 },
+        { x: 45, y: 2, z: -6 },
+        { x: 13, y: 2, z: -39 },
+        { x: -15, y: 2, z: -22 },
+        { x: 0, y: 2, z: 18 },
+        { x: -41, y: 2, z: -12 },
+        { x: -33, y: 2, z: 18 },
+        { x: -26, y: 2, z: -29 },
+    ];
+    private _usedSpawnPoints: Vector3Like[] = [];
 
     public get maxPlayerCount(): number { return this._maxPlayerCount; }
     public get playerCount(): number { return this._worldState.players.length; }
@@ -103,9 +118,9 @@ export class GunWorld extends World {
 
             // this gives the despawn chance to run before leaving this world and joining back to the lobby
             // if despawning immediately the entity fails to despawn and is there the next time you enter the game
-            setImmediate(() => {
+            setTimeout(() => {
                 player.joinWorld(this._lobby);
-            });
+            }, 250);
         });
     }
 
@@ -178,11 +193,11 @@ export class GunWorld extends World {
     private kickPlayersToLobby() {
         for (const p of this.entityManager.getAllPlayerEntities()) {
             // give the eventloop/gameloop time to sort itself out
-            // if the player moves worlds straight away, the despawn doesn't compete and leaves a zombie entitiy in the world
+            // BUG - if the player moves worlds straight away, the despawn doesn't compete and leaves a zombie entitiy in the world
             setTimeout(() => {
                 // kick the players to lobby
                 p.player.joinWorld(this._lobby);
-            }, 100);
+            }, 250);
         }
 
         // kick the players back to the lobby
@@ -302,8 +317,18 @@ export class GunWorld extends World {
         };
     }
 
-    private respawnPlayer(player: Player): void {
-        console.log(`[GAME] Respawning player ${player.username}`);
+    public generateSpawnPosition() {
+        const randomSpawnPointIndex = Math.floor(Math.random() * this._spawnPoints.length) % this._spawnPoints.length; // % incase we get a random 1.0
+        const spawnPosition = this._spawnPoints[randomSpawnPointIndex];
+        this._spawnPoints.splice(randomSpawnPointIndex, 1); // Remove the used spawn point
+        console.log("Remaining Spawn Points:", this._spawnPoints)
+        this._usedSpawnPoints.push(spawnPosition); // record the used position
+        console.log("Used Spawn Points:", this._usedSpawnPoints)
+        return spawnPosition;
+    }
+
+    private spawnPlayer(player: Player): void {
+        console.log(`[GAME] Spawning player ${player.username}`);
 
         // First check if player already has an entity
         const existingEntities = this.entityManager.getPlayerEntitiesByPlayer(player);
@@ -322,18 +347,18 @@ export class GunWorld extends World {
             controller: new MyEntityController(),
         });
 
-        // Randomize spawn position
-        const spawnRadius = 10;
-        const randomAngle = Math.random() * Math.PI * 2;
-        const spawnPos = {
-            x: Math.cos(randomAngle) * spawnRadius * Math.random(),
-            y: 4,
-            z: Math.sin(randomAngle) * spawnRadius * Math.random()
-        };
 
         // Spawn the entity
-        playerEntity.spawn(this, spawnPos);
-        console.log(`[GAME] Spawned new entity for ${player.username} at`, spawnPos);
+        if (this._spawnPoints.length == 0) {
+            // refresh spawn points
+            this._spawnPoints = [...this._usedSpawnPoints];
+            this._usedSpawnPoints = [];
+        }
+
+        const spawnPosition = this.generateSpawnPosition();
+
+        playerEntity.spawn(this, spawnPosition);
+        console.log(`[GAME] Spawned new entity for ${player.username} at`, spawnPosition);
 
         // Set up camera
         player.camera.setAttachedToEntity(playerEntity);
@@ -389,7 +414,7 @@ export class GunWorld extends World {
                 type: (player === winner) ? "player-won" : "player-lost",
             });
 
-            this.chatManager.sendPlayerMessage(player, `🏆 ${winner.username} WON THE GAME! 🏆` , "FFFF00");
+            this.chatManager.sendPlayerMessage(player, `🏆 ${winner.username} WON THE GAME! 🏆`, "FFFF00");
         });
     }
 
@@ -420,58 +445,62 @@ export class GunWorld extends World {
     onPlayerJoin = (player: Player) => {
         console.log(`[GAME JOIN] Setting up player ${player.username} in ${this.name}`);
 
-        try {
-            const playerEntity = new PlayerEntity({
-                player,
-                name: 'Player',
-                modelUri: 'models/players/PlayerModel.gltf',
-                modelLoopedAnimations: ['idle'],
-                modelScale: 0.5,
-                controller: new MyEntityController(),
-            });
+        this.spawnPlayer(player);
 
-            console.log(`[GAME JOIN] Created player entity for ${player.username}`);
+        player.ui.load('ui/game.html');
 
-            // Spawn the entity
-            playerEntity.spawn(this, { x: Math.random() * 10 - 5, y: 4, z: Math.random() * 10 - 5 });
-            console.log(`[GAME JOIN] Spawned entity for ${player.username}`);
+        // try {
+        //     const playerEntity = new PlayerEntity({
+        //         player,
+        //         name: 'Player',
+        //         modelUri: 'models/players/PlayerModel.gltf',
+        //         modelLoopedAnimations: ['idle'],
+        //         modelScale: 0.5,
+        //         controller: new MyEntityController(),
+        //     });
 
-            // Set up camera
-            player.camera.setAttachedToEntity(playerEntity);
-            player.camera.setMode(PlayerCameraMode.FIRST_PERSON);
-            player.camera.setOffset({ x: 0, y: 0.4, z: 0 });
-            player.camera.setModelHiddenNodes(['head', 'neck']);
-            player.camera.setForwardOffset(0.3);
+        //     console.log(`[GAME JOIN] Created player entity for ${player.username}`);
 
-            // Load UI
-            player.ui.load('ui/game.html');
+        //     // Spawn the entity
+        //     playerEntity.spawn(this, { x: Math.random() * 10 - 5, y: 4, z: Math.random() * 10 - 5 });
+        //     console.log(`[GAME JOIN] Spawned entity for ${player.username}`);
 
-            // Initialize player state
-            if (!this._worldState.players.includes(player)) {
-                this._worldState.players.push(player);
-            }
+        //     // Set up camera
+        //     player.camera.setAttachedToEntity(playerEntity);
+        //     player.camera.setMode(PlayerCameraMode.FIRST_PERSON);
+        //     player.camera.setOffset({ x: 0, y: 0.4, z: 0 });
+        //     player.camera.setModelHiddenNodes(['head', 'neck']);
+        //     player.camera.setForwardOffset(0.3);
 
-            this._worldState.scores.set(player.username, 0);
+        // // Load UI
+        // player.ui.load('ui/game.html');
 
-            // Set initial freeze state
-            if (playerEntity.controller instanceof MyEntityController) {
-                const shouldFreeze = this._worldState.playState !== GunWorldPlayState.ACTIVE;
-                playerEntity.controller.setFrozen(shouldFreeze);
-                console.log(`[GAME JOIN] Player ${player.username} initial freeze state: ${shouldFreeze}`);
-            }
-
-            // Send welcome message and broadcast player count
-            this.chatManager.sendBroadcastMessage(`[${player.username}] has joined the game.`);
-            this.broadcastGameMessage(`Players: ${this.entityManager.getAllPlayerEntities().length}/${this._minPlayerCount} needed to start`);
-
-            console.log(`[GAME JOIN] Player ${player.username} setup complete`);
-
-            // Force check if we should start the game
-            this.checkGameStart();
-        } catch (err) {
-            console.error(`[GAME JOIN] Error setting up player ${player.username}:`, err);
-            throw err;
+        // Initialize player state
+        if (!this._worldState.players.includes(player)) {
+            this._worldState.players.push(player);
         }
+
+        this._worldState.scores.set(player.username, 0);
+
+        // // Set initial freeze state
+        // if (playerEntity.controller instanceof MyEntityController) {
+        //     const shouldFreeze = this._worldState.playState !== GunWorldPlayState.ACTIVE;
+        //     playerEntity.controller.setFrozen(shouldFreeze);
+        //     console.log(`[GAME JOIN] Player ${player.username} initial freeze state: ${shouldFreeze}`);
+        // }
+
+        // Send welcome message and broadcast player count
+        this.chatManager.sendBroadcastMessage(`[${player.username}] has joined the game.`);
+        this.broadcastGameMessage(`Players: ${this.entityManager.getAllPlayerEntities().length}/${this._minPlayerCount} needed to start`);
+
+        console.log(`[GAME JOIN] Player ${player.username} setup complete`);
+
+        // Force check if we should start the game
+        this.checkGameStart();
+        // } catch (err) {
+        //     console.error(`[GAME JOIN] Error setting up player ${player.username}:`, err);
+        //     throw err;
+        // }
     }
 
     /**
