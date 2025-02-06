@@ -1,7 +1,7 @@
 import { Player, PlayerCameraMode, PlayerEntity, World, Audio, Vector3Like } from "hytopia";
 import MyEntityController from "../MyEntityController";
 
-import mapData from '../assets/maps/no-lightposts.json';
+import mapData from '../assets/maps/map-final-fixed-cars.json';
 
 export interface GunWorldOptions {
     id: number;
@@ -578,30 +578,23 @@ export class GunWorld extends World {
 const worldConfigs: GunWorldOptions[] = [
     {
         id: 1,
-        name: "Bloodshot Badlands", 
+        name: "Bullet Alley",
         minPlayerCount: 2,
         maxPlayerCount: 8,
         maxWaitingTime: 10000,
     },
     {
         id: 2,
-        name: "Bullet Alley",
+        name: "Crimson Crossfire",
         minPlayerCount: 4,
-        maxPlayerCount: 8,
+        maxPlayerCount: 12,
         maxWaitingTime: 10000,
     },
     {
         id: 3,
-        name: "Crimson Crossfire",
-        minPlayerCount: 4,
-        maxPlayerCount: 10,
-        maxWaitingTime: 10000,
-    },
-    {
-        id: 4,
         name: "Grimshot Grounds",
-        minPlayerCount: 4,
-        maxPlayerCount: 12,
+        minPlayerCount: 6,
+        maxPlayerCount: 16,
         maxWaitingTime: 10000,
     }
 ];

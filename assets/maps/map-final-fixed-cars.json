@@ -20464,23 +20464,6 @@
         }
       }
     },
-    "-10.964092592995973,3.2163113498831173,-32.06452966730901": {
-      "modelUri": "models/environment/truck2.gltf",
-      "modelLoopedAnimations": [
-        "idle"
-      ],
-      "modelScale": 1,
-      "name": "truck2",
-      "rigidBodyOptions": {
-        "type": "kinematic_velocity",
-        "rotation": {
-          "x": 0,
-          "y": 0,
-          "z": 0,
-          "w": 1
-        }
-      }
-    },
     "9.86409231453731,1.734375,-12.05067199577545": {
       "modelUri": "models/environment/trash bag.gltf",
       "modelLoopedAnimations": [
@@ -20692,6 +20675,23 @@
       ],
       "modelScale": 1,
       "name": "trash bag",
+      "rigidBodyOptions": {
+        "type": "kinematic_velocity",
+        "rotation": {
+          "x": 0,
+          "y": 0,
+          "z": 0,
+          "w": 1
+        }
+      }
+    },
+    "20.891370849256383,3.2163113498831173,-5.012135278056855": {
+      "modelUri": "models/environment/truck.gltf",
+      "modelLoopedAnimations": [
+        "idle"
+      ],
+      "modelScale": 1,
+      "name": "truck",
       "rigidBodyOptions": {
         "type": "kinematic_velocity",
         "rotation": {
@@ -20957,23 +20957,6 @@
         }
       }
     },
-    "-41.6432899732257,3.195812024222583,27.93938546845877": {
-      "modelUri": "models/environment/fence.gltf",
-      "modelLoopedAnimations": [
-        "idle"
-      ],
-      "modelScale": 1,
-      "name": "fence",
-      "rigidBodyOptions": {
-        "type": "kinematic_velocity",
-        "rotation": {
-          "x": 0,
-          "y": 0,
-          "z": 0,
-          "w": 1
-        }
-      }
-    },
     "47.24441898124251,3.195812024222583,40.79078345387831": {
       "modelUri": "models/environment/fence.gltf",
       "modelLoopedAnimations": [
@@ -20991,13 +20974,13 @@
         }
       }
     },
-    "-46.711220271696995,3.195812024222583,27.957454322944287": {
-      "modelUri": "models/environment/fenc2e.gltf",
+    "31.386452420348004,3.195812024222583,40.74907425519462": {
+      "modelUri": "models/environment/fenc1e.gltf",
       "modelLoopedAnimations": [
         "idle"
       ],
       "modelScale": 1,
-      "name": "fenc2e",
+      "name": "fenc1e",
       "rigidBodyOptions": {
         "type": "kinematic_velocity",
         "rotation": {
@@ -21008,13 +20991,30 @@
         }
       }
     },
-    "20.891370849256383,3.2163113498831173,-5.012135278056855": {
-      "modelUri": "models/environment/truck.gltf",
+    "41.376591232002916,3.195812024222583,40.748933076278426": {
+      "modelUri": "models/environment/fenc1e.gltf",
       "modelLoopedAnimations": [
         "idle"
       ],
       "modelScale": 1,
-      "name": "truck",
+      "name": "fenc1e",
+      "rigidBodyOptions": {
+        "type": "kinematic_velocity",
+        "rotation": {
+          "x": 0,
+          "y": 0,
+          "z": 0,
+          "w": 1
+        }
+      }
+    },
+    "36.42803935739338,3.195812024222583,40.77846559780518": {
+      "modelUri": "models/environment/fenc1e.gltf",
+      "modelLoopedAnimations": [
+        "idle"
+      ],
+      "modelScale": 1,
+      "name": "fenc1e",
       "rigidBodyOptions": {
         "type": "kinematic_velocity",
         "rotation": {
@@ -21314,13 +21314,13 @@
         }
       }
     },
-    "31.386452420348004,3.195812024222583,40.74907425519462": {
-      "modelUri": "models/environment/fenc1e.gltf",
+    "24.49,2.566562486886978,-37.8572126514084": {
+      "modelUri": "models/environment/conus.gltf",
       "modelLoopedAnimations": [
         "idle"
       ],
       "modelScale": 1,
-      "name": "fenc1e",
+      "name": "conus",
       "rigidBodyOptions": {
         "type": "kinematic_velocity",
         "rotation": {
@@ -21331,30 +21331,13 @@
         }
       }
     },
-    "41.376591232002916,3.195812024222583,40.748933076278426": {
-      "modelUri": "models/environment/fenc1e.gltf",
+    "30.30727206640444,1.566562486886978,-29.658241492209704": {
+      "modelUri": "models/environment/conus.gltf",
       "modelLoopedAnimations": [
         "idle"
       ],
       "modelScale": 1,
-      "name": "fenc1e",
-      "rigidBodyOptions": {
-        "type": "kinematic_velocity",
-        "rotation": {
-          "x": 0,
-          "y": 0,
-          "z": 0,
-          "w": 1
-        }
-      }
-    },
-    "36.42803935739338,3.195812024222583,40.77846559780518": {
-      "modelUri": "models/environment/fenc1e.gltf",
-      "modelLoopedAnimations": [
-        "idle"
-      ],
-      "modelScale": 1,
-      "name": "fenc1e",
+      "name": "conus",
       "rigidBodyOptions": {
         "type": "kinematic_velocity",
         "rotation": {
@@ -21450,12 +21433,12 @@
         }
       }
     },
-    "29.326987748250357,2.309999989271164,-23.52502639054835": {
+    "29.326987748250357,1.95,-23.52502639054835": {
       "modelUri": "models/environment/car.gltf",
       "modelLoopedAnimations": [
         "idle"
       ],
-      "modelScale": 1,
+      "modelScale": 0.75,
       "name": "car",
       "rigidBodyOptions": {
         "type": "kinematic_velocity",
@@ -21467,12 +21450,12 @@
         }
       }
     },
-    "29.204001526783188,2.309999989271164,-30.980049265605004": {
+    "29.204001526783188,1.95,-30.980049265605004": {
       "modelUri": "models/environment/car.gltf",
       "modelLoopedAnimations": [
         "idle"
       ],
-      "modelScale": 1,
+      "modelScale": 0.75,
       "name": "car",
       "rigidBodyOptions": {
         "type": "kinematic_velocity",
@@ -21484,12 +21467,12 @@
         }
       }
     },
-    "17.00234518468796,2.309999989271164,14.433461631159071": {
+    "17.00234518468796,1.95,14.433461631159071": {
       "modelUri": "models/environment/car.gltf",
       "modelLoopedAnimations": [
         "idle"
       ],
-      "modelScale": 1,
+      "modelScale": 0.75,
       "name": "car",
       "rigidBodyOptions": {
         "type": "kinematic_velocity",
@@ -21501,12 +21484,12 @@
         }
       }
     },
-    "-13.807478035422065,2.309999989271164,-10.668380101029136": {
+    "-13.807478035422065,1.95,-10.668380101029136": {
       "modelUri": "models/environment/car.gltf",
       "modelLoopedAnimations": [
         "idle"
       ],
-      "modelScale": 1,
+      "modelScale": 0.75,
       "name": "car",
       "rigidBodyOptions": {
         "type": "kinematic_velocity",
@@ -21518,12 +21501,12 @@
         }
       }
     },
-    "18.61577577132254,2.309999989271164,-42.324567221158745": {
+    "18.61577577132254,1.95,-42.324567221158745": {
       "modelUri": "models/environment/car.gltf",
       "modelLoopedAnimations": [
         "idle"
       ],
-      "modelScale": 1,
+      "modelScale": 0.75,
       "name": "car",
       "rigidBodyOptions": {
         "type": "kinematic_velocity",
@@ -21535,12 +21518,12 @@
         }
       }
     },
-    "-8.250022403308716,2.309999989271164,18.082927437149586": {
+    "-8.250022403308716,1.95,18.082927437149586": {
       "modelUri": "models/environment/car_1.gltf",
       "modelLoopedAnimations": [
         "idle"
       ],
-      "modelScale": 1,
+      "modelScale": 0.75,
       "name": "car_1",
       "rigidBodyOptions": {
         "type": "kinematic_velocity",
@@ -21552,12 +21535,12 @@
         }
       }
     },
-    "-25.31596393673775,2.309999989271164,-44.22395112263697": {
+    "-25.31596393673775,1.95,-44.22395112263697": {
       "modelUri": "models/environment/car_1.gltf",
       "modelLoopedAnimations": [
         "idle"
       ],
-      "modelScale": 1,
+      "modelScale": 0.75,
       "name": "car_1",
       "rigidBodyOptions": {
         "type": "kinematic_velocity",
@@ -21569,12 +21552,12 @@
         }
       }
     },
-    "18.691688312516675,2.309999989271164,-35.31561169238546": {
+    "18.691688312516675,1.95,-35.31561169238546": {
       "modelUri": "models/environment/car_1.gltf",
       "modelLoopedAnimations": [
         "idle"
       ],
-      "modelScale": 1,
+      "modelScale": 0.75,
       "name": "car_1",
       "rigidBodyOptions": {
         "type": "kinematic_velocity",
@@ -22266,40 +22249,6 @@
         }
       }
     },
-    "-8.10279270872336,3.195812024222583,47.613447076528615": {
-      "modelUri": "models/environment/fence2_1.gltf",
-      "modelLoopedAnimations": [
-        "idle"
-      ],
-      "modelScale": 1,
-      "name": "fence2_1",
-      "rigidBodyOptions": {
-        "type": "kinematic_velocity",
-        "rotation": {
-          "x": 0,
-          "y": 0,
-          "z": 0,
-          "w": 1
-        }
-      }
-    },
-    "-8.098827706197815,3.195812024222583,43.09828792479817": {
-      "modelUri": "models/environment/fence2_1.gltf",
-      "modelLoopedAnimations": [
-        "idle"
-      ],
-      "modelScale": 1,
-      "name": "fence2_1",
-      "rigidBodyOptions": {
-        "type": "kinematic_velocity",
-        "rotation": {
-          "x": 0,
-          "y": 0,
-          "z": 0,
-          "w": 1
-        }
-      }
-    },
     "23.49947753779871,3.195812024222583,47.438684834062336": {
       "modelUri": "models/environment/fence2_1.gltf",
       "modelLoopedAnimations": [
@@ -22307,74 +22256,6 @@
       ],
       "modelScale": 1,
       "name": "fence2_1",
-      "rigidBodyOptions": {
-        "type": "kinematic_velocity",
-        "rotation": {
-          "x": 0,
-          "y": 0,
-          "z": 0,
-          "w": 1
-        }
-      }
-    },
-    "47.70517210050591,2.719377467316976,-12.493012029319353": {
-      "modelUri": "models/environment/bak.gltf",
-      "modelLoopedAnimations": [
-        "idle"
-      ],
-      "modelScale": 1,
-      "name": "bak",
-      "rigidBodyOptions": {
-        "type": "kinematic_velocity",
-        "rotation": {
-          "x": 0,
-          "y": 0,
-          "z": 0,
-          "w": 1
-        }
-      }
-    },
-    "3.612229743572536,2.719377467316976,48.915185222918545": {
-      "modelUri": "models/environment/bak.gltf",
-      "modelLoopedAnimations": [
-        "idle"
-      ],
-      "modelScale": 1,
-      "name": "bak",
-      "rigidBodyOptions": {
-        "type": "kinematic_velocity",
-        "rotation": {
-          "x": 0,
-          "y": 0,
-          "z": 0,
-          "w": 1
-        }
-      }
-    },
-    "-20.691073015615604,2.719377467316976,-38.086639239860226": {
-      "modelUri": "models/environment/bak.gltf",
-      "modelLoopedAnimations": [
-        "idle"
-      ],
-      "modelScale": 1,
-      "name": "bak",
-      "rigidBodyOptions": {
-        "type": "kinematic_velocity",
-        "rotation": {
-          "x": 0,
-          "y": 0,
-          "z": 0,
-          "w": 1
-        }
-      }
-    },
-    "25.94168733704555,3.195812024222583,-42.75471440445101": {
-      "modelUri": "models/environment/fence2_3.gltf",
-      "modelLoopedAnimations": [
-        "idle"
-      ],
-      "modelScale": 1,
-      "name": "fence2_3",
       "rigidBodyOptions": {
         "type": "kinematic_velocity",
         "rotation": {
@@ -22453,64 +22334,13 @@
         }
       }
     },
-    "-36.15621297759151,3.195812024222583,30.250892684848896": {
-      "modelUri": "models/environment/fence3_1.gltf",
+    "25.89316935838447,3.195812024222583,-41.70319445025777": {
+      "modelUri": "models/environment/fence2_3.gltf",
       "modelLoopedAnimations": [
         "idle"
       ],
       "modelScale": 1,
-      "name": "fence3_1",
-      "rigidBodyOptions": {
-        "type": "kinematic_velocity",
-        "rotation": {
-          "x": 0,
-          "y": 0,
-          "z": 0,
-          "w": 1
-        }
-      }
-    },
-    "-36.17235611393558,3.195812024222583,35.45703642515798": {
-      "modelUri": "models/environment/fence3_1.gltf",
-      "modelLoopedAnimations": [
-        "idle"
-      ],
-      "modelScale": 1,
-      "name": "fence3_1",
-      "rigidBodyOptions": {
-        "type": "kinematic_velocity",
-        "rotation": {
-          "x": 0,
-          "y": 0,
-          "z": 0,
-          "w": 1
-        }
-      }
-    },
-    "-36.22774196630945,3.195812024222583,40.74447358916189": {
-      "modelUri": "models/environment/fence3_1.gltf",
-      "modelLoopedAnimations": [
-        "idle"
-      ],
-      "modelScale": 1,
-      "name": "fence3_1",
-      "rigidBodyOptions": {
-        "type": "kinematic_velocity",
-        "rotation": {
-          "x": 0,
-          "y": 0,
-          "z": 0,
-          "w": 1
-        }
-      }
-    },
-    "15.660609397952777,3.195812024222583,42.58657143522722": {
-      "modelUri": "models/environment/fence3_1.gltf",
-      "modelLoopedAnimations": [
-        "idle"
-      ],
-      "modelScale": 1,
-      "name": "fence3_1",
+      "name": "fence2_3",
       "rigidBodyOptions": {
         "type": "kinematic_velocity",
         "rotation": {
@@ -22555,13 +22385,13 @@
         }
       }
     },
-    "-36.170312820368544,3.195812024222583,46.77061308829312": {
-      "modelUri": "models/environment/fence3_1.gltf",
+    "-15.85652230981165,3.195812024222583,-41.82761528845835": {
+      "modelUri": "models/environment/fence3_2.gltf",
       "modelLoopedAnimations": [
         "idle"
       ],
       "modelScale": 1,
-      "name": "fence3_1",
+      "name": "fence3_2",
       "rigidBodyOptions": {
         "type": "kinematic_velocity",
         "rotation": {
@@ -22691,13 +22521,13 @@
         }
       }
     },
-    "44.42606397734949,4.060000000596046,-11.132070515456517": {
-      "modelUri": "models/environment/lamppost.gltf",
+    "47.70517210050591,2.719377467316976,-12.493012029319353": {
+      "modelUri": "models/environment/bak.gltf",
       "modelLoopedAnimations": [
         "idle"
       ],
       "modelScale": 1,
-      "name": "lamppost",
+      "name": "bak",
       "rigidBodyOptions": {
         "type": "kinematic_velocity",
         "rotation": {
@@ -22708,13 +22538,13 @@
         }
       }
     },
-    "-43.13913332787371,4.060000000596046,5.152653867796689": {
-      "modelUri": "models/environment/lamppost.gltf",
+    "3.612229743572536,2.719377467316976,48.915185222918545": {
+      "modelUri": "models/environment/bak.gltf",
       "modelLoopedAnimations": [
         "idle"
       ],
       "modelScale": 1,
-      "name": "lamppost",
+      "name": "bak",
       "rigidBodyOptions": {
         "type": "kinematic_velocity",
         "rotation": {
@@ -22725,183 +22555,13 @@
         }
       }
     },
-    "35.87160613889928,4.060000000596046,25.787068774559962": {
-      "modelUri": "models/environment/lamppost.gltf",
+    "-20.691073015615604,2.719377467316976,-38.086639239860226": {
+      "modelUri": "models/environment/bak.gltf",
       "modelLoopedAnimations": [
         "idle"
       ],
       "modelScale": 1,
-      "name": "lamppost",
-      "rigidBodyOptions": {
-        "type": "kinematic_velocity",
-        "rotation": {
-          "x": 0,
-          "y": 0,
-          "z": 0,
-          "w": 1
-        }
-      }
-    },
-    "-7.754140056184438,4.060000000596046,26.21994699404375": {
-      "modelUri": "models/environment/lamppost.gltf",
-      "modelLoopedAnimations": [
-        "idle"
-      ],
-      "modelScale": 1,
-      "name": "lamppost",
-      "rigidBodyOptions": {
-        "type": "kinematic_velocity",
-        "rotation": {
-          "x": 0,
-          "y": 0,
-          "z": 0,
-          "w": 1
-        }
-      }
-    },
-    "24.182146540989734,4.060000000596046,-35.83788608395127": {
-      "modelUri": "models/environment/lamppost2.gltf",
-      "modelLoopedAnimations": [
-        "idle"
-      ],
-      "modelScale": 1,
-      "name": "lamppost2",
-      "rigidBodyOptions": {
-        "type": "kinematic_velocity",
-        "rotation": {
-          "x": 0,
-          "y": 0,
-          "z": 0,
-          "w": 1
-        }
-      }
-    },
-    "24.072795156874555,4.060000000596046,17.435726518320497": {
-      "modelUri": "models/environment/lamppost2.gltf",
-      "modelLoopedAnimations": [
-        "idle"
-      ],
-      "modelScale": 1,
-      "name": "lamppost2",
-      "rigidBodyOptions": {
-        "type": "kinematic_velocity",
-        "rotation": {
-          "x": 0,
-          "y": 0,
-          "z": 0,
-          "w": 1
-        }
-      }
-    },
-    "-7.200270863114999,4.060000000596046,-14.632196605425069": {
-      "modelUri": "models/environment/lamppost2.gltf",
-      "modelLoopedAnimations": [
-        "idle"
-      ],
-      "modelScale": 1,
-      "name": "lamppost2",
-      "rigidBodyOptions": {
-        "type": "kinematic_velocity",
-        "rotation": {
-          "x": 0,
-          "y": 0,
-          "z": 0,
-          "w": 1
-        }
-      }
-    },
-    "24.013211452412083,4.060000000596046,-8.548319524211793": {
-      "modelUri": "models/environment/lamppost2.gltf",
-      "modelLoopedAnimations": [
-        "idle"
-      ],
-      "modelScale": 1,
-      "name": "lamppost2",
-      "rigidBodyOptions": {
-        "type": "kinematic_velocity",
-        "rotation": {
-          "x": 0,
-          "y": 0,
-          "z": 0,
-          "w": 1
-        }
-      }
-    },
-    "27.54064891468295,4.060000000596046,-41.13048637194069": {
-      "modelUri": "models/environment/lamppost3.gltf",
-      "modelLoopedAnimations": [
-        "idle"
-      ],
-      "modelScale": 1,
-      "name": "lamppost3",
-      "rigidBodyOptions": {
-        "type": "kinematic_velocity",
-        "rotation": {
-          "x": 0,
-          "y": 0,
-          "z": 0,
-          "w": 1
-        }
-      }
-    },
-    "44.35392791772553,4.060000000596046,17.906562364559697": {
-      "modelUri": "models/environment/lamppost3.gltf",
-      "modelLoopedAnimations": [
-        "idle"
-      ],
-      "modelScale": 1,
-      "name": "lamppost3",
-      "rigidBodyOptions": {
-        "type": "kinematic_velocity",
-        "rotation": {
-          "x": 0,
-          "y": 0,
-          "z": 0,
-          "w": 1
-        }
-      }
-    },
-    "-32.849540700809825,4.060000000596046,16.962143310863425": {
-      "modelUri": "models/environment/lamppost3.gltf",
-      "modelLoopedAnimations": [
-        "idle"
-      ],
-      "modelScale": 1,
-      "name": "lamppost3",
-      "rigidBodyOptions": {
-        "type": "kinematic_velocity",
-        "rotation": {
-          "x": 0,
-          "y": 0,
-          "z": 0,
-          "w": 1
-        }
-      }
-    },
-    "-32.90860653168238,4.060000000596046,-8.621052053739298": {
-      "modelUri": "models/environment/lamppost3.gltf",
-      "modelLoopedAnimations": [
-        "idle"
-      ],
-      "modelScale": 1,
-      "name": "lamppost3",
-      "rigidBodyOptions": {
-        "type": "kinematic_velocity",
-        "rotation": {
-          "x": 0,
-          "y": 0,
-          "z": 0,
-          "w": 1
-        }
-      }
-    },
-    "2.845807365145264,4.060000000596046,18.0236923194795": {
-      "modelUri": "models/environment/lamppost3.gltf",
-      "modelLoopedAnimations": [
-        "idle"
-      ],
-      "modelScale": 1,
-      "name": "lamppost3",
+      "name": "bak",
       "rigidBodyOptions": {
         "type": "kinematic_velocity",
         "rotation": {
@@ -22946,12 +22606,12 @@
         }
       }
     },
-    "34.58145062294205,2.309999989271164,43.051167754911575": {
+    "34.58145062294205,1.95,43.051167754911575": {
       "modelUri": "models/environment/car2_1.gltf",
       "modelLoopedAnimations": [
         "idle"
       ],
-      "modelScale": 1,
+      "modelScale": 0.75,
       "name": "car2_1",
       "rigidBodyOptions": {
         "type": "kinematic_velocity",
@@ -22963,12 +22623,12 @@
         }
       }
     },
-    "27.55423867028015,2.309999989271164,43.04328847741726": {
+    "27.55423867028015,1.95,43.04328847741726": {
       "modelUri": "models/environment/car2_1.gltf",
       "modelLoopedAnimations": [
         "idle"
       ],
-      "modelScale": 1,
+      "modelScale": 0.75,
       "name": "car2_1",
       "rigidBodyOptions": {
         "type": "kinematic_velocity",
@@ -22980,12 +22640,12 @@
         }
       }
     },
-    "-41.21356783457463,2.309999989271164,-17.99765249924474": {
+    "-41.21356783457463,1.95,-17.99765249924474": {
       "modelUri": "models/environment/car2_1.gltf",
       "modelLoopedAnimations": [
         "idle"
       ],
-      "modelScale": 1,
+      "modelScale": 0.75,
       "name": "car2_1",
       "rigidBodyOptions": {
         "type": "kinematic_velocity",
@@ -22997,12 +22657,12 @@
         }
       }
     },
-    "19.752214222107543,2.309999989271164,42.0728976866878": {
+    "19.752214222107543,1.95,42.0728976866878": {
       "modelUri": "models/environment/car2_1.gltf",
       "modelLoopedAnimations": [
         "idle"
       ],
-      "modelScale": 1,
+      "modelScale": 0.75,
       "name": "car2_1",
       "rigidBodyOptions": {
         "type": "kinematic_velocity",
@@ -23014,12 +22674,12 @@
         }
       }
     },
-    "-13.70354400108261,2.309999989271164,42.492658331924396": {
+    "-13.70354400108261,1.95,42.492658331924396": {
       "modelUri": "models/environment/car2_1.gltf",
       "modelLoopedAnimations": [
         "idle"
       ],
-      "modelScale": 1,
+      "modelScale": 0.75,
       "name": "car2_1",
       "rigidBodyOptions": {
         "type": "kinematic_velocity",
@@ -23031,98 +22691,13 @@
         }
       }
     },
-    "30.323548422794563,2.309999989271164,-13.887922924552335": {
+    "30.323548422794563,1.95,-13.887922924552335": {
       "modelUri": "models/environment/car2_1.gltf",
       "modelLoopedAnimations": [
         "idle"
       ],
-      "modelScale": 1,
+      "modelScale": 0.75,
       "name": "car2_1",
-      "rigidBodyOptions": {
-        "type": "kinematic_velocity",
-        "rotation": {
-          "x": 0,
-          "y": 0,
-          "z": 0,
-          "w": 1
-        }
-      }
-    },
-    "45.74643748506518,2.309999989271164,-28.462079880017694": {
-      "modelUri": "models/environment/car3_1.gltf",
-      "modelLoopedAnimations": [
-        "idle"
-      ],
-      "modelScale": 1,
-      "name": "car3_1",
-      "rigidBodyOptions": {
-        "type": "kinematic_velocity",
-        "rotation": {
-          "x": 0,
-          "y": 0,
-          "z": 0,
-          "w": 1
-        }
-      }
-    },
-    "45.66087545841679,2.309999989271164,-33.88042847780642": {
-      "modelUri": "models/environment/car3_1.gltf",
-      "modelLoopedAnimations": [
-        "idle"
-      ],
-      "modelScale": 1,
-      "name": "car3_1",
-      "rigidBodyOptions": {
-        "type": "kinematic_velocity",
-        "rotation": {
-          "x": 0,
-          "y": 0,
-          "z": 0,
-          "w": 1
-        }
-      }
-    },
-    "28.84887274010534,2.309999989271164,2.8104029826886396": {
-      "modelUri": "models/environment/car3_1.gltf",
-      "modelLoopedAnimations": [
-        "idle"
-      ],
-      "modelScale": 1,
-      "name": "car3_1",
-      "rigidBodyOptions": {
-        "type": "kinematic_velocity",
-        "rotation": {
-          "x": 0,
-          "y": 0,
-          "z": 0,
-          "w": 1
-        }
-      }
-    },
-    "43.33621632617164,2.309999989271164,24.069913094744706": {
-      "modelUri": "models/environment/car3_1.gltf",
-      "modelLoopedAnimations": [
-        "idle"
-      ],
-      "modelScale": 1,
-      "name": "car3_1",
-      "rigidBodyOptions": {
-        "type": "kinematic_velocity",
-        "rotation": {
-          "x": 0,
-          "y": 0,
-          "z": 0,
-          "w": 1
-        }
-      }
-    },
-    "11.461036147483476,2.309999989271164,19.805341716530485": {
-      "modelUri": "models/environment/car3_1.gltf",
-      "modelLoopedAnimations": [
-        "idle"
-      ],
-      "modelScale": 1,
-      "name": "car3_1",
       "rigidBodyOptions": {
         "type": "kinematic_velocity",
         "rotation": {
@@ -23201,13 +22776,13 @@
         }
       }
     },
-    "-16.159257754606465,4.060000000596046,34.20639467828454": {
-      "modelUri": "models/environment/lamppost4.gltf",
+    "45.74643748506518,1.95,-28.462079880017694": {
+      "modelUri": "models/environment/car3_1.gltf",
       "modelLoopedAnimations": [
         "idle"
       ],
-      "modelScale": 1,
-      "name": "lamppost4",
+      "modelScale": 0.75,
+      "name": "car3_1",
       "rigidBodyOptions": {
         "type": "kinematic_velocity",
         "rotation": {
@@ -23218,13 +22793,13 @@
         }
       }
     },
-    "15.88051801523611,4.060000000596046,-20.744944208649013": {
-      "modelUri": "models/environment/lamppost4.gltf",
+    "45.66087545841679,1.95,-33.88042847780642": {
+      "modelUri": "models/environment/car3_1.gltf",
       "modelLoopedAnimations": [
         "idle"
       ],
-      "modelScale": 1,
-      "name": "lamppost4",
+      "modelScale": 0.75,
+      "name": "car3_1",
       "rigidBodyOptions": {
         "type": "kinematic_velocity",
         "rotation": {
@@ -23235,13 +22810,13 @@
         }
       }
     },
-    "-16.063272038989425,4.060000000596046,-8.40743855414827": {
-      "modelUri": "models/environment/lamppost4.gltf",
+    "28.84887274010534,1.95,2.8104029826886396": {
+      "modelUri": "models/environment/car3_1.gltf",
       "modelLoopedAnimations": [
         "idle"
       ],
-      "modelScale": 1,
-      "name": "lamppost4",
+      "modelScale": 0.75,
+      "name": "car3_1",
       "rigidBodyOptions": {
         "type": "kinematic_velocity",
         "rotation": {
@@ -23252,13 +22827,13 @@
         }
       }
     },
-    "16.057058422209906,4.060000000596046,5.123982307115095": {
-      "modelUri": "models/environment/lamppost4.gltf",
+    "43.33621632617164,1.95,24.069913094744706": {
+      "modelUri": "models/environment/car3_1.gltf",
       "modelLoopedAnimations": [
         "idle"
       ],
-      "modelScale": 1,
-      "name": "lamppost4",
+      "modelScale": 0.75,
+      "name": "car3_1",
       "rigidBodyOptions": {
         "type": "kinematic_velocity",
         "rotation": {
@@ -23269,13 +22844,13 @@
         }
       }
     },
-    "-16.083610909664333,4.060000000596046,-34.13315429686378": {
-      "modelUri": "models/environment/lamppost4.gltf",
+    "11.461036147483476,1.95,19.805341716530485": {
+      "modelUri": "models/environment/car3_1.gltf",
       "modelLoopedAnimations": [
         "idle"
       ],
-      "modelScale": 1,
-      "name": "lamppost4",
+      "modelScale": 0.75,
+      "name": "car3_1",
       "rigidBodyOptions": {
         "type": "kinematic_velocity",
         "rotation": {
@@ -23286,12 +22861,12 @@
         }
       }
     },
-    "37.000470505371574,2.309999989271164,-15.089406727002567": {
+    "37.000470505371574,1.95,-15.089406727002567": {
       "modelUri": "models/environment/car3.gltf",
       "modelLoopedAnimations": [
         "idle"
       ],
-      "modelScale": 1,
+      "modelScale": 0.75,
       "name": "car3",
       "rigidBodyOptions": {
         "type": "kinematic_velocity",
@@ -23303,12 +22878,12 @@
         }
       }
     },
-    "-9.90707688050909,2.309999989271164,-18.196662632632126": {
+    "-9.90707688050909,1.95,-18.196662632632126": {
       "modelUri": "models/environment/car3.gltf",
       "modelLoopedAnimations": [
         "idle"
       ],
-      "modelScale": 1,
+      "modelScale": 0.75,
       "name": "car3",
       "rigidBodyOptions": {
         "type": "kinematic_velocity",
@@ -23320,12 +22895,12 @@
         }
       }
     },
-    "-10.060473802050627,2.309999989271164,31.73621270936448": {
+    "-10.060473802050627,1.95,31.73621270936448": {
       "modelUri": "models/environment/car3.gltf",
       "modelLoopedAnimations": [
         "idle"
       ],
-      "modelScale": 1,
+      "modelScale": 0.75,
       "name": "car3",
       "rigidBodyOptions": {
         "type": "kinematic_velocity",
@@ -23422,40 +22997,6 @@
         }
       }
     },
-    "-15.85652230981165,3.195812024222583,-41.82761528845835": {
-      "modelUri": "models/environment/fence3_2.gltf",
-      "modelLoopedAnimations": [
-        "idle"
-      ],
-      "modelScale": 1,
-      "name": "fence3_2",
-      "rigidBodyOptions": {
-        "type": "kinematic_velocity",
-        "rotation": {
-          "x": 0,
-          "y": 0,
-          "z": 0,
-          "w": 1
-        }
-      }
-    },
-    "15.788540409515825,3.195812024222583,47.35979095113573": {
-      "modelUri": "models/environment/fence3_2.gltf",
-      "modelLoopedAnimations": [
-        "idle"
-      ],
-      "modelScale": 1,
-      "name": "fence3_2",
-      "rigidBodyOptions": {
-        "type": "kinematic_velocity",
-        "rotation": {
-          "x": 0,
-          "y": 0,
-          "z": 0,
-          "w": 1
-        }
-      }
-    },
     "38.72902468718629,2.5625,-47.55246751727867": {
       "modelUri": "models/environment/shipping-container.gltf",
       "modelLoopedAnimations": [
@@ -23480,6 +23021,23 @@
       ],
       "modelScale": 1,
       "name": "shipping-container",
+      "rigidBodyOptions": {
+        "type": "kinematic_velocity",
+        "rotation": {
+          "x": 0,
+          "y": 0,
+          "z": 0,
+          "w": 1
+        }
+      }
+    },
+    "-33.42366490554413,3.2163113498831173,19.61019427956159": {
+      "modelUri": "models/environment/truck1_2.gltf",
+      "modelLoopedAnimations": [
+        "idle"
+      ],
+      "modelScale": 1,
+      "name": "truck1_2",
       "rigidBodyOptions": {
         "type": "kinematic_velocity",
         "rotation": {
@@ -24187,91 +23745,6 @@
         }
       }
     },
-    "12.831912502407116,1.6875,-45.719717595164695": {
-      "modelUri": "models/environment/stick.gltf",
-      "modelLoopedAnimations": [
-        "idle"
-      ],
-      "modelScale": 1,
-      "name": "stick",
-      "rigidBodyOptions": {
-        "type": "kinematic_velocity",
-        "rotation": {
-          "x": 0,
-          "y": 0,
-          "z": 0,
-          "w": 1
-        }
-      }
-    },
-    "9.67762427305974,1.6875,-47.60407971680423": {
-      "modelUri": "models/environment/stick.gltf",
-      "modelLoopedAnimations": [
-        "idle"
-      ],
-      "modelScale": 1,
-      "name": "stick",
-      "rigidBodyOptions": {
-        "type": "kinematic_velocity",
-        "rotation": {
-          "x": 0,
-          "y": 0,
-          "z": 0,
-          "w": 1
-        }
-      }
-    },
-    "1.2878034043223172,1.6875,-34.269155453371724": {
-      "modelUri": "models/environment/stick.gltf",
-      "modelLoopedAnimations": [
-        "idle"
-      ],
-      "modelScale": 1,
-      "name": "stick",
-      "rigidBodyOptions": {
-        "type": "kinematic_velocity",
-        "rotation": {
-          "x": 0,
-          "y": 0,
-          "z": 0,
-          "w": 1
-        }
-      }
-    },
-    "13.079366049723546,1.6875,-35.68428387215211": {
-      "modelUri": "models/environment/stick.gltf",
-      "modelLoopedAnimations": [
-        "idle"
-      ],
-      "modelScale": 1,
-      "name": "stick",
-      "rigidBodyOptions": {
-        "type": "kinematic_velocity",
-        "rotation": {
-          "x": 0,
-          "y": 0,
-          "z": 0,
-          "w": 1
-        }
-      }
-    },
-    "-5.749065828653212,1.6875,-44.19281203020141": {
-      "modelUri": "models/environment/stick.gltf",
-      "modelLoopedAnimations": [
-        "idle"
-      ],
-      "modelScale": 1,
-      "name": "stick",
-      "rigidBodyOptions": {
-        "type": "kinematic_velocity",
-        "rotation": {
-          "x": 0,
-          "y": 0,
-          "z": 0,
-          "w": 1
-        }
-      }
-    },
     "11.637995305393357,4.375,-14.88834364767268": {
       "modelUri": "models/environment/basic-tree.gltf",
       "modelLoopedAnimations": [
@@ -24534,6 +24007,91 @@
       ],
       "modelScale": 2,
       "name": "basic-tree",
+      "rigidBodyOptions": {
+        "type": "kinematic_velocity",
+        "rotation": {
+          "x": 0,
+          "y": 0,
+          "z": 0,
+          "w": 1
+        }
+      }
+    },
+    "12.831912502407116,1.6875,-45.719717595164695": {
+      "modelUri": "models/environment/stick.gltf",
+      "modelLoopedAnimations": [
+        "idle"
+      ],
+      "modelScale": 1,
+      "name": "stick",
+      "rigidBodyOptions": {
+        "type": "kinematic_velocity",
+        "rotation": {
+          "x": 0,
+          "y": 0,
+          "z": 0,
+          "w": 1
+        }
+      }
+    },
+    "9.67762427305974,1.6875,-47.60407971680423": {
+      "modelUri": "models/environment/stick.gltf",
+      "modelLoopedAnimations": [
+        "idle"
+      ],
+      "modelScale": 1,
+      "name": "stick",
+      "rigidBodyOptions": {
+        "type": "kinematic_velocity",
+        "rotation": {
+          "x": 0,
+          "y": 0,
+          "z": 0,
+          "w": 1
+        }
+      }
+    },
+    "1.2878034043223172,1.6875,-34.269155453371724": {
+      "modelUri": "models/environment/stick.gltf",
+      "modelLoopedAnimations": [
+        "idle"
+      ],
+      "modelScale": 1,
+      "name": "stick",
+      "rigidBodyOptions": {
+        "type": "kinematic_velocity",
+        "rotation": {
+          "x": 0,
+          "y": 0,
+          "z": 0,
+          "w": 1
+        }
+      }
+    },
+    "13.079366049723546,1.6875,-35.68428387215211": {
+      "modelUri": "models/environment/stick.gltf",
+      "modelLoopedAnimations": [
+        "idle"
+      ],
+      "modelScale": 1,
+      "name": "stick",
+      "rigidBodyOptions": {
+        "type": "kinematic_velocity",
+        "rotation": {
+          "x": 0,
+          "y": 0,
+          "z": 0,
+          "w": 1
+        }
+      }
+    },
+    "-5.749065828653212,1.6875,-44.19281203020141": {
+      "modelUri": "models/environment/stick.gltf",
+      "modelLoopedAnimations": [
+        "idle"
+      ],
+      "modelScale": 1,
+      "name": "stick",
       "rigidBodyOptions": {
         "type": "kinematic_velocity",
         "rotation": {
