@@ -578,25 +578,26 @@ export class GunWorld extends World {
 const worldConfigs: GunWorldOptions[] = [
     {
         id: 1,
-        name: "Bullet Alley",
-        minPlayerCount: 2,
+        name: "Crimson Crossfire",
+        minPlayerCount: 4,
         maxPlayerCount: 8,
         maxWaitingTime: 10000,
     },
-    {
-        id: 2,
-        name: "Crimson Crossfire",
-        minPlayerCount: 4,
-        maxPlayerCount: 12,
-        maxWaitingTime: 10000,
-    },
-    {
-        id: 3,
-        name: "Grimshot Grounds",
-        minPlayerCount: 6,
-        maxPlayerCount: 16,
-        maxWaitingTime: 10000,
-    }
+    // REMOVED EXTRA WORLDS AS COULDN"T TEST FOR PERFORMANCE BUT ONLY INDIVIDUALLY
+    // {
+    //     id: 2,
+    //     name: "Crimson Crossfire",
+    //     minPlayerCount: 4,
+    //     maxPlayerCount: 12,
+    //     maxWaitingTime: 10000,
+    // },
+    // {
+    //     id: 3,
+    //     name: "Grimshot Grounds",
+    //     minPlayerCount: 6,
+    //     maxPlayerCount: 16,
+    //     maxWaitingTime: 10000,
+    // }
 ];
 
 const worldRegistry: GunWorld[] = [];

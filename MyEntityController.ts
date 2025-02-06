@@ -333,7 +333,7 @@ export default class MyEntityController extends BaseEntityController {
         // Make sure we're not frozen when respawning
         this._freeze = false;
         // Restore weapon from before death
-        this.currentWeapon = this._lastWeaponBeforeDeath;
+        this.currentWeapon = this._lastWeaponBeforeDeath || getStartingWeapon();
         this.currentAmmo = this.currentWeapon.maxAmmo;
 
         const gunworld = entity.world as GunWorld;
