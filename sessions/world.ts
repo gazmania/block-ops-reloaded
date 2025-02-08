@@ -40,9 +40,10 @@ export class GunWorld extends World {
 
     private _worldState: GunWorldState;
 
-    private readonly ROUND_DURATION = 300000; // 5 minutes per round
-    private readonly START_COUNTDOWN = 5000;  // 5 second countdown
-    private readonly END_SCREEN_DURATION = 10000; // 10 seconds to show results
+    private readonly ROUND_DURATION = 10 * 60 * 1000; // 10 minutes per round
+    private readonly ROUND_END_COUNTDOWN = 30 * 1000; // start counting down 30secs before end of round
+    private readonly START_COUNTDOWN = 15 * 1000;  // 15 second countdown
+    private readonly END_SCREEN_DURATION = 10 * 1000; // 10 seconds to show results
 
     private _lastLoggedPlayerCount: number = 0;
     private _lastCountdownTime: number = -1;
@@ -59,6 +60,7 @@ export class GunWorld extends World {
         { x: -41, y: 2, z: -12 },
         { x: -33, y: 2, z: 18 },
         { x: -26, y: 2, z: -29 },
+        { x: 4, y: 2, z: 12 },
     ];
     private _usedSpawnPoints: Vector3Like[] = [];
 
@@ -91,7 +93,7 @@ export class GunWorld extends World {
             directionalLightIntensity: 2,
             ambientLightColor: { r: 255, g: 200, b: 150, },
             ambientLightIntensity: 0.5
-            
+
         });
 
         this._lobby = lobby;
@@ -122,6 +124,7 @@ export class GunWorld extends World {
 
         // Only keep the leave command here
         this.chatManager.registerCommand("/leave", (player: Player, args: string[], message: string) => {
+            // this should be done in the onPlayerLeave()
             this.entityManager.getPlayerEntitiesByPlayer(player).forEach(entity => {
                 entity.despawn();
             });
@@ -130,7 +133,14 @@ export class GunWorld extends World {
             // if despawning immediately the entity fails to despawn and is there the next time you enter the game
             setTimeout(() => {
                 player.joinWorld(this._lobby);
-            }, 250);
+            }, 500);
+        });
+
+        // Only keep the leave command here
+        this.chatManager.registerCommand("/position", (player: Player, args: string[], message: string) => {
+            this.entityManager.getPlayerEntitiesByPlayer(player).forEach(entity => {
+                this.chatManager.sendPlayerMessage(player, `${JSON.stringify(entity.position)}`, "999999");
+            });
         });
     }
 
@@ -171,6 +181,8 @@ export class GunWorld extends World {
     }
 
     private handleStartingState(): void {
+        // console.log(`[${new Date().toLocaleTimeString()}] ENTER handleStartingState()`);
+
         const timeElapsed = Date.now() - (this._worldState.startTime || 0);
         const remainingTime = Math.ceil((this.START_COUNTDOWN - timeElapsed) / 1000);
 
@@ -185,9 +197,13 @@ export class GunWorld extends World {
             console.log("[GAME STATE] Countdown finished, starting round!");
             this.beginRound();
         }
+
+        // console.log(`[${new Date().toLocaleTimeString()}] EXIT handleStartingState()`);
     }
 
     private handleActiveState(): void {
+        // console.log(`[${new Date().toLocaleTimeString()}] ENTER handleActiveState()`);
+
         if (!this._worldState.roundStartTime) return;
 
         const timeElapsed = Date.now() - this._worldState.roundStartTime;
@@ -195,35 +211,45 @@ export class GunWorld extends World {
 
         if (timeRemaining <= 0) {
             this.endRound();
-        } else if (timeRemaining <= 10000) { // Last 10 seconds
+        } else if (timeRemaining <= this.ROUND_END_COUNTDOWN) { // Last 30 seconds
             this.broadcastGameMessage(`Round ending in ${Math.ceil(timeRemaining / 1000)}...`);
         }
+
+        // console.log(`[${new Date().toLocaleTimeString()}] EXIT handleActiveState()`);
     }
 
     private kickPlayersToLobby() {
+        console.log(`[${new Date().toLocaleTimeString()}] ENTER kickPlayersToLobby()`);
+
         for (const p of this.entityManager.getAllPlayerEntities()) {
             // give the eventloop/gameloop time to sort itself out
             // BUG - if the player moves worlds straight away, the despawn doesn't compete and leaves a zombie entitiy in the world
             setTimeout(() => {
                 // kick the players to lobby
                 p.player.joinWorld(this._lobby);
-            }, 250);
+            }, 500);
         }
 
         // kick the players back to the lobby
         this.entityManager.getAllPlayerEntities().forEach((p) => {
             p.despawn();
         });
+
+        console.log(`[${new Date().toLocaleTimeString()}] EXIT kickPlayersToLobby()`);
     }
 
     private handleEndingState(): void {
+        console.log(`[${new Date().toLocaleTimeString()}] ENTER handleEndingState()`);
+
         if (!this._worldState.roundEndTime) return;
 
         const timeElapsed = Date.now() - this._worldState.roundEndTime;
-        if (timeElapsed >= this.END_SCREEN_DURATION) {
+        if (timeElapsed >= 2) {
             this.kickPlayersToLobby();
             this.resetWorld();
         }
+
+        console.log(`[${new Date().toLocaleTimeString()}] EXIT handleEndingState()`);
     }
 
     // private handleRestartingState(): void {
@@ -232,6 +258,8 @@ export class GunWorld extends World {
     // }
 
     private startGame(): void {
+        console.log(`[${new Date().toLocaleTimeString()}] ENTER startGame()`);
+
         if (this._worldState.playState !== GunWorldPlayState.WAITING) {
             console.log(`[GAME] Attempted to start game but state is ${this._worldState.playState}`);
             return;
@@ -252,10 +280,14 @@ export class GunWorld extends World {
             }
         });
 
-        this.broadcastGameMessage("🎮 Game starting in 5 seconds! Get ready! 🎮");
+        // this.broadcastGameMessage(`🎮 Game starting in ${this.START_COUNTDOWN / 1000} seconds! Get ready! 🎮`);
+
+        console.log(`[${new Date().toLocaleTimeString()}] EXIT startGame()`);
     }
 
     private freezePlayer(playerEntity: PlayerEntity, freeze: boolean): void {
+        console.log(`[${new Date().toLocaleTimeString()}] ENTER freezePlayer(player: ${playerEntity.player?.username}, freeze: ${freeze})`);
+
         if (!(playerEntity.controller instanceof MyEntityController)) return;
 
         const controller = playerEntity.controller as MyEntityController;
@@ -275,9 +307,13 @@ export class GunWorld extends World {
         //     // Reset physics state
         //     playerEntity.resetPhysics?.();
         // }
+
+        console.log(`[${new Date().toLocaleTimeString()}] EXIT freezePlayer(player: ${playerEntity.player?.username}, freeze: ${freeze})`);
     }
 
     private beginRound(): void {
+        console.log(`[${new Date().toLocaleTimeString()}] ENTER beginRound()`);
+
         console.log("[GAME STATE] Beginning round...");
         this._worldState.playState = GunWorldPlayState.ACTIVE;
         this._worldState.roundStartTime = Date.now();
@@ -296,9 +332,13 @@ export class GunWorld extends World {
         });
 
         this.broadcastGameMessage("🎮 Round Started! Fight! 🎮");
+
+        console.log(`[${new Date().toLocaleTimeString()}] EXIT beginRound()`);
     }
 
     private endRound(): void {
+        console.log(`[${new Date().toLocaleTimeString()}] ENTER endRound()`);
+
         this._worldState.playState = GunWorldPlayState.ENDING;
         this._worldState.roundEndTime = Date.now();
 
@@ -306,6 +346,8 @@ export class GunWorld extends World {
         const scores = this.calculateScores();
         this.broadcastGameMessage("Round Over!");
         this.displayScores(scores);
+
+        console.log(`[${new Date().toLocaleTimeString()}] EXIT endRound()`);
     }
 
     // private restartGame(): void {
@@ -313,11 +355,16 @@ export class GunWorld extends World {
     // }
 
     private resetWorld() {
+        console.log(`[${new Date().toLocaleTimeString()}] ENTER resetWorld()`);
+
         this._worldState = this.defaultState();
+
+        console.log(`[${new Date().toLocaleTimeString()}] EXIT resetWorld()`);
     }
 
     private defaultState() {
-        return {
+        console.log(`[${new Date().toLocaleTimeString()}] ENTER defaultState()`);
+        const state = {
             startTime: Date.now(),
             players: [],
             playState: GunWorldPlayState.WAITING,
@@ -325,19 +372,36 @@ export class GunWorld extends World {
             roundDuration: this.ROUND_DURATION,
             scores: new Map()
         };
+        console.log(`[${new Date().toLocaleTimeString()}] EXIT defaultState() -> ${JSON.stringify(state)}`);
+        return state;
     }
 
     public generateSpawnPosition() {
+        console.log(`[${new Date().toLocaleTimeString()}] ENTER generateSpawnPosition()`);
+
+        if (this._spawnPoints.length == 0) {
+            console.log(`[SPAWN] Refreshing spawn points`);
+            this._spawnPoints = [...this._usedSpawnPoints];
+            this._usedSpawnPoints = [];
+        }
+
+
         const randomSpawnPointIndex = Math.floor(Math.random() * this._spawnPoints.length) % this._spawnPoints.length; // % incase we get a random 1.0
         const spawnPosition = this._spawnPoints[randomSpawnPointIndex];
+        console.log(`[SPAWN] Selected spawn index ${randomSpawnPointIndex}, position: ${JSON.stringify(spawnPosition)}`);
+
         this._spawnPoints.splice(randomSpawnPointIndex, 1); // Remove the used spawn point
         // console.log("Remaining Spawn Points:", this._spawnPoints)
         this._usedSpawnPoints.push(spawnPosition); // record the used position
         // console.log("Used Spawn Points:", this._usedSpawnPoints)
+
+        console.log(`[${new Date().toLocaleTimeString()}] EXIT generateSpawnPosition() -> {x: ${spawnPosition.x}, y: ${spawnPosition.y}, z: ${spawnPosition.z}}`);
         return spawnPosition;
     }
 
     private spawnPlayer(player: Player): void {
+        console.log(`[${new Date().toLocaleTimeString()}] ENTER spawnPlayer(player: ${player.username})`);
+
         console.log(`[GAME] Spawning player ${player.username}`);
 
         // First check if player already has an entity
@@ -359,12 +423,6 @@ export class GunWorld extends World {
 
 
         // Spawn the entity
-        if (this._spawnPoints.length == 0) {
-            // refresh spawn points
-            this._spawnPoints = [...this._usedSpawnPoints];
-            this._usedSpawnPoints = [];
-        }
-
         const spawnPosition = this.generateSpawnPosition();
 
         playerEntity.spawn(this, spawnPosition);
@@ -383,14 +441,21 @@ export class GunWorld extends World {
             playerEntity.controller.setFrozen(shouldFreeze);
             console.log(`[GAME] Player ${player.username} initial freeze state: ${shouldFreeze}`);
         }
+
+        console.log(`[${new Date().toLocaleTimeString()}] EXIT spawnPlayer(player: ${player.username})`);
     }
 
     private calculateScores(): Map<string, number> {
+        console.log(`[${new Date().toLocaleTimeString()}] ENTER calculateScores()`);
+
         // This should be implemented based on your scoring system
+        console.log(`[${new Date().toLocaleTimeString()}] EXIT calculateScores() -> Map(${Array.from(this._worldState.scores.entries()).map(([k, v]) => `${k}:${v}`).join(', ')})`);
         return this._worldState.scores;
     }
 
     private displayScores(scores: Map<string, number>): void {
+        console.log(`[${new Date().toLocaleTimeString()}] ENTER displayScores(scores: ${scores.size} entries)`);
+
         const scoreList = Array.from(scores.entries())
             .sort(([, a], [, b]) => b - a)
             .map(([name, score], index) => `${index + 1}. ${name}: ${score}`);
@@ -405,9 +470,13 @@ export class GunWorld extends World {
                 isGameOver: isGameEnd
             });
         });
+
+        console.log(`[${new Date().toLocaleTimeString()}] EXIT displayScores(scores: ${scores.size} entries)`);
     }
 
     private broadcastGameMessage(message: string): void {
+        // console.log(`[${new Date().toLocaleTimeString()}] ENTER broadcastGameMessage(message: ${message})`);
+
         this._worldState.players.forEach(player => {
             this.chatManager.sendPlayerMessage(player, message, "FFFF00");
             player.ui.sendData({
@@ -415,6 +484,8 @@ export class GunWorld extends World {
                 message: message
             });
         });
+
+        // console.log(`[${new Date().toLocaleTimeString()}] EXIT broadcastGameMessage(message: ${message})`);
     }
 
     private broadcastEndGameMessage(winner: Player): void {
@@ -429,6 +500,8 @@ export class GunWorld extends World {
     }
 
     public join(player: Player) {
+        console.log(`[${new Date().toLocaleTimeString()}] ENTER join(player: ${player.username})`);
+
         try {
             console.log(`[GAME JOIN] ${player.username} joining ${this.name}`);
 
@@ -442,48 +515,29 @@ export class GunWorld extends World {
 
             // Don't spawn here since onPlayerJoin will handle it
             console.log(`[GAME JOIN] ${player.username} successfully joined ${this.name}`);
+            console.log(`[${new Date().toLocaleTimeString()}] EXIT join(player: ${player.username}) -> ${null}`);
             return null;
         } catch (err) {
             console.error(`[GAME JOIN] Error:`, err);
+            console.log(`[${new Date().toLocaleTimeString()}] EXIT join(player: ${player.username}) -> ${err}`);
             return "Error joining game";
         }
+
+        console.log(`[${new Date().toLocaleTimeString()}] EXIT join(player: ${player.username}) -> ${null}`);
+        return null;
     }
 
     /**
      * A function that is called when a player joins the world.
      */
     onPlayerJoin = (player: Player) => {
+        console.log(`[${new Date().toLocaleTimeString()}] ENTER onPlayerJoin(player: ${player.username})`);
+
         console.log(`[GAME JOIN] Setting up player ${player.username} in ${this.name}`);
 
         this.spawnPlayer(player);
 
         player.ui.load('ui/game.html');
-
-        // try {
-        //     const playerEntity = new PlayerEntity({
-        //         player,
-        //         name: 'Player',
-        //         modelUri: 'models/players/PlayerModel.gltf',
-        //         modelLoopedAnimations: ['idle'],
-        //         modelScale: 0.5,
-        //         controller: new MyEntityController(),
-        //     });
-
-        //     console.log(`[GAME JOIN] Created player entity for ${player.username}`);
-
-        //     // Spawn the entity
-        //     playerEntity.spawn(this, { x: Math.random() * 10 - 5, y: 4, z: Math.random() * 10 - 5 });
-        //     console.log(`[GAME JOIN] Spawned entity for ${player.username}`);
-
-        //     // Set up camera
-        //     player.camera.setAttachedToEntity(playerEntity);
-        //     player.camera.setMode(PlayerCameraMode.FIRST_PERSON);
-        //     player.camera.setOffset({ x: 0, y: 0.4, z: 0 });
-        //     player.camera.setModelHiddenNodes(['head', 'neck']);
-        //     player.camera.setForwardOffset(0.3);
-
-        // // Load UI
-        // player.ui.load('ui/game.html');
 
         // Initialize player state
         if (!this._worldState.players.includes(player)) {
@@ -491,13 +545,6 @@ export class GunWorld extends World {
         }
 
         this._worldState.scores.set(player.username, 0);
-
-        // // Set initial freeze state
-        // if (playerEntity.controller instanceof MyEntityController) {
-        //     const shouldFreeze = this._worldState.playState !== GunWorldPlayState.ACTIVE;
-        //     playerEntity.controller.setFrozen(shouldFreeze);
-        //     console.log(`[GAME JOIN] Player ${player.username} initial freeze state: ${shouldFreeze}`);
-        // }
 
         // Send welcome message and broadcast player count
         this.chatManager.sendBroadcastMessage(`[${player.username}] has joined the game.`);
@@ -507,23 +554,30 @@ export class GunWorld extends World {
 
         // Force check if we should start the game
         this.checkGameStart();
-        // } catch (err) {
-        //     console.error(`[GAME JOIN] Error setting up player ${player.username}:`, err);
-        //     throw err;
-        // }
+
+        console.log(`[${new Date().toLocaleTimeString()}] EXIT onPlayerJoin(player: ${player.username})`);
     }
 
     /**
      * A function that is called when a player leaves the world.
      */
     onPlayerLeave = (player: Player) => {
+        console.log(`[${new Date().toLocaleTimeString()}] ENTER onPlayerLeave(player: ${player.username})`);
+
         console.log(`[GAME LEAVE] ${player.username} leaving game`);
         this._worldState.players = this._worldState.players.filter(p => p !== player);
         console.log(`[GAME LEAVE] Players remaining: ${this._worldState.players.length}`);
+
+        this.entityManager.getPlayerEntitiesByPlayer(player).forEach(entity => {
+            entity.despawn();
+        });
+
         this.chatManager.sendBroadcastMessage(`[${player.username}] has left the game.`);
 
         // Update remaining players about the count
-        this.broadcastGameMessage(`Players: ${this.entityManager.getAllPlayerEntities().length}/${this._minPlayerCount} needed to start`);
+        // this.broadcastGameMessage(`Players: ${this.entityManager.getAllPlayerEntities().length}/${this._minPlayerCount} needed to start`);
+
+        console.log(`[${new Date().toLocaleTimeString()}] EXIT onPlayerLeave(player: ${player.username})`);
     }
 
     private getRoundTimeRemaining(): number {
@@ -532,6 +586,8 @@ export class GunWorld extends World {
     }
 
     public handleGameWin(winner: PlayerEntity): void {
+        console.log(`[${new Date().toLocaleTimeString()}] ENTER handleGameWin(winner: ${winner.player?.username})`);
+
         console.log(`[GAME] ${winner.player.username} won the game with baguette!`);
 
         // Announce the winner
@@ -558,10 +614,14 @@ export class GunWorld extends World {
                 this.resetWorld();
             }
         }, 1000);
+
+        console.log(`[${new Date().toLocaleTimeString()}] EXIT handleGameWin(winner: ${winner.player?.username})`);
     }
 
     // Add this new method to check if we should start the game
     private checkGameStart(): void {
+        console.log(`[${new Date().toLocaleTimeString()}] ENTER checkGameStart()`);
+
         if (this._worldState.playState !== GunWorldPlayState.WAITING) return;
 
         const currentPlayerCount = this.entityManager.getAllPlayerEntities().length;
@@ -571,6 +631,8 @@ export class GunWorld extends World {
             console.log(`[GAME CHECK] Starting game with ${currentPlayerCount} players`);
             this.startGame();
         }
+
+        console.log(`[${new Date().toLocaleTimeString()}] EXIT checkGameStart()`);
     }
 }
 
@@ -579,8 +641,8 @@ const worldConfigs: GunWorldOptions[] = [
     {
         id: 1,
         name: "Crimson Crossfire",
-        minPlayerCount: 4,
-        maxPlayerCount: 8,
+        minPlayerCount: 2,
+        maxPlayerCount: 12,
         maxWaitingTime: 10000,
     },
     // REMOVED EXTRA WORLDS AS COULDN"T TEST FOR PERFORMANCE BUT ONLY INDIVIDUALLY

@@ -14,6 +14,7 @@ import type {
     PlayerInput,
     PlayerCameraOrientation,
     BlockType,
+    Vector3Like,
 } from 'hytopia';
 import { getStartingWeapon, getWeaponByKillCount, WeaponConfig } from './weapons/weapons';
 import { GunWorld } from './sessions/world';
@@ -57,10 +58,15 @@ export default class MyEntityController extends BaseEntityController {
     private _playerNames: Map<number, string> = new Map();
 
     private getPlayerIdentifier(entity: PlayerEntity): string {
+        // console.log(`[${new Date().toLocaleTimeString()}] ENTER getPlayerIdentifier(entity: ${entity.player.username})`);
+
         // Priority: custom name -> default name -> ID
-        const customName = this._playerNames.get(entity.id!);
-        if (customName) return customName;
-        return `Player ${entity.id}`;
+        // const customName = this._playerNames.get(entity.id!);
+        // if (customName) return customName;
+        const identifier = entity.player.username;
+
+        // console.log(`[${new Date().toLocaleTimeString()}] EXIT getPlayerIdentifier(entity: ${entity.player.username}) -> ${identifier}`);
+        return identifier;
     }
 
     private broadcastKillFeed(world: World, killer: PlayerEntity, victim: PlayerEntity): void {
@@ -109,6 +115,9 @@ export default class MyEntityController extends BaseEntityController {
             this.currentWeapon.offsetPosition,
             Quaternion.fromEuler(this.currentWeapon.offsetRotation.x, this.currentWeapon.offsetRotation.y, this.currentWeapon.offsetRotation.z)
         );
+
+        this.updateUI(entity);
+
         console.log(`[${this.getPlayerIdentifier(entity)}] Weapon attached to player hand`);
     }
 
@@ -170,43 +179,55 @@ export default class MyEntityController extends BaseEntityController {
     }
 
     private calculateDamage(weapon: WeaponConfig, hitLocation: 'head' | 'body' | 'limbs'): number {
+        console.log(`[${new Date().toLocaleTimeString()}] ENTER calculateDamage(weapon: ${weapon.name}, hitLocation: ${hitLocation})`);
+
+        let damage = 0;
         switch (hitLocation) {
             case 'head':
-                return weapon.headDamage;
+                damage = weapon.headDamage;
             case 'limbs':
-                return weapon.limbDamage;
+                damage = weapon.limbDamage;
             default:
-                return weapon.bodyDamage;
+                damage = weapon.bodyDamage;
         }
+
+        console.log(`[${new Date().toLocaleTimeString()}] EXIT calculateDamage(weapon: ${weapon.name}, hitLocation: ${hitLocation}) -> ${damage}`);
+        return damage;
     }
 
     private calculateDamageWithFalloff(weapon: WeaponConfig, hitLocation: 'head' | 'body' | 'limbs', distance: number): number {
+        console.log(`[${new Date().toLocaleTimeString()}] ENTER calculateDamageWithFalloff(weapon: ${weapon.name}, hitLocation: ${hitLocation}, distance: ${distance})`);
+
         // Get base damage for hit location
         let baseDamage = this.calculateDamage(weapon, hitLocation);
-        
+
+        let finalDamage = 0;
         // Special handling for shotgun - more aggressive falloff
         if (weapon.name === "shotgun") {
             const falloffStart = weapon.range * 0.3;  // Start falloff earlier (at 30% of range)
-            
+
             if (distance <= falloffStart) {
                 // Full damage within close range
-                return baseDamage;
+                finalDamage = baseDamage;
             } else {
                 // More aggressive falloff for shotgun
                 const falloffPercentage = Math.max(0, 1 - ((distance - falloffStart) / (weapon.range - falloffStart)));
                 // Minimum damage is 20% of base damage for shotgun
-                return Math.max(baseDamage * (falloffPercentage * falloffPercentage), baseDamage * 0.2);
+                finalDamage = Math.max(baseDamage * (falloffPercentage * falloffPercentage), baseDamage * 0.2);
+            }
+        } else {
+            // Normal falloff for other weapons
+            const falloffStart = weapon.range * 0.5;
+            if (distance <= falloffStart) {
+                finalDamage = baseDamage;
+            } else {
+                const falloffPercentage = Math.max(0, 1 - ((distance - falloffStart) / (weapon.range - falloffStart)));
+                finalDamage = Math.max(baseDamage * falloffPercentage, baseDamage * 0.3);
             }
         }
-        
-        // Normal falloff for other weapons
-        const falloffStart = weapon.range * 0.5;
-        if (distance <= falloffStart) {
-            return baseDamage;
-        } else {
-            const falloffPercentage = Math.max(0, 1 - ((distance - falloffStart) / (weapon.range - falloffStart)));
-            return Math.max(baseDamage * falloffPercentage, baseDamage * 0.3);
-        }
+
+        console.log(`[${new Date().toLocaleTimeString()}] EXIT calculateDamageWithFalloff(weapon: ${weapon.name}, hitLocation: ${hitLocation}, distance: ${distance}) -> ${finalDamage}`);
+        return finalDamage;
     }
 
     private playDamageSound(entity: Entity): void {
@@ -233,6 +254,7 @@ export default class MyEntityController extends BaseEntityController {
 
         this.updateUI(entity);
 
+        // MARKER
         if (this.health <= 0 && !this._isDead) {
             this._isDead = true;
             entity.setPosition({ x: 0, y: -100, z: 0 });
@@ -241,60 +263,69 @@ export default class MyEntityController extends BaseEntityController {
     }
 
     private die(playerEntity: PlayerEntity, attackerEntity: PlayerEntity): void {
-        console.log(`[${playerEntity.player.username}] Died!`);
+        console.log(`[${new Date().toLocaleTimeString()}] ENTER die(player: ${playerEntity.player?.username}, attacker: ${attackerEntity.player?.username})`);
+
+        console.log(`[${new Date().toLocaleTimeString()}] Player ${playerEntity.player?.username} died!`);
 
         // Log the killer's name
         if (attackerEntity) {
-            console.log(`${attackerEntity.player.username} killed ${playerEntity.player.username}`);
+            console.log(`[${new Date().toLocaleTimeString()}] ${attackerEntity.player?.username} killed ${playerEntity.player?.username}`);
         }
 
         // Save current weapon before death
         this._lastWeaponBeforeDeath = this.currentWeapon;
+        console.log(`[${new Date().toLocaleTimeString()}] Saved last weapon: ${this._lastWeaponBeforeDeath.name}`);
 
         // Remove weapon when dead
         if (this._weaponEntity) {
+            console.log(`[${new Date().toLocaleTimeString()}] Despawning weapon entity`);
             this._weaponEntity.despawn();
             this._weaponEntity = undefined;
         }
 
         // Handle attacker logic - moved this block up and consolidated scoring
-        if (attackerEntity && attackerEntity.controller instanceof MyEntityController) {
+        // --- you dont get points for killing yourself ---
+        if (attackerEntity != playerEntity) {
+            console.log(`[${new Date().toLocaleTimeString()}] ${playerEntity.player?.username} killed themselves, dummy`);
+        }
+        if (attackerEntity != playerEntity && attackerEntity && attackerEntity.controller instanceof MyEntityController) {
             const attackerController = attackerEntity.controller;
-            
+
             // First check if this was a baguette kill
             if (attackerController.currentWeapon.victory) {
-                console.log(`[GAME] ${playerEntity.player.username} got a winning kill! Triggering win condition...`);
+                console.log(`[${new Date().toLocaleTimeString()}] ${attackerEntity.player?.username} got a winning kill with baguette! Triggering win condition...`);
                 if (attackerEntity.world instanceof GunWorld) {
                     const gunWorld = attackerEntity.world as GunWorld;
                     gunWorld.handleGameWin(attackerEntity);
+                    console.log(`[${new Date().toLocaleTimeString()}] EXIT die(player: ${playerEntity.player?.username}, attacker: ${attackerEntity.player?.username}) -> early return: game win`);
                     return; // Exit early as game is ending
                 }
             }
 
             // If not a winning kill, proceed with normal kill logic
             attackerController.kills++;
-            console.log(`[WEAPON] ${playerEntity.player.username} now has ${attackerController.kills} kills`);
-            
+            console.log(`[${new Date().toLocaleTimeString()}] ${attackerEntity.player?.username} now has ${attackerController.kills} kills`);
+
             // Update score
             if (attackerEntity.world instanceof GunWorld) {
                 const attackerWorld = attackerEntity.world as GunWorld;
-                attackerWorld.incrementScore(attackerEntity.player)
-                // const currentScore = attackerWorld. _worldState.scores.get(attackerEntity.player.username) || 0;
-                // attackerWorld._worldState.scores.set(attackerEntity.player.username, currentScore + 1);
+                console.log(`[${new Date().toLocaleTimeString()}] Incrementing score for ${attackerEntity.player?.username}`);
+                attackerWorld.incrementScore(attackerEntity.player);
             }
 
             // Handle weapon progression
             const newAttackerWeapon = getWeaponByKillCount(attackerController.kills);
-            console.log(`[WEAPON] Selected new weapon: ${newAttackerWeapon.name}`);
-            
+            console.log(`[${new Date().toLocaleTimeString()}] Selected new weapon for ${attackerEntity.player?.username}: ${newAttackerWeapon.name}`);
+
             if (attackerController.currentWeapon.name !== newAttackerWeapon.name) {
-                console.log(`[WEAPON] Switching from ${attackerController.currentWeapon.name} to ${newAttackerWeapon.name}`);
+                console.log(`[${new Date().toLocaleTimeString()}] Switching ${attackerEntity.player?.username}'s weapon from ${attackerController.currentWeapon.name} to ${newAttackerWeapon.name}`);
                 attackerController.switchWeapon(newAttackerWeapon, attackerEntity);
             }
         }
 
         // Send death UI message
         if (playerEntity.player && playerEntity.player.ui) {
+            console.log(`[${new Date().toLocaleTimeString()}] Sending death UI message to ${playerEntity.player?.username}`);
             playerEntity.player.ui.sendData({
                 type: 'player-died',
                 respawnTime: 5
@@ -303,11 +334,13 @@ export default class MyEntityController extends BaseEntityController {
 
         // Send kill feed
         if (playerEntity.world && attackerEntity) {
+            console.log(`[${new Date().toLocaleTimeString()}] Broadcasting kill feed: ${attackerEntity.player?.username} killed ${playerEntity.player?.username}`);
             this.broadcastKillFeed(playerEntity.world, attackerEntity, playerEntity);
         }
 
         // Handle respawn timer
         let respawnTime = 5;
+        console.log(`[${new Date().toLocaleTimeString()}] Starting respawn countdown for ${playerEntity.player?.username}`);
         const countdownInterval = setInterval(() => {
             if (playerEntity.player && playerEntity.player.ui) {
                 playerEntity.player.ui.sendData({
@@ -315,18 +348,26 @@ export default class MyEntityController extends BaseEntityController {
                     timeLeft: respawnTime
                 });
             }
-            console.log(`[${this.getPlayerIdentifier(playerEntity)}] Respawning in ${respawnTime} seconds...`);
+            console.log(`[${new Date().toLocaleTimeString()}] ${playerEntity.player?.username} respawning in ${respawnTime} seconds...`);
             respawnTime--;
 
             if (respawnTime < 0) {
                 clearInterval(countdownInterval);
+                console.log(`[${new Date().toLocaleTimeString()}] Respawn countdown complete, respawning ${playerEntity.player?.username}`);
                 this.respawn(playerEntity);
             }
         }, 1000);
+
+        console.log(`[${new Date().toLocaleTimeString()}] EXIT die(player: ${playerEntity.player?.username}, attacker: ${attackerEntity.player?.username})`);
     }
 
     private respawn(entity: PlayerEntity): void {
-        if (!entity.world) return;
+        console.log(`[${new Date().toLocaleTimeString()}] ENTER respawn(entity: ${entity.player?.username})`);
+
+        if (!entity.world) {
+            console.log(`[${new Date().toLocaleTimeString()}] EXIT respawn(entity: ${entity.player?.username}) -> early return: no world`);
+            return;
+        }
 
         this.health = 100;
         this._isDead = false;
@@ -335,6 +376,7 @@ export default class MyEntityController extends BaseEntityController {
         // Restore weapon from before death
         this.currentWeapon = this._lastWeaponBeforeDeath || getStartingWeapon();
         this.currentAmmo = this.currentWeapon.maxAmmo;
+        console.log(`[${new Date().toLocaleTimeString()}] Restored weapon: ${this.currentWeapon.name} with ${this.currentAmmo} ammo`);
 
         const gunworld = entity.world as GunWorld;
         const spawnPos = gunworld.generateSpawnPosition();
@@ -345,7 +387,8 @@ export default class MyEntityController extends BaseEntityController {
         console.log(`[${this.getPlayerIdentifier(entity)}] Respawning with ${this.currentWeapon.name}, freeze: ${this._freeze}`);
         this.updateWeaponModel(entity);
         this.updateUI(entity);
-        console.log(`[${this.getPlayerIdentifier(entity)}] Respawned!`);
+
+        console.log(`[${new Date().toLocaleTimeString()}] EXIT respawn(entity: ${entity.player?.username})`);
     }
 
     public spawn(entity: Entity): void {
@@ -481,25 +524,37 @@ export default class MyEntityController extends BaseEntityController {
     }
 
     private getHitLocation(hitPoint: { y: number }, entityPosition: { y: number }): 'head' | 'body' | 'limbs' {
+        console.log(`[${new Date().toLocaleTimeString()}] ENTER getHitLocation(hitPointY: ${hitPoint.y}, entityPosY: ${entityPosition.y})`);
+
         const relativeHitHeight = hitPoint.y - entityPosition.y;
 
         // Определяем зоны попадания по высоте относительно центра игрока
+        let result: 'head' | 'body' | 'limbs';
         if (relativeHitHeight > 0.3) { // Выше 0.5 - голова
-            return 'head';
+            result = 'head';
         } else if (relativeHitHeight > 0) { // В пределах ±0.3 - тело
-            return 'body';
+            result = 'body';
         } else { // Остальное - руки
-            return 'limbs';
+            result = 'limbs';
         }
+
+        console.log(`[${new Date().toLocaleTimeString()}] EXIT getHitLocation(hitPointY: ${hitPoint.y}, entityPosY: ${entityPosition.y}) -> ${result}`);
+        return result;
     }
 
     public tickWithPlayerInput(entity: PlayerEntity, input: PlayerInput, cameraOrientation: PlayerCameraOrientation, deltaTimeMs: number): void {
-        if (!entity.isSpawned || !entity.world) return;
-        
+        // console.log(`[${new Date().toLocaleTimeString()}] ENTER tickWithPlayerInput(entity: ${entity.player?.username}, deltaTimeMs: ${deltaTimeMs})`);
+
+        if (!entity.isSpawned || !entity.world) {
+            // console.log(`[${new Date().toLocaleTimeString()}] EXIT tickWithPlayerInput(entity: ${entity.player?.username}) -> early return: not spawned or no world`);
+            return;
+        }
+
         // Check freeze state
         if (this._freeze) {
             // When frozen, only allow camera movement
             this.handleCameraOnly(entity, input, cameraOrientation);
+            // console.log(`[${new Date().toLocaleTimeString()}] EXIT tickWithPlayerInput(entity: ${entity.player?.username}) -> early return: frozen`);
             return;
         }
 
@@ -614,7 +669,7 @@ export default class MyEntityController extends BaseEntityController {
 
         if (ml && !this._isDead) {
             const currentTime = Date.now();
-            
+
             if (this.currentAmmo <= 0) {
                 // Only play empty sound if enough time has passed (use same rate as weapon's fire rate)
                 if (currentTime - this._lastEmptySoundTime >= this.currentWeapon.fireRate) {
@@ -630,6 +685,11 @@ export default class MyEntityController extends BaseEntityController {
 
             if (currentTime - this.lastFireTime >= this.currentWeapon.fireRate) {
                 console.log(`[${this.getPlayerIdentifier(entity)}] Firing ${this.currentWeapon.name}!`);
+
+                // Play firing animation
+                const fireAnimation = this.currentWeapon.fireAnimation;
+                console.log(`Current animations: ${Array.from(entity.modelLoopedAnimations)}, Attempting to play ${fireAnimation} animation.`);
+                entity.startModelOneshotAnimations([fireAnimation]);
 
                 // Update ammo and UI
                 this.currentAmmo--;
@@ -650,11 +710,15 @@ export default class MyEntityController extends BaseEntityController {
                     rayStart,
                     facingDir,
                     this.currentWeapon.range,
-                    { 
+                    {
                         filterExcludeRigidBody: entity.rawRigidBody
                     },
                 );
 
+                // Update last fire times
+                this.lastFireTime = currentTime;
+
+                const damagedPlayerEntities = new Set<PlayerEntity>()
                 // TODO remove this hard coding of weapon type
                 if (this.currentWeapon.name === 'rpg' && ray?.hitPoint) {
                     // Урон по площади
@@ -669,6 +733,7 @@ export default class MyEntityController extends BaseEntityController {
                             const controller = player.controller;
                             if (controller instanceof MyEntityController) {
                                 controller.takeDamage(damage, player, entity); // Наносим урон
+                                damagedPlayerEntities.add(player);
                                 console.log(`[${this.getPlayerIdentifier(player)}] Hit by RPG explosion! Damage: ${damage}`);
                             }
                         }
@@ -682,35 +747,28 @@ export default class MyEntityController extends BaseEntityController {
                             const distance = this.getDistanceToPlayer(entity, hitEntity);
                             const damage = this.calculateDamageWithFalloff(this.currentWeapon, hitLocation, distance);
                             controller.takeDamage(damage, hitEntity, entity);
+                            damagedPlayerEntities.add(hitEntity);
                             console.log(`[${this.getPlayerIdentifier(entity)}] Hit ${this.getPlayerIdentifier(hitEntity)} in ${ray.hitPoint.y}(${hitLocation}) at ${distance.toFixed(1)}m! Damage: ${damage.toFixed(1)}, Their remaining health: ${controller.health.toFixed(1)}`);
                         }
                     }
                 }
-
-                
-
-                // Play firing animation
-                const fireAnimation = this.currentWeapon.fireAnimation;
-                console.log(`Current animations: ${Array.from(entity.modelLoopedAnimations)}, Attempting to play ${fireAnimation} animation.`);
-                entity.startModelOneshotAnimations([fireAnimation]);
-
-                // Update last fire times
-                this.lastFireTime = currentTime;
             }
         }
 
-        // Example usage in tickWithPlayerInput:
-        const nearbyPlayers = entity.world.entityManager.getAllPlayerEntities().filter(other => {
-            if (other === entity) return false;
-            const distance = this.getDistanceToPlayer(entity, other);
-            return distance < 10; // Returns players within 10 units
-        });
+        // // Example usage in tickWithPlayerInput:
+        // const nearbyPlayers = entity.world.entityManager.getAllPlayerEntities().filter(other => {
+        //     if (other === entity) return false;
+        //     const distance = this.getDistanceToPlayer(entity, other);
+        //     return distance < 10; // Returns players within 10 units
+        // });
+
+        // console.log(`[${new Date().toLocaleTimeString()}] EXIT tickWithPlayerInput(entity: ${entity.player?.username}, deltaTimeMs: ${deltaTimeMs}, velocity: {x: ${targetVelocities.x.toFixed(2)}, y: ${targetVelocities.y.toFixed(2)}, z: ${targetVelocities.z.toFixed(2)}})`);
     }
 
     private handleCameraOnly(entity: PlayerEntity, input: PlayerInput, cameraOrientation: PlayerCameraOrientation): void {
         // Allow only camera movement when frozen
         const { mr } = input;
-        
+
         // Handle aiming with right mouse button
         if (mr && entity.player) {
             const zoomLevel = this.currentWeapon.zoomLevel || 1;
@@ -722,21 +780,34 @@ export default class MyEntityController extends BaseEntityController {
 
     // Метод для расчета расстояния
     private calculateDistance(pointA: { x: number, y: number, z: number }, pointB: { x: number, y: number, z: number }): number {
+        console.log(`[${new Date().toLocaleTimeString()}] ENTER calculateDistance()`);
+
         const dx = pointA.x - pointB.x;
         const dy = pointA.y - pointB.y;
         const dz = pointA.z - pointB.z;
-        return Math.sqrt(dx * dx + dy * dy + dz * dz);
+        const distance = Math.sqrt(dx * dx + dy * dy + dz * dz);
+
+        console.log(`[${new Date().toLocaleTimeString()}] EXIT calculateDistance() -> ${distance}`);
+        return distance;
     }
 
     public switchWeapon(newWeapon: WeaponConfig, entity: PlayerEntity): void {
+        console.log(`[${new Date().toLocaleTimeString()}] ENTER switchWeapon(newWeapon: ${newWeapon.name}, entity: ${entity.player?.username})`);
+        console.log(`[${this.getPlayerIdentifier(entity)}] Switching weapon from ${this.currentWeapon.name} to ${newWeapon.name}`);
+        
         this.currentWeapon = newWeapon;
         this.currentAmmo = newWeapon.maxAmmo;
+        
+        // console.log(`[${this.getPlayerIdentifier(entity)}] New weapon ammo set to ${this.currentAmmo}/${newWeapon.maxAmmo}`);
+        
         this.updateWeaponModel(entity);
         this.updateUI(entity);
+        
+        
 
         // Play different sounds based on weapon
         // TODO - this is more gun specific code that should be in configuration
-        const soundUri = newWeapon.name === 'baguette' 
+        const soundUri = newWeapon.name === 'baguette'
             ? 'audio/engage-baguette.mp3'  // Special baguette sound
             : 'audio/level-up.mp3';        // Normal level up sound
 
@@ -746,20 +817,25 @@ export default class MyEntityController extends BaseEntityController {
             volume: 0.4,
             // spatialSound: false,
             attachedToEntity: entity
-        });        
+        });
         if (entity.world) {
             levelUpSound.play(entity.world);
         }
 
-        // console.log(`Available animations for ${newWeapon.name}:`, entity.modelLoopedAnimationsNames);
+        console.log(`[${new Date().toLocaleTimeString()}] EXIT switchWeapon() -> weapon switched to ${newWeapon.name}`);
     }
 
     private getDistanceToPlayer(entity: PlayerEntity, otherPlayer: PlayerEntity): number {
+        console.log(`[${new Date().toLocaleTimeString()}] ENTER getDistanceToPlayer(entity: ${entity.player?.username}, other: ${otherPlayer.player?.username})`);
+
         const dx = entity.position.x - otherPlayer.position.x;
         const dy = entity.position.y - otherPlayer.position.y;
         const dz = entity.position.z - otherPlayer.position.z;
-        
-        return Math.sqrt(dx * dx + dy * dy + dz * dz);
+
+        const distance = Math.sqrt(dx * dx + dy * dy + dz * dz);
+
+        console.log(`[${new Date().toLocaleTimeString()}] EXIT getDistanceToPlayer(entity: ${entity.player?.username}, other: ${otherPlayer.player?.username}) -> ${distance}`);
+        return distance;
     }
 
     private playEmptyWeaponSound(entity: Entity, weapon: WeaponConfig): void {
@@ -790,10 +866,10 @@ export default class MyEntityController extends BaseEntityController {
         // Force a state update by triggering a small position change
         if (this.entity) {
             const currentPos = this.entity.position;
-            this.entity.setPosition({ 
-                x: currentPos.x + 0.0001, 
-                y: currentPos.y, 
-                z: currentPos.z 
+            this.entity.setPosition({
+                x: currentPos.x + 0.0001,
+                y: currentPos.y,
+                z: currentPos.z
             });
             this.entity.setPosition(currentPos);
         }
@@ -802,17 +878,17 @@ export default class MyEntityController extends BaseEntityController {
     public setFrozen(value: boolean): void {
         const oldValue = this._freeze;
         this._freeze = value;
-        
+
         if (!this.entity) return;
-        
+
         console.log(`[CONTROLLER] ${this.entity.player?.username} freeze state changing from ${oldValue} to ${value}`);
-        
+
         if (!value) {
             // When unfreezing, reset all movement and physics
             console.log(`[CONTROLLER] Resetting physics for ${this.entity.player?.username}`);
             this.entity.setLinearVelocity({ x: 0, y: 0, z: 0 });
             this.entity.setAngularVelocity({ x: 0, y: 0, z: 0 });
-            
+
             // Reset the entity's physics state
             // this.entity.resetPhysics?.();
         } else {
@@ -823,8 +899,22 @@ export default class MyEntityController extends BaseEntityController {
     }
 
     public isFrozen(): boolean {
+        console.log(`[${new Date().toLocaleTimeString()}] ENTER isFrozen()`);
+
         const frozen = this._freeze;
         console.log(`[CONTROLLER] ${this.entity?.player?.username} freeze state checked: ${frozen}`);
+
+        console.log(`[${new Date().toLocaleTimeString()}] EXIT isFrozen() -> ${frozen}`);
         return frozen;
     }
+
+    // public generateSpawnPosition(): Vector3Like {
+    //     console.log(`[${new Date().toLocaleTimeString()}] ENTER generateSpawnPosition()`);
+
+    //     const gunworld = this.entity?.world as GunWorld;
+    //     const spawnPos = gunworld.generateSpawnPosition();
+
+    //     console.log(`[${new Date().toLocaleTimeString()}] EXIT generateSpawnPosition() -> {x: ${spawnPos.x}, y: ${spawnPos.y}, z: ${spawnPos.z}}`);
+    //     return spawnPos;
+    // }
 }

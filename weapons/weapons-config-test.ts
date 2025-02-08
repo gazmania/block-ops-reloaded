@@ -28,6 +28,32 @@ const weaponConfigs = [
         zoomLevel: 0, // Уровень зума для пистолета
     },
     {
+        name: "rpg",
+        damage: 120,
+        fireRate: 2000,
+        range: 40,
+        maxAmmo: 1,
+        modelUri: 'models/rpg.gltf',
+        modelScale: 1,
+        offsetPosition: {x: 0, y: 0, z: 0},
+        offsetRotation: {x: 0, y: 0, z: 0},
+        reloadTime: 4000,
+        spread: 0.02,
+        spreadRecoveryTime: 1000,
+        requiredKills: 1, 
+        idleAnimation: "idle_rpg",
+        walkAnimation: 'walk_rpg', // Анимация ходьбы
+        fireAnimation: 'fire_rpg',
+        fireAudio: "audio/rocket-fire.mp3",
+        reloadAnimation: "recharge_rpg",
+        reloadAudio: "audio/rocket-reload.mp3",
+        headDamage: 120,
+        bodyDamage: 120,
+        limbDamage: 120,
+        victory: false,
+        zoomLevel: 0,
+    },
+    {
         name: "baguette",
         damage: 100,
         fireRate: 2000,        // Slower swing speed (2 second between swings)
@@ -40,7 +66,7 @@ const weaponConfigs = [
         reloadTime: 0,         // No reload needed
         spread: 0,             // No spread for melee
         spreadRecoveryTime: 0, // No spread recovery needed
-        requiredKills: 1,
+        requiredKills: 2,
         idleAnimation: "idle_baguette",
         walkAnimation: 'walk_baguette',
         fireAnimation: 'fire_baguette',

@@ -82,3 +82,17 @@ To ensure proper attribution, the following **texture packs** were used in devel
 - **[Stay True](https://www.curseforge.com/minecraft/texture-packs/stay-true)**  
 
 These resources were utilized in accordance with their respective **licenses**.  
+
+# Post Submission Updates
+
+## Bugs fixed:
+ - spawn point randomisation was not refreshing the already used spawn points correctly in some situations
+ - killing yourself with the RPG would incorrectly trigger a win condition; now killing yourself won’t award you points for your own stupidity
+ - ammo was incorrectly being decremented on spawning new gun
+
+## Minor tweaks:
+ - Some of the countdown timers
+ - Game size change to max 12 and added a new spawn point to accomodate
+ - removed transparency on You Died and You Lost screens
+ - lots of debug
+ 
